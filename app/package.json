@@ -1,0 +1,86 @@
+{
+  "name": "mttv",
+  "author": "webif",
+  "description": "empty",
+  "main": "electron/main.js",
+  "version": "0.2.0",
+  "license": "MIT",
+  "homepage": "./",
+  "private": false,
+  "scripts": {
+    "start": "nf start",
+    "react-start": "react-scripts start",
+    "electron-start": "node electron-wait-react",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "pack-src": "electron-builder --dir",
+    "ebuild": "yarn electron-builder --x64 --win && node_modules/.bin/build",
+    "gh-publish": "yarn electron-builder --x64 --win -p always && node_modules/.bin/build"
+  },
+  "build": {
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "mttv",
+        "repo": "mttv-app"
+      }
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "build/icon.ico",
+      "publisherName": "webifua"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": true,
+      "createDesktopShortcut": true,
+      "installerIcon": "build/icon.ico",
+      "uninstallerIcon": "build/icon.ico",
+      "uninstallDisplayName": "Uninstall MTTV"
+    },
+    "productName": "MTTV",
+    "appId": "com.mttv.app",
+    "extends": null,
+    "electronVersion": "3.0.0",
+    "buildVersion": "0.2.0",
+    "copyright": "webifua 2019",
+    "files": [
+      "build/**/*",
+      "electron/**/*"
+    ]
+  },
+  "dependencies": {
+    "electron-is-dev": "^1.0.1",
+    "electron-log": "^2.2.17",
+    "electron-titlebar": "0.0.3",
+    "electron-updater": "^4.0.6",
+    "jquery": "^3.3.1",
+    "prettysize": "^2.0.0",
+    "react": "^16.4.2",
+    "react-beautiful-dnd": "^10.0.3",
+    "react-content-loader": "^3.1.2",
+    "react-dom": "^16.4.2",
+    "react-image": "^1.4.1",
+    "react-mutation-observer": "^1.1.0",
+    "react-player": "^1.6.4",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^1.1.4",
+    "react-visibility-sensor": "^3.11.1",
+    "sweetalert2": "^7.26.11",
+    "sweetalert2-react-content": "^1.0.1",
+    "twitch-api-v5": "^2.0.4"
+  },
+  "devDependencies": {
+    "electron": "^3.0.0",
+    "electron-builder": "^20.27.1",
+    "foreman": "^3.0.1",
+    "nodemon": "^1.18.4"
+  }
+}

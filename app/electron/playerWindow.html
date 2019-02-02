@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <title>MTTV | Window Player</title>
+    <style>
+      #player-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+<body>
+<noscript>
+  You need to enable JavaScript to run this app.
+</noscript>
+<div id="electron-titlebar" class="drag"></div>
+<div id="player-container"></div>
+<script src="./ReactPlayer.standalone.js"></script>
+<script>
+  require('electron-titlebar')
+  require('electron').ipcRenderer.on('open-player-window', (event, res) => {
+    const container = document.getElementById('player-container')
+    const url = "https://www.twitch.tv/" + res
+    renderReactPlayer(container, { url, playing: true, width: "100%", height: "100%" })
+  })
+</script>
+</body>
+</html>
