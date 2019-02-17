@@ -1,31 +1,69 @@
-import React, { Component } from 'react'
-import { HashRouter, Route, Redirect } from "react-router-dom"
+import React, { Component, Suspense, lazy } from 'react'
+import { HashRouter as Router, Route, Redirect, Switch } from "react-router-dom"
+// import Analytics from 'electron-google-analytics'
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import $ from 'jquery'
-import Login from './components/Login/Login'
-import MainNav from './components/MainNav/MainNav'
-import Home from './components/Home/Home'
-import Search from './components/Search/Search'
-import Games from './components/Games/Games'
-import Watch from './components/Watch/Watch'
-// import Communities from './components/Communities/Communities'
-import SettingsModal from './components/Settings/SettingsModal'
-import Channel from './components/Channel/Channel'
-import Following from './components/Following/Following'
-import Notifications from './components/Notifications/Notifications'
-import MultiStream from './components/MultiStream/MultiStream'
+import MainNav from './render/components/MainNav/MainNav'
+import Login from './render/pages/Login'
+import SettingsModal from './render/components/Settings/SettingsModal'
 import icon from './img/icon.png'
 import './libs/libs.css'
 import './index.css'
 import './App.css'
 import './Media.css'
 
+const Home = lazy(() => import('./render/pages/Home'))
+const Search = lazy(() => import('./render/pages/Search'))
+const Games = lazy(() => import('./render/pages/Games'))
+const Watch = lazy(() => import('./render/pages/Watch'))
+const Channel = lazy(() => import('./render/pages/Channel'))
+const Following = lazy(() => import('./render/pages/Following'))
+const Notifications = lazy(() => import('./render/pages/Notifications'))
+const MultiStream = lazy(() => import('./render/pages/MultiStream'))
+
 const remote = window.require("electron").remote
 const main = remote.require("./main.js")
 
 const api = require('twitch-api-v5')
 api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
+
+// const APP_VERSION = "0.2.3"
+// const USER_ID = main.getAppID()
+// const APP_NAME = "MTTV"
+// const APP_ID = "com.mttv.app"
+
+// const analytics = new Analytics('UA-133347961-3')
+
+// analytics.set('uid', USER_ID)
+
+// const analyticsTestScreen = () => {
+//   return analytics.screen(APP_NAME, APP_VERSION, APP_ID, 'com.mttv.installer', 'screenTest', USER_ID)
+//   .then((response) => {
+//     console.log(response)
+//     return response
+//   }).catch((err) => {
+//     console.log(err)
+//     return err
+//   })
+// }
+
+// const analyticsTestPageView = () => {
+//   return analytics.pageview('https://mttv-app.firebaseapp.com/', '/pageViewTest', 'pageViewTest', USER_ID)
+//   .then((response) => {
+//     console.log(response)
+//     return response
+//   }).catch((err) => {
+//     console.log(err)
+//     return err
+//   })
+// }
+
+// analyticsTestScreen()
+// analyticsTestPageView()
+
+// console.log(USER_ID)
+
 
 class App extends Component {
 
@@ -95,10 +133,10 @@ class App extends Component {
     const updateAlert = withReactContent(Swal)
     updateAlert.fire({
       type: 'info',
-      text: 'New update is avaliable!Would you like to install it now?',
+      text: this.state.langPack.others.app_update_alert.title,
       showCancelButton: true,
-      confirmButtonText: 'Update',
-      cancelButtonText: 'cancel',
+      confirmButtonText: this.state.langPack.others.app_update_alert.update_btn,
+      cancelButtonText: this.state.langPack.others.app_update_alert.cancel_btn,
       cancelButtonColor: '#cc0000'
     }).then((r) => {
       if (r.value === true) {
@@ -191,73 +229,76 @@ class App extends Component {
   AppLayout = () => {
     const isInApp = sessionStorage.getItem("isInApp")
     if(isInApp === "true") {
-      {this.state.logoutRedirect ? <Redirect to='/' /> : <div id="no-logout-redirect" />}
         return(
           <div id="app">
+            {this.state.logoutRedirect ? <Redirect to='/' /> : <div id="no-logout-redirect" />}
             <MainNav api={api} langPack={this.state.langPack.menu_titles} />
               <div id="container-fade">
-                <Route 
-                  path={"/"} 
-                  exact 
-                  component={props => <Redirect to='/app/home' />} />
-                <Route 
-                  path={"/app/home"} 
-                  exact 
-                  component={props => <Home api={api} 
-                  langPack={this.state.langPack.home_page}
-                  langPackOthers={this.state.langPack.others} />} />
-                <Route 
-                  path={"/app/search"} 
-                  exact 
-                  component={props => <Search 
-                  api={api} 
-                  langPack={this.state.langPack.search_page} 
-                  langPackCategories={this.state.langPack.categories} 
-                  langPackOthers={this.state.langPack.others} />} />
-                <Route 
-                  path={"/app/multistream"} 
-                  exact 
-                  component={props => <MultiStream 
-                  api={api} 
-                  langPack={this.state.langPack.multistream_page}
-                  langPackOthers={this.state.langPack.others} />} />
-                <Route 
-                  path={"/app/games"} 
-                  exact 
-                  component={props => <Games 
-                  api={api} 
-                  langPack={this.state.langPack.games_page} 
-                  langPackOthers={this.state.langPack.others} />} />
-                <Route 
-                  path={"/app/watch"} 
-                  exact 
-                  component={props => <Watch 
-                  api={api} 
-                  langPack={this.state.langPack.watch_page} 
-                  langPackOthers={this.state.langPack.others} />} />
-                {/* <Route path={"/app/communities"} exact component={props => <Communities api={api} />} /> */}
-                <Route 
-                  path={"/app/channel"} 
-                  component={props => <Channel 
-                  api={api} 
-                  langPack={this.state.langPack.channel_page} 
-                  langPackCategories={this.state.langPack.categories} 
-                  langPackOthers={this.state.langPack.others} />} />
-                <Route 
-                  path={"/app/following"} 
-                  exact 
-                  component={props => <Following 
-                  api={api} 
-                  langPack={this.state.langPack.following_page} 
-                  langPackCategories={this.state.langPack.categories} 
-                  langPackOthers={this.state.langPack.others} />} />
-                <Route 
-                  path={"/app/notifications"} 
-                  exact 
-                  component={props => <Notifications 
-                  api={api} 
-                  langPack={this.state.langPack.notifications_page} />} />
-                {this.state.logoutRedirect ? <Redirect to='/' /> : <div id="no-logout-redirect"></div>}
+                <Suspense fallback={<div />}>
+                  <Switch>
+                    <Route 
+                      path={"/"} 
+                      exact 
+                      component={props => <Redirect to='/app/home' />} />
+                    <Route 
+                      path={"/app/home"} 
+                      exact 
+                      component={props => <Home api={api} 
+                      langPack={this.state.langPack.home_page}
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/search"} 
+                      exact 
+                      component={props => <Search 
+                      api={api} 
+                      langPack={this.state.langPack.search_page} 
+                      langPackCategories={this.state.langPack.categories} 
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/multistream"} 
+                      exact 
+                      component={props => <MultiStream 
+                      api={api} 
+                      langPack={this.state.langPack.multistream_page}
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/games"} 
+                      exact 
+                      component={props => <Games 
+                      api={api} 
+                      langPack={this.state.langPack.games_page} 
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/watch"} 
+                      exact 
+                      component={props => <Watch 
+                      api={api} 
+                      langPack={this.state.langPack.watch_page} 
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/channel"} 
+                      component={props => <Channel 
+                      api={api} 
+                      langPack={this.state.langPack.channel_page} 
+                      langPackCategories={this.state.langPack.categories} 
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/following"} 
+                      exact 
+                      component={props => <Following 
+                      api={api} 
+                      langPack={this.state.langPack.following_page} 
+                      langPackCategories={this.state.langPack.categories} 
+                      langPackOthers={this.state.langPack.others} />} />
+                    <Route 
+                      path={"/app/notifications"} 
+                      exact 
+                      component={props => <Notifications 
+                      api={api} 
+                      langPack={this.state.langPack.notifications_page} />} />
+                    {this.state.logoutRedirect ? <Redirect to='/' /> : <div id="no-logout-redirect"></div>}
+                  </Switch>
+                </Suspense>
               </div>
           </div>
         )
@@ -278,7 +319,7 @@ class App extends Component {
 
   render() {
     return (
-      <HashRouter>
+      <Router>
         <div className="container-fluid">
             <this.AppLayout />
             <SettingsModal 
@@ -287,7 +328,7 @@ class App extends Component {
               languageHandler={this.languageHandler}
             />
         </div>
-      </HashRouter>
+      </Router>
     )
   }
 }

@@ -39,6 +39,11 @@
             "october": "Oktober",
             "november": "November", 
             "december": "Dezember"
+        },
+        "app_update_alert": {
+            "title": "Neues Update ist verfügbar! Möchten Sie es jetzt installieren?",
+            "update_btn": "Aktualisieren",
+            "cancel_btn": "Zurück"
         }
     },
     "welcome_page": {
@@ -135,7 +140,8 @@
             },
             "resizable": {
                 "title": "Veränderbare Mini-Playergröße",
-                "message": "Sie können die Mini-Playergröße verändern, wenn der Player ist aktiv."
+                "message": "Sie können die Mini-Playergröße verändern, wenn der Player ist aktiv.",
+                "alert_msg": "Sie müssen die App neu starten, um die Größe des Mini-Players zu ändern."
             },
             "mp_size": {
                 "title": "Mini-Playergröße",
@@ -152,7 +158,8 @@
             "message": "Später werden sie fertig sein. Jetzt können Sie nur Testbenachrichtigung senden."
         },
         "faq_btn": "FAQ",
-        "contact_btn": "Stell die Frage"
+        "contact_btn": "Stell die Frage",
+        "log_btn": "Neuerungen"
     },
     "channel_page": {
         "header": {

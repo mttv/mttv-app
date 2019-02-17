@@ -39,6 +39,11 @@
             "october": "October",
             "november": "November", 
             "december": "December"
+        },
+        "app_update_alert": {
+            "title": "New update is available! Would you like to install it now?",
+            "update_btn": "Update",
+            "cancel_btn": "cancel"
         }
     },
     "welcome_page": {
@@ -113,7 +118,7 @@
             }
         },
         "twitch_player_settings": {
-            "title": "Twitch Player",
+            "title": "Player",
             "ratio": {
                 "title": "aspect ratio"
             },
@@ -135,7 +140,8 @@
             },
             "resizable": {
                 "title": "resizable mini player",
-                "message": "You can resize mini player when it is activated."
+                "message": "You can resize mini player when it is activated.",
+                "alert_msg": "Need to restart app to make mini player resizable."
             },
             "mp_size": {
                 "title": "mini player size",
@@ -152,7 +158,8 @@
             "message": "We will deploy them when they are ready."
         },
         "faq_btn": "FAQ",
-        "contact_btn": "Ask a Question"
+        "contact_btn": "Ask a Question",
+        "log_btn": "Change Log"
     },
     "channel_page": {
         "header": {

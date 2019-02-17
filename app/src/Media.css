@@ -22,7 +22,13 @@
   .container.streams-live {
     max-width: 90%; }
   .container.channel {
-    max-width: 92.5%; }
+    max-width: 97.5%;
+    margin-left: 0;
+    margin-right: 0; }
+  #stream {
+    max-width: 97%;
+    margin: 0 auto;
+    padding-left: 1.5%; }
   .container.channels-preview {
     max-width: 90%; }
   #player-container {
@@ -45,4 +51,6 @@
   .container-block.channel-top-header .btns-group .btns-container {
     display: block; }
   .container-block.channel-top-header .btns-group .load-btn-group {
-    display: none; } }
+    display: none; }
+  .tab-content.settings > .tab-pane {
+    width: 75%; } }

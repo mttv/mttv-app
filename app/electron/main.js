@@ -2,7 +2,7 @@ const fs = require('fs')
 const electron = require('electron')
 
 // Module to control application life.
-const { app, Menu, shell, Tray } = require('electron')
+const { app, Menu, shell, Tray, dialog } = require('electron')
 
 //Updates module
 const { autoUpdater } = require('electron-updater')
@@ -11,6 +11,9 @@ autoUpdater.autoDownload = false
 
 //checking app status
 const isDev = require('electron-is-dev')
+
+//generating app unique id
+const uuid = require('uuid/v4')
 
 //Updates log conf
 const log = require('electron-log')
@@ -42,8 +45,7 @@ let subWindow
 let tWindow
 let tray = null
 
-// app.commandLine.appendSwitch('js-flags', '--max-old-space-size=256')
-
+app.commandLine.appendSwitch('js-flags', '--max-old-space-size=512')
 
 // app.disableHardwareAcceleration()
 
@@ -121,11 +123,13 @@ createWindow = () => {
       webPreferences: {
         webSecurity: false,
         devTools: conf.app.devTools,
-        allowRunningInsecureContent: true,
+        allowRunningInsecureContent: false,
         plugins: true
       },
       backgroundColor: '#17141f'
     })
+
+    // mainWindow.webContents.setFrameRate(60)
 
     // and load the index.html of the app.
     const startUrl = process.env.ELECTRON_START_URL || url.format({
@@ -137,7 +141,7 @@ createWindow = () => {
 
     mainWindow.on('ready-to-show', () => {
         preloaderWindow.close()
-        playerWindow = null
+        preloaderWindow = null
         mainWindow.show()
         //watching for app updates  
         // loading bttv
@@ -146,11 +150,12 @@ createWindow = () => {
         if (!isDev) {
             autoUpdater.checkForUpdates()   
         }
-        // setInterval(() => {
-        //     mainWindow.webContents.session.clearCache(() => {
-        //         console.log("cache cleared...")
-        //     })
-        // }, 1000 * 60)
+        setInterval(() => {
+            mainWindow.webContents.session.clearCache(() => {
+                //some callback.
+                mainWindow.webContents.send("cache-cleared", true)
+            })
+        }, 1000 * 60 * 3)
     })
     // mainWindow.loadURL('http://localhost:5000/')
     // Open the DevTools.
@@ -191,13 +196,10 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         resizable: resizable,
         alwaysOnTop: true,
         icon: __dirname + '/icon_r.png',
-        webPreferences: {
-            webSecurity: false
-          },
         backgroundColor: '#2f3237'
     })
 
-    let playerUrl = url.format({
+    const playerUrl = url.format({
       pathname: path.join(__dirname, './playerWindow.html'),
       protocol: 'file',
       slashes: true
@@ -324,16 +326,6 @@ exports.restartApp = () => {
     app.exit(0)
 }
 
-exports.getCache = () => {
-    mainWindow.webContents.session.getCacheSize((size) => {
-        mainWindow.webContents.send("get-cache-size", size)
-    })
-}
-
-// exports.clearStoredCache = () => {
-//     mainWindow.webContents.session.clearCache()
-// }
-
 //Exporting twitch subscripiton window
 exports.subscribeWindow = (channelName) => {
     subWindow = new BrowserWindow({
@@ -348,9 +340,6 @@ exports.subscribeWindow = (channelName) => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icon_r.png',
-        webPreferences: {
-            devTools: false
-        },
         backgroundColor: '#2f3237'
     })
 
@@ -385,9 +374,6 @@ exports.twitchWindow = () => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icon_r.png',
-        webPreferences: {
-            devTools: false
-        },
         backgroundColor: '#2f3237'
     })
 
@@ -408,6 +394,10 @@ exports.twitchWindow = () => {
     })
 }
 
+exports.getAppID = () => {
+    return conf.app.appId
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -422,13 +412,20 @@ app.on('ready', () => {
                     })
                 } else {
                     fs.writeFile(confUrl, data, (err) => {
-                        // if (err) {
-                        //     fs.writeFile(confErrUrl, err, (err) => {
-                        //         app.exit()
-                        //     })
-                        // } else {
+                        if (err) {
+                            fs.writeFile(confErrUrl, err, (err) => {
+                                app.exit()
+                            })
+                        } else {
                             try {
                                 conf = JSON.parse(data)
+                                if (conf.app.appId === "none" || !conf.app.appId) {
+                                    conf.app.appId = uuid()
+                                    const newConf = JSON.stringify(conf)
+                                    fs.writeFile(confUrl, newConf, (err) => {
+                                        if (err) app.exit()
+                                    })
+                                }
                                 preloader()
                             } catch (err) {
                                 app.exit()
@@ -436,13 +433,20 @@ app.on('ready', () => {
                                     app.exit()
                                 })
                             }
-                        // }
+                        }
                     })
                 }
             })
         } else {
             try {
                 conf = JSON.parse(data)
+                if (conf.app.appId === "none" || !conf.app.appId) {
+                    conf.app.appId = uuid()
+                    const newConf = JSON.stringify(conf)
+                    fs.writeFile(confUrl, newConf, (err) => {
+                        if (err) app.exit()
+                    })
+                }
                 preloader()
                 // appUpdateWindow()
             } catch (err) {
@@ -578,6 +582,7 @@ appUpdateWindow = () => {
 
     appUpdateWin.on('ready-to-show', () => {
         appUpdateWin.show()
+        autoUpdater.downloadUpdate()
         setTimeout(() => {
             if (mainWindow) mainWindow.close()
             if (playerWindow) playerWindow.close()
@@ -624,9 +629,6 @@ autoUpdater.on('error', (err) => {
 exports.downloadUpdate = (permission) => {
     if (permission) {
         appUpdateWindow()
-        setTimeout(() => {
-            autoUpdater.downloadUpdate()
-        }, 500)
     }
 }
 

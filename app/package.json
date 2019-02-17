@@ -3,7 +3,7 @@
   "author": "webif",
   "description": "empty",
   "main": "electron/main.js",
-  "version": "0.2.0",
+  "version": "0.2.3",
   "license": "MIT",
   "homepage": "./",
   "private": false,
@@ -16,8 +16,8 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "pack-src": "electron-builder --dir",
-    "ebuild": "yarn electron-builder --x64 --win && node_modules/.bin/build",
-    "gh-publish": "yarn electron-builder --x64 --win -p always && node_modules/.bin/build"
+    "ebuild": "yarn electron-builder --ia32 --win && node_modules/.bin/build",
+    "gh-publish": "yarn electron-builder --ia32 --win -p always && node_modules/.bin/build"
   },
   "build": {
     "publish": [
@@ -49,7 +49,7 @@
     "appId": "com.mttv.app",
     "extends": null,
     "electronVersion": "3.0.0",
-    "buildVersion": "0.2.0",
+    "buildVersion": "0.2.3",
     "copyright": "webifua 2019",
     "files": [
       "build/**/*",
@@ -57,6 +57,7 @@
     ]
   },
   "dependencies": {
+    "electron-google-analytics": "^0.1.0",
     "electron-is-dev": "^1.0.1",
     "electron-log": "^2.2.17",
     "electron-titlebar": "0.0.3",
@@ -75,7 +76,8 @@
     "react-visibility-sensor": "^3.11.1",
     "sweetalert2": "^7.26.11",
     "sweetalert2-react-content": "^1.0.1",
-    "twitch-api-v5": "^2.0.4"
+    "twitch-api-v5": "^2.0.4",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "electron": "^3.0.0",
