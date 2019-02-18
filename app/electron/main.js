@@ -632,17 +632,15 @@ exports.downloadUpdate = (permission) => {
     }
 }
 
-autoUpdater.on('download-progress', (progressObj) => {
-    if (appUpdateWin) {
-        const downloadInfo = {
-            speed: progressObj.bytesPerSecond,
-            progress: Math.floor(progressObj.percent),
-            transferred: progressObj.transferred,
-            total: progressObj.total
-        }
-        appUpdateWin.webContents.send('app-update-status', downloadInfo)
-    }
-})
+// autoUpdater.on('download-progress', (progressObj) => {
+//     const downloadInfo = {
+//         speed: progressObj.bytesPerSecond,
+//         progress: Math.floor(progressObj.percent),
+//         transferred: progressObj.transferred,
+//         total: progressObj.total
+//     }
+//     appUpdateWin.webContents.send('app-update-status', progressObj)
+// })
 
 autoUpdater.on('update-downloaded', (info) => {
     sendStatusToWindow('Update downloaded')

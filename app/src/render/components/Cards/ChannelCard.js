@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 const channelCard = (props) => {
   return(
-    <div className="col-sm-6 col-lg-3">
+    <div className="col-sm-6 col-md-6 col-lg-3 col-xl-2">
         <Link to={{
             pathname: '/app/channel',
             search: '?id=' + props.channelId

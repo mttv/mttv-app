@@ -9,7 +9,7 @@ export default class Games extends Component {
     this.state = {
       gamesList: null,
       gamesListError: false,
-      showLimit: 12,
+      showLimit: 24,
       total: 0,
       showCounter: 0
     }

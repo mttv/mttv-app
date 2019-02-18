@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const gameList = (props) => {
   return(
-    <div className="col-xs-6 col-sm-3 col-lg-2">
+    <div className="col-sm-6 col-md-4 col-lg-2 col-xl-1">
       <Link onClick={() => sessionStorage.setItem("active-game", props.title)} params={props.title} to={{
           pathname: '/app/watch'
         }} 
