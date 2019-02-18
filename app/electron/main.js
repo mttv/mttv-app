@@ -76,6 +76,14 @@ preloader = () => {
     preloaderWindow.on('ready-to-show', () => {
         tray = new Tray(__dirname + '/icon_r.png')
         const contextMenu = Menu.buildFromTemplate([
+            {
+                label: 'Check for Updates',
+                click: () => {
+                    if (!isDev) {
+                        autoUpdater.checkForUpdates()   
+                    }
+                }
+            },
             { 
                 label: 'Open App', 
                 click:  () => {
