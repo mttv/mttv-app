@@ -38,7 +38,7 @@ const followingListLayout = (props) => {
                 <LoadMoreBtn
                     query={""}
                     total={total} 
-                    limit={showLimit + 6}
+                    limit={showLimit}
                     functionHandler={followsHandler}
                     langPackOthers={langPackOthers}
                 />

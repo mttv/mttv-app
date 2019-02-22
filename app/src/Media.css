@@ -12,7 +12,12 @@
     border: none;
     font-size: 25px;
     background-color: transparent;
-    cursor: pointer; } }
+    cursor: pointer; }
+  .card-columns {
+    -webkit-column-count: 2;
+       -moz-column-count: 2;
+            column-count: 2;
+    padding: 50px; } }
 
 @media (min-width: 1000px) {
   .side-menu {
@@ -53,4 +58,32 @@
   .container-block.channel-top-header .btns-group .load-btn-group {
     display: none; }
   .tab-content.settings > .tab-pane {
-    width: 75%; } }
+    width: 75%; }
+  .card-columns {
+    -webkit-column-count: 3;
+       -moz-column-count: 3;
+            column-count: 3;
+    padding: 0; } }
+
+@media (min-width: 1600px) {
+  .card-columns {
+    -webkit-column-count: 4;
+       -moz-column-count: 4;
+            column-count: 4; }
+  .jumbotron.msg {
+    width: 50%;
+    margin: 0 auto; }
+  .jumbotron.msg.text-center {
+    width: 100%; }
+  #stream {
+    width: 90%;
+    margin: 0 auto; }
+  .side-menu {
+    width: 70px; }
+  .modal.show .modal-dialog {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .modal-content {
+    width: 70%; } }

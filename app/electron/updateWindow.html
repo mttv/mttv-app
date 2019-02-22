@@ -111,12 +111,12 @@ body, html {
             <div class="circle-core"></div>
         </div>  
       </div>
-      <div class="progress">
+      <!-- <div class="progress">
         <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
+      </div> -->
       <div class="d-flex justify-content-between">
-        <p class="info info-speed text-left text-light"></p>
-        <p class="info info-packages text-light"></p>
+        <p class="info info-speed text-center text-light">Downloading update please wait for cookies...</p>
+        <!-- <p class="info info-packages text-light"></p> -->
       </div>
     </div>
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
@@ -124,20 +124,20 @@ body, html {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <script>
-      $(document).ready(() => {
-        const pretty = require('prettysize')
-        require('electron').ipcRenderer.on('app-update-status', (event, info) => {
-          const speed = pretty(info.speed)
-          const progress = info.progress
-          const transferred = info.transferred
-          const total = info.total
-          $(".progress-bar").css({"width": progress + "%"})
-          $(".progress-bar").attr("aria-valuenow", progress)
-          $(".progress-bar").text(progress + "%")
-          $(".info-speed").text("Speed: " + speed + "/s")
-          $(".info-packages").text("Packages: " + transferred + "/" + total)
-        })
-      })
+        // require('electron').ipcRenderer.on('app-update-status', (event, info) => {
+        //   const pretty = require('prettysize')
+        //   console.log(event)
+        //   console.log(info)
+        //   const speed = pretty(info.speed)
+        //   const progress = info.progress
+        //   const transferred = info.transferred
+        //   const total = info.total
+        //   $(".progress-bar").css({"width": progress + "%"})
+        //   $(".progress-bar").attr("aria-valuenow", progress)
+        //   $(".progress-bar").text(progress + "%")
+        //   $(".info-speed").text("Speed: " + speed + "/s")
+        //   $(".info-packages").text("Packages: " + transferred + "/" + total)
+        // })
     </script>
     <script>if (window.module) module = window.module;</script>
 </body>

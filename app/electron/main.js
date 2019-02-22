@@ -59,7 +59,7 @@ preloader = () => {
         fullscreen: false,
         fullscreenable: false,
         movable: true,
-        backgroundColor: '#17141f',
+        backgroundColor: '#0c0d0e',
         icon: __dirname + '/icon_r.png',
         webPreferences: {
             devTools: false
@@ -76,6 +76,14 @@ preloader = () => {
     preloaderWindow.on('ready-to-show', () => {
         tray = new Tray(__dirname + '/icon_r.png')
         const contextMenu = Menu.buildFromTemplate([
+            {
+                label: 'Check for Updates',
+                click: () => {
+                    if (!isDev) {
+                        autoUpdater.checkForUpdates()   
+                    }
+                }
+            },
             { 
                 label: 'Open App', 
                 click:  () => {
@@ -126,7 +134,7 @@ createWindow = () => {
         allowRunningInsecureContent: false,
         plugins: true
       },
-      backgroundColor: '#17141f'
+      backgroundColor: '#0c0d0e'
     })
 
     // mainWindow.webContents.setFrameRate(60)
@@ -196,7 +204,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         resizable: resizable,
         alwaysOnTop: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#2f3237'
+        backgroundColor: '#0c0d0e'
     })
 
     const playerUrl = url.format({
@@ -340,7 +348,7 @@ exports.subscribeWindow = (channelName) => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#2f3237'
+        backgroundColor: '#0c0d0e'
     })
 
     const subWinUrl = url.format({
@@ -374,7 +382,7 @@ exports.twitchWindow = () => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#2f3237'
+        backgroundColor: '#0c0d0e'
     })
 
     const twitchWinUrl = url.format({
@@ -427,6 +435,7 @@ app.on('ready', () => {
                                     })
                                 }
                                 preloader()
+                                // appUpdateWindow()
                             } catch (err) {
                                 app.exit()
                                 fs.writeFile(confErrUrl, err, (err) => {
@@ -565,7 +574,7 @@ appUpdateWindow = () => {
         fullscreen: false,
         fullscreenable: false,
         movable: true,
-        backgroundColor: '#17141f',
+        backgroundColor: '#0c0d0e',
         icon: __dirname + '/icon_r.png',
         webPreferences: {
             devTools: true
@@ -582,7 +591,9 @@ appUpdateWindow = () => {
 
     appUpdateWin.on('ready-to-show', () => {
         appUpdateWin.show()
-        autoUpdater.downloadUpdate()
+        if (!isDev) {
+            autoUpdater.downloadUpdate()
+        }
         setTimeout(() => {
             if (mainWindow) mainWindow.close()
             if (playerWindow) playerWindow.close()
@@ -632,17 +643,15 @@ exports.downloadUpdate = (permission) => {
     }
 }
 
-autoUpdater.on('download-progress', (progressObj) => {
-    if (appUpdateWin) {
-        const downloadInfo = {
-            speed: progressObj.bytesPerSecond,
-            progress: Math.floor(progressObj.percent),
-            transferred: progressObj.transferred,
-            total: progressObj.total
-        }
-        appUpdateWin.webContents.send('app-update-status', downloadInfo)
-    }
-})
+// autoUpdater.on('download-progress', (progressObj) => {
+//     const downloadInfo = {
+//         speed: progressObj.bytesPerSecond,
+//         progress: Math.floor(progressObj.percent),
+//         transferred: progressObj.transferred,
+//         total: progressObj.total
+//     }
+//     appUpdateWin.webContents.send('app-update-status', progressObj)
+// })
 
 autoUpdater.on('update-downloaded', (info) => {
     sendStatusToWindow('Update downloaded')

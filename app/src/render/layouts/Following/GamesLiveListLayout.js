@@ -38,7 +38,7 @@ const gamesLiveListLayout = (props) => {
                 <LoadMoreBtn
                     query={""}
                     total={total} 
-                    limit={showLimit + 6}
+                    limit={showLimit}
                     functionHandler={gamesLiveHandler}
                     langPackOthers={langPackOthers}
                 />

@@ -3,7 +3,7 @@ import React from 'react'
 const loadMoreBtn = (props) => {
     const { query, total, limit, functionHandler, langPackOthers } = props
     if (total > limit) {
-        return <button className="btn load-more" onClick={() => functionHandler(query, limit)}>{langPackOthers.load_more_btn}</button>
+        return <button className="btn load-more" onClick={() => functionHandler(query, limit + 6)}>{langPackOthers.load_more_btn}</button>
     } else {
         return <div className='no-load-more' />
     }

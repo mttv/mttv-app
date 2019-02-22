@@ -5,7 +5,7 @@ const streamPreviewCard = (props) => {
     return(
         <Draggable draggableId={props.res._id} index={props.index} id={props.res._id}>
             {(provided, snapshot) => (
-                <li className="list-group-item channel-card" id={props.res._id}
+                <li className="list-group-item channel-card shadow-sm" id={props.res._id}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}

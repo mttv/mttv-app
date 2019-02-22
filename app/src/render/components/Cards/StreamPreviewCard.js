@@ -5,12 +5,12 @@ import ContentLoader from 'react-content-loader'
 
 const streamPreviewCard = (props) => {
   return(
-    <div className="col-sm-6 col-lg-3">
+    <div className="col-sm-6 col-md-6 col-lg-3 col-xl-2">
         <Link to={{
             pathname: '/app/channel',
             search: '?id=' + props.channelId
         }}>
-            <div className="card stream-preview">
+            <div className="card stream-preview shadow-sm">
                 <div className="card-image-container">
                     <Img className="card-img-top" 
                         src={props.previewImg} 

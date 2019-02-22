@@ -4,7 +4,7 @@
 
 body {
   overflow-x: hidden;
-  background-color: #ffffff; }
+  background-color: #eeeeee; }
 
 a {
   color: #000; }
@@ -19,7 +19,7 @@ a:focus {
   width: 5px; }
 
 ::-webkit-scrollbar-track {
-  background-color: #ffffff; }
+  background-color: #eeeeee; }
 
 ::-webkit-scrollbar-thumb {
   background: #6441A4;

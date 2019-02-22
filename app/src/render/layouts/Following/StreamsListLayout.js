@@ -43,7 +43,7 @@ const streamsListLayout = (props) => {
                 <LoadMoreBtn
                     query={""}
                     total={total} 
-                    limit={showLimit + 6}
+                    limit={showLimit}
                     functionHandler={streamsHandler}
                     langPackOthers={langPackOthers}
                 />
