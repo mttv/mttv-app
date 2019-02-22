@@ -435,6 +435,7 @@ app.on('ready', () => {
                                     })
                                 }
                                 preloader()
+                                // appUpdateWindow()
                             } catch (err) {
                                 app.exit()
                                 fs.writeFile(confErrUrl, err, (err) => {
@@ -590,7 +591,9 @@ appUpdateWindow = () => {
 
     appUpdateWin.on('ready-to-show', () => {
         appUpdateWin.show()
-        autoUpdater.downloadUpdate()
+        if (!isDev) {
+            autoUpdater.downloadUpdate()
+        }
         setTimeout(() => {
             if (mainWindow) mainWindow.close()
             if (playerWindow) playerWindow.close()
