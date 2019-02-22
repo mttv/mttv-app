@@ -10,7 +10,7 @@ const streamPreviewCard = (props) => {
             pathname: '/app/channel',
             search: '?id=' + props.channelId
         }}>
-            <div className="card stream-preview">
+            <div className="card stream-preview shadow-sm">
                 <div className="card-image-container">
                     <Img className="card-img-top" 
                         src={props.previewImg} 

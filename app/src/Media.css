@@ -69,4 +69,21 @@
   .card-columns {
     -webkit-column-count: 4;
        -moz-column-count: 4;
-            column-count: 4; } }
+            column-count: 4; }
+  .jumbotron.msg {
+    width: 50%;
+    margin: 0 auto; }
+  .jumbotron.msg.text-center {
+    width: 100%; }
+  #stream {
+    width: 90%;
+    margin: 0 auto; }
+  .side-menu {
+    width: 70px; }
+  .modal.show .modal-dialog {
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+  .modal-content {
+    width: 70%; } }

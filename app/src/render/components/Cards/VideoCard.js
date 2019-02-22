@@ -31,7 +31,7 @@ export default class VideoCard extends Component {
     render() {
         return(
             <div className="col-sm-6 col-md-6 col-lg-3 col-xl-2">
-                <div className="card stream-preview video" data-toggle="modal" type={this.props.type} data-target={"#" + this.props.vid}>
+                <div className="card stream-preview video shadow-sm" data-toggle="modal" type={this.props.type} data-target={"#" + this.props.vid}>
                     <div className="card-image-container">
                         <Img className="card-img-top" 
                             src={this.props.previewImg} 

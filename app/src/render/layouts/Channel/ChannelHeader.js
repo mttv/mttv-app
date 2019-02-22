@@ -146,7 +146,7 @@ export default class ChannelHeader extends Component {
                     className="img-fluid profile-banner"
                 />
             </div>
-            <div className="container-block channel-top-header">
+            <div className="container-block channel-top-header shadow">
                 <ul className="channel-top-nav">
                     <li onClick={() => this.props.navLayout("#stream")} className="short-info">
                         <img src={this.props.logo} className="profile-logo channel-header" alt={this.props.name} />

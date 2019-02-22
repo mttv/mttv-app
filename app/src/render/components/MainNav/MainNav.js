@@ -61,7 +61,7 @@ export default class mainNav extends Component {
 
     render() {
         return(
-            <div className="side-menu" id="main-menu">
+            <div className="side-menu shadow" id="main-menu">
                 <div className="menu">
                     <ul className="dropdown">
                         <this.layoutHandler />
@@ -76,7 +76,7 @@ export default class mainNav extends Component {
                         <li data-toggle="tooltip" data-placement="right" title="twitch"><div onClick={this.twitchHandler} className="btn nav-link setting-open-btn twitch-btn"><i className="fab fa-twitch menu-icon"></i></div></li>
                         <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.settings}><div className="btn nav-link setting-open-btn" data-toggle="modal" data-target="#settings-modal"><i className="fas fa-cog menu-icon"></i></div></li>
                     </ul>
-                    <button className="hide-btn" id="hide-menu-btn"><i className="fas fa-angle-left"></i></button>
+                    {/* <button className="hide-btn" id="hide-menu-btn"><i className="fas fa-angle-left"></i></button> */}
                 </div>
             </div>
         )

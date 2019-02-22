@@ -8,7 +8,7 @@ const gameList = (props) => {
           pathname: '/app/watch'
         }} 
       >
-        <div className="card game">
+        <div className="card game shadow-sm">
           <div className="img-container">
             <div className="img-shadow" />
             <img className="card-img-top" src={props.img} alt={props.title} />

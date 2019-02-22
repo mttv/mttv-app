@@ -59,7 +59,7 @@ preloader = () => {
         fullscreen: false,
         fullscreenable: false,
         movable: true,
-        backgroundColor: '#17141f',
+        backgroundColor: '#0c0d0e',
         icon: __dirname + '/icon_r.png',
         webPreferences: {
             devTools: false
@@ -134,7 +134,7 @@ createWindow = () => {
         allowRunningInsecureContent: false,
         plugins: true
       },
-      backgroundColor: '#17141f'
+      backgroundColor: '#0c0d0e'
     })
 
     // mainWindow.webContents.setFrameRate(60)
@@ -204,7 +204,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         resizable: resizable,
         alwaysOnTop: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#2f3237'
+        backgroundColor: '#0c0d0e'
     })
 
     const playerUrl = url.format({
@@ -348,7 +348,7 @@ exports.subscribeWindow = (channelName) => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#2f3237'
+        backgroundColor: '#0c0d0e'
     })
 
     const subWinUrl = url.format({
@@ -382,7 +382,7 @@ exports.twitchWindow = () => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#2f3237'
+        backgroundColor: '#0c0d0e'
     })
 
     const twitchWinUrl = url.format({
@@ -573,7 +573,7 @@ appUpdateWindow = () => {
         fullscreen: false,
         fullscreenable: false,
         movable: true,
-        backgroundColor: '#17141f',
+        backgroundColor: '#0c0d0e',
         icon: __dirname + '/icon_r.png',
         webPreferences: {
             devTools: true
