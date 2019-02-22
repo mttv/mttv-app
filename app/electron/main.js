@@ -204,7 +204,12 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         resizable: resizable,
         alwaysOnTop: true,
         icon: __dirname + '/icon_r.png',
-        backgroundColor: '#0c0d0e'
+        backgroundColor: '#0c0d0e',
+        webPreferences: {
+            webSecurity: false,
+            devTools: conf.app.devTools,
+            allowRunningInsecureContent: true,
+          }
     })
 
     const playerUrl = url.format({
