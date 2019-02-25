@@ -7,9 +7,9 @@ export default class channelDescription extends Component {
         $(".card.description a").attr({"target":"_blank", "rel":"noopener noreferrer"})
     }
 
-    render() {
-        return(
-            <VisibilitySensor>
+    DescriptionLayout = () => {
+        if (!this.props.channelError) {
+            return(
                 <div className="card description">
                     <a href={this.props.imageLink}>
                         <img className="card-img-top" src={this.props.image} alt="" />
@@ -19,6 +19,16 @@ export default class channelDescription extends Component {
                         <div className="htmlDescription" dangerouslySetInnerHTML={{__html: this.props.description}} />
                     </div>
                 </div>
+            )
+        } else {
+            return <div />
+        }
+    }
+
+    render() {
+        return(
+            <VisibilitySensor>
+                <this.DescriptionLayout />
             </VisibilitySensor>
         )
     }

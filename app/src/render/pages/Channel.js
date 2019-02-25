@@ -181,7 +181,8 @@ export default class Channel extends Component {
                         key={i} 
                         image={res.data.image}
                         imageLink={res.data.link} 
-                        description={res.html_description} 
+                        description={res.html_description}
+                        channelError={error}
                     />
             })
             return(
