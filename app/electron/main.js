@@ -131,8 +131,7 @@ createWindow = () => {
       webPreferences: {
         webSecurity: false,
         devTools: conf.app.devTools,
-        allowRunningInsecureContent: false,
-        plugins: true
+        allowRunningInsecureContent: true
       },
       backgroundColor: '#0c0d0e'
     })
@@ -158,12 +157,14 @@ createWindow = () => {
         if (!isDev) {
             autoUpdater.checkForUpdates()   
         }
-        setInterval(() => {
-            mainWindow.webContents.session.clearCache(() => {
-                //some callback.
-                mainWindow.webContents.send("cache-cleared", true)
-            })
-        }, 1000 * 60 * 3)
+        // if (mainWindow) {
+        //     setInterval(() => {
+        //         mainWindow.webContents.session.clearCache(() => {
+        //             //some callback.
+        //             mainWindow.webContents.send("cache-cleared", true)
+        //         })
+        //     }, 1000 * 60 * 3)   
+        // }
     })
     // mainWindow.loadURL('http://localhost:5000/')
     // Open the DevTools.
