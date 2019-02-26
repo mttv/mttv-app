@@ -89,6 +89,10 @@ class App extends Component {
       }
     })
 
+    window.require('electron').ipcRenderer.on("app-update-status", (event, res) => {
+      console.log(res)
+    })
+
     this.darkModeHandler()
     
     $("#hide-menu-btn").click(function() {
