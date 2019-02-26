@@ -646,18 +646,19 @@ autoUpdater.on('error', (err) => {
 exports.downloadUpdate = (permission) => {
     if (permission) {
         appUpdateWindow()
+        autoUpdater.downloadUpdate()
     }
 }
 
-// autoUpdater.on('download-progress', (progressObj) => {
-//     const downloadInfo = {
-//         speed: progressObj.bytesPerSecond,
-//         progress: Math.floor(progressObj.percent),
-//         transferred: progressObj.transferred,
-//         total: progressObj.total
-//     }
-//     appUpdateWin.webContents.send('app-update-status', progressObj)
-// })
+autoUpdater.on('download-progress', (progressObj) => {
+    const downloadInfo = {
+        speed: progressObj.bytesPerSecond,
+        progress: Math.floor(progressObj.percent),
+        transferred: progressObj.transferred,
+        total: progressObj.total
+    }
+   appUpdateWin.webContents.send('app-update-status', downloadInfo)
+})
 
 autoUpdater.on('update-downloaded', (info) => {
     sendStatusToWindow('Update downloaded')
