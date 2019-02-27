@@ -182,7 +182,6 @@ export default class MultiStream extends Component {
         // this.setState({
         //     muted: false
         // })
-        console.log(res)
         const { destination, source } = res
         const activeStreams = this.state.activeStreams
         if (!destination || destination.droppableId === "search-container") {
