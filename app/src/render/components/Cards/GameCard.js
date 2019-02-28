@@ -1,5 +1,7 @@
 import React from 'react'
+import Img from 'react-image'
 import { Link } from 'react-router-dom'
+import ImgPreloader from './ImgPreloader'
 
 const gameList = (props) => {
   return(
@@ -11,7 +13,12 @@ const gameList = (props) => {
         <div className="card game shadow-sm">
           <div className="img-container">
             <div className="img-shadow" />
-            <img className="card-img-top" src={props.img} alt={props.title} />
+              <Img 
+                className="card-img-top" 
+                src={props.img} 
+                alt={props.title} 
+                loader={<ImgPreloader cardType="game" />}
+                />
           </div>
           <div className="card-body">
             <h6 className="card-title">{props.title}</h6>

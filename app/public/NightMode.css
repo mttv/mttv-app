@@ -127,14 +127,14 @@ input[type]:focus {
   background-color: #0e0c13; }
 
 .channel-card {
-  background-color: #17141f;
+  background-color: #18191b;
   color: #fff;
   -webkit-box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.8);
           box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.8); }
 
 .card.game .img-container .img-shadow {
-  -webkit-box-shadow: inset 0px -41px 38px -8px #17141f;
-          box-shadow: inset 0px -41px 38px -8px #17141f; }
+  -webkit-box-shadow: inset 0px -41px 38px -8px #18191b;
+          box-shadow: inset 0px -41px 38px -8px #18191b; }
 
 .card.description a {
   color: #7a5fb9; }
