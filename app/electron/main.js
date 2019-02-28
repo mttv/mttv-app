@@ -597,9 +597,6 @@ appUpdateWindow = () => {
 
     appUpdateWin.on('ready-to-show', () => {
         appUpdateWin.show()
-        if (!isDev) {
-            autoUpdater.downloadUpdate()
-        }
         setTimeout(() => {
             if (mainWindow) mainWindow.close()
             if (playerWindow) playerWindow.close()
@@ -622,7 +619,9 @@ const sendStatusToWindow = (text) => {
 }
 
 autoUpdater.on('checking-for-update', () => {
-    sendStatusToWindow('Checking for update...')
+    if (mainWindow) {
+        sendStatusToWindow('Checking for update...')
+    }
 })
 
 autoUpdater.on('update-available', (info) => {
@@ -632,7 +631,9 @@ autoUpdater.on('update-available', (info) => {
 })
 
 autoUpdater.on('update-not-available', (info) => {
-    sendStatusToWindow('Update not available.')
+    if (mainWindow) {
+        sendStatusToWindow('Update not available.')
+    }
 })
 
 autoUpdater.on('error', (err) => {
@@ -646,7 +647,9 @@ autoUpdater.on('error', (err) => {
 exports.downloadUpdate = (permission) => {
     if (permission) {
         appUpdateWindow()
-        autoUpdater.downloadUpdate()
+        setTimeout(() => {
+            autoUpdater.downloadUpdate()
+        }, 1000)
     }
 }
 
@@ -661,6 +664,6 @@ autoUpdater.on('download-progress', (progressObj) => {
 })
 
 autoUpdater.on('update-downloaded', (info) => {
-    sendStatusToWindow('Update downloaded')
+    // sendStatusToWindow('Update downloaded')
     autoUpdater.quitAndInstall()
 })
