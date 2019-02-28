@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Img from 'react-image'
-import ContentLoader from 'react-content-loader'
+import ImgPreloader from './ImgPreloader'
 import ClipsIconLight from '../../../img/clips_icon_light.svg'
 
 export default class VideoCard extends Component {
 
     formatDate = (date) => {
         const res = new Date(date)
+        
         const monthNames = [
             this.props.langPackOthers.months.january, this.props.langPackOthers.months.february, this.props.langPackOthers.months.march,
             this.props.langPackOthers.months.april, this.props.langPackOthers.months.may, this.props.langPackOthers.months.june, this.props.langPackOthers.months.july,
@@ -36,7 +37,7 @@ export default class VideoCard extends Component {
                         <Img className="card-img-top" 
                             src={this.props.previewImg} 
                             alt="" 
-                            loader={<ContentLoader className="card-img-top"  primaryColor="#6441A4" secondaryColor="#7a5fb9"><rect x="1.18" y="-14.99" rx="5" ry="5" width="100%" height="177" /></ContentLoader>} 
+                            loader={<ImgPreloader cardType="others" />} 
                         />
                         <div className="card-img-overlay">
                             <h5 className="card-title" style={{textAlign: "right"}}>{(this.props.type === "video") ? <i className="fas fa-video"></i> : (this.props.type === "clip") ? <img src={ClipsIconLight} className="clip-preview-icon" alt="" /> : ""}</h5>

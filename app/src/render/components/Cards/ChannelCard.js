@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 // import Img from 'react-image'
-// import ContentLoader from 'react-content-loader'
 
 const channelCard = (props) => {
   return(

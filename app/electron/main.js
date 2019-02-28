@@ -60,21 +60,21 @@ preloader = () => {
         fullscreenable: false,
         movable: true,
         backgroundColor: '#0c0d0e',
-        icon: __dirname + '/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         webPreferences: {
             devTools: false
         }
     })
 
     const preloaderUrl = url.format({
-        pathname: path.join(__dirname, './preloader.html'),
+        pathname: path.join(__dirname, './windows/preloader.html'),
         protocol: 'file',
         slashes: true
     })
     preloaderWindow.loadURL(preloaderUrl)
 
     preloaderWindow.on('ready-to-show', () => {
-        tray = new Tray(__dirname + '/icon_r.png')
+        tray = new Tray(__dirname + '/icons/icon_r.png')
         const contextMenu = Menu.buildFromTemplate([
             {
                 label: 'Check for Updates',
@@ -125,7 +125,7 @@ createWindow = () => {
       frame: true,
       show: false,
       fullscreen: conf.app.fullScreenLaunch,
-      icon: __dirname + '/icon_r.png',
+      icon: __dirname + '/icons/icon_r.png',
       fullscreenable: true,
       autoHideMenuBar: true,
       webPreferences: {
@@ -188,9 +188,9 @@ createWindow = () => {
 
 //Exporting playerWindow.html to Stream Component
 exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
-    let width = mpWidth ? mpWidth : conf.playerWindow.width
-    let height = mpHeight ? mpHeight : conf.playerWindow.height
-    let resizable = mpResizable ? mpResizable : conf.playerWindow.resizable
+    const width = mpWidth ? mpWidth : conf.playerWindow.width
+    const height = mpHeight ? mpHeight : conf.playerWindow.height
+    const resizable = mpResizable ? mpResizable : conf.playerWindow.resizable
     playerWindow = new BrowserWindow({
         width: width,
         height: height,
@@ -204,7 +204,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         movable: true,
         resizable: resizable,
         alwaysOnTop: true,
-        icon: __dirname + '/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         backgroundColor: '#0c0d0e',
         webPreferences: {
             webSecurity: false,
@@ -214,7 +214,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
     })
 
     const playerUrl = url.format({
-      pathname: path.join(__dirname, './playerWindow.html'),
+      pathname: path.join(__dirname, './windows/playerWindow.html'),
       protocol: 'file',
       slashes: true
     })
@@ -353,12 +353,12 @@ exports.subscribeWindow = (channelName) => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + '/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         backgroundColor: '#0c0d0e'
     })
 
     const subWinUrl = url.format({
-        pathname: path.join(__dirname, './subscribeWindow.html'),
+        pathname: path.join(__dirname, './windows/subscribeWindow.html'),
         protocol: 'file',
         slashes: true
     })
@@ -387,12 +387,12 @@ exports.twitchWindow = () => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + '/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         backgroundColor: '#0c0d0e'
     })
 
     const twitchWinUrl = url.format({
-        pathname: path.join(__dirname, './subscribeWindow.html'),
+        pathname: path.join(__dirname, './windows/subscribeWindow.html'),
         protocol: 'file',
         slashes: true
     })
@@ -581,14 +581,14 @@ appUpdateWindow = () => {
         fullscreenable: false,
         movable: true,
         backgroundColor: '#0c0d0e',
-        icon: __dirname + '/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         webPreferences: {
             devTools: true
         }
     })
 
     const updateWinUrl = url.format({
-        pathname: path.join(__dirname, './updateWindow.html'),
+        pathname: path.join(__dirname, './windows/updateWindow.html'),
         protocol: 'file',
         slashes: true
     })

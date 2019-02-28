@@ -697,6 +697,7 @@
 .card.game .card-img-top
   border-top-left-radius: 10px
   border-top-right-radius: 10px
+  height: 266px
 
 .card.game .card-text
   text-align: center
@@ -711,6 +712,7 @@
 .card.stream-preview .card-img-top
   border-top-left-radius: 10px
   border-top-right-radius: 10px
+  height: 180px
 
 .card.stream-preview .card-image-container
   position: relative
@@ -1295,7 +1297,7 @@
   left: 0
   right: 0
   top: 50%
-  width: 100%
+  width: 93%
   z-index: 1001
   transform: translateY(-50%)
   margin: auto
@@ -1487,3 +1489,120 @@ input
 .clip-preview-icon
   width: 22px
   height: 22px
+
+.img-preloader
+  width: 100%
+  border-radius: 10px
+  position: relative
+
+.img-preloader.game
+  height: 266px
+
+.img-preloader.others
+  height: 180px
+
+.img-preloader .preload-icon
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+.circleG:first-child
+  margin-left: 0
+
+.circleG
+  background-color: rgb(255, 255, 255)
+  float: left
+  height: 8px
+  margin-left: 8px
+  width: 8px
+  animation-name: bounce_circleG
+  -o-animation-name: bounce_circleG
+  -ms-animation-name: bounce_circleG
+  -webkit-animation-name: bounce_circleG
+  -moz-animation-name: bounce_circleG
+  animation-duration: 2.24s
+  -o-animation-duration: 2.24s
+  -ms-animation-duration: 2.24s
+  -webkit-animation-duration: 2.24s
+  -moz-animation-duration: 2.24s
+  animation-iteration-count: infinite
+  -o-animation-iteration-count: infinite
+  -ms-animation-iteration-count: infinite
+  -webkit-animation-iteration-count: infinite
+  -moz-animation-iteration-count: infinite
+  animation-direction: normal
+  -o-animation-direction: normal
+  -ms-animation-direction: normal
+  -webkit-animation-direction: normal
+  -moz-animation-direction: normal
+  border-radius: 20px
+  -o-border-radius: 20px
+  -ms-border-radius: 20px
+  -webkit-border-radius: 20px
+  -moz-border-radius: 20px
+
+.circleG_1
+  animation-delay: 0.45s
+  -o-animation-delay: 0.45s
+  -ms-animation-delay: 0.45s
+  -webkit-animation-delay: 0.45s
+  -moz-animation-delay: 0.45s
+
+.circleG_2
+  animation-delay: 1.05s
+  -o-animation-delay: 1.05s
+  -ms-animation-delay: 1.05s
+  -webkit-animation-delay: 1.05s
+  -moz-animation-delay: 1.05s
+
+.circleG_3
+  animation-delay: 1.35s
+  -o-animation-delay: 1.35s
+  -ms-animation-delay: 1.35s
+  -webkit-animation-delay: 1.35s
+  -moz-animation-delay: 1.35s
+
+@keyframes bounce_circleG
+  0%
+
+  50%
+    background-color: rgb(0, 0, 0)
+
+  100%
+
+
+@-o-keyframes bounce_circleG
+  0%
+
+  50%
+    background-color: rgb(0, 0, 0)
+
+  100%
+
+
+@-ms-keyframes bounce_circleG
+  0%
+
+  50%
+    background-color: rgb(0, 0, 0)
+
+  100%
+
+
+@-webkit-keyframes bounce_circleG
+  0%
+
+  50%
+    background-color: rgb(0, 0, 0)
+
+  100%
+
+
+@-moz-keyframes bounce_circleG
+  0%
+
+  50%
+    background-color: rgb(0, 0, 0)
+
+  100%
