@@ -83,18 +83,6 @@ export default class Settings extends Component {
                         </div>
                         <div className="modal-body">
                             <div className="container-block" style={{boxShadow: "none"}}>
-                                {/* <div className="accordion">
-                                    <Application langPack={this.props.langPack.application_settings} restartAppHandler={this.restartAppHandler} />
-                                    <PlayerSettings langPack={this.props.langPack.twitch_player_settings} restartAppHandler={this.restartAppHandler} />
-                                    <Languages langPack={this.props.langPack.languages_settings} languageHandler={this.props.languageHandler} />
-                                    <Notifications langPack={this.props.langPack.notifications_settings} />
-                                </div>
-                                <a href="https://mttv.github.io/faq" className="btn btn-md btn-block btn-link" target="_blank" rel="noopener noreferrer">{this.props.langPack.faq_btn}</a>
-                                <a href="https://mttv.github.io/contacts" className="btn btn-md btn-block btn-link" target="_blank" rel="noopener noreferrer">{this.props.langPack.contact_btn}</a>
-                                <a href="https://github.com/mttv/mttv-app/releases" className="btn btn-md btn-block btn-link" target="_blank" rel="noopener noreferrer">{this.props.langPack.log_btn}</a>
-                                <hr />
-                                <p className="app-version">{this.props.langPack.version}: 0.2.3 - Public Alpha</p>
-                                <div className="btn btn-primary" onClick={this.cacheSizeHandler}>get cache</div> */}
                                 <div className="row">
                                     <div className="col-4">
                                         <div className="list-group" id="list-tab" role="tablist" style={{paddingBottom: "0px"}}>
@@ -105,7 +93,7 @@ export default class Settings extends Component {
                                             <a className="list-group-item list-group-item-action" id="list-notifications" data-toggle="list" href="#notifications" role="tab" aria-controls="notifications">{this.props.langPack.notifications_settings.title}</a>
                                             <a className="list-group-item list-group-item-action" href="https://mttv.github.io/contacts" target="_blank" rel="noopener noreferrer">{this.props.langPack.contact_btn}</a>
                                             <a className="list-group-item list-group-item-action" href="https://github.com/mttv/mttv-app/releases" target="_blank" rel="noopener noreferrer">{this.props.langPack.log_btn}</a>
-                                            <p className="app-version">{this.props.langPack.version}: 0.2.9 - Public Alpha</p>
+                                            <p className="app-version">{this.props.langPack.version}: 0.2.10 - Public Alpha</p>
                                             <div className="row settings-social-footer">
                                                 <a className="social-icon twitter" href="https://twitter.com/mttvapp" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
                                                 <a className="social-icon github" href="https://github.com/mttv" target="_blank" rel="noopener noreferrer"><i className="fab fa-github-alt"></i></a>
