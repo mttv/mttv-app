@@ -60,7 +60,7 @@ preloader = () => {
         fullscreenable: false,
         movable: true,
         backgroundColor: '#0c0d0e',
-        icon: __dirname + './icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         webPreferences: {
             devTools: false
         }
@@ -74,7 +74,7 @@ preloader = () => {
     preloaderWindow.loadURL(preloaderUrl)
 
     preloaderWindow.on('ready-to-show', () => {
-        tray = new Tray(__dirname + './icons/icon_r.png')
+        tray = new Tray(__dirname + '/icons/icon_r.png')
         const contextMenu = Menu.buildFromTemplate([
             {
                 label: 'Check for Updates',
@@ -125,7 +125,7 @@ createWindow = () => {
       frame: true,
       show: false,
       fullscreen: conf.app.fullScreenLaunch,
-      icon: __dirname + './icons/icon_r.png',
+      icon: __dirname + '/icons/icon_r.png',
       fullscreenable: true,
       autoHideMenuBar: true,
       webPreferences: {
@@ -204,7 +204,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         movable: true,
         resizable: resizable,
         alwaysOnTop: true,
-        icon: __dirname + './icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         backgroundColor: '#0c0d0e',
         webPreferences: {
             webSecurity: false,
@@ -353,7 +353,7 @@ exports.subscribeWindow = (channelName) => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + './icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         backgroundColor: '#0c0d0e'
     })
 
@@ -387,7 +387,7 @@ exports.twitchWindow = () => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + './icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         backgroundColor: '#0c0d0e'
     })
 
@@ -581,7 +581,7 @@ appUpdateWindow = () => {
         fullscreenable: false,
         movable: true,
         backgroundColor: '#0c0d0e',
-        icon: __dirname + './icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.png',
         webPreferences: {
             devTools: true
         }

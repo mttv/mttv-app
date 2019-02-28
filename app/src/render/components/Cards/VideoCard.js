@@ -7,6 +7,7 @@ export default class VideoCard extends Component {
 
     formatDate = (date) => {
         const res = new Date(date)
+        
         const monthNames = [
             this.props.langPackOthers.months.january, this.props.langPackOthers.months.february, this.props.langPackOthers.months.march,
             this.props.langPackOthers.months.april, this.props.langPackOthers.months.may, this.props.langPackOthers.months.june, this.props.langPackOthers.months.july,
