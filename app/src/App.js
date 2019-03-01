@@ -7,6 +7,7 @@ import $ from 'jquery'
 import MainNav from './render/components/MainNav/MainNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'
+import OfflineAlert from './render/components/Alerts/OfflineAlert'
 import icon from './img/icon.png'
 import './libs/libs.css'
 import './index.css'
@@ -64,6 +65,15 @@ api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
 
 // console.log(USER_ID)
 
+//cheking user online status
+const appOfflineStatusHandler = () => {
+  navigator.onLine ? $("#offline-alert").hide() : $("#offline-alert").fadeIn()
+}
+
+window.addEventListener('online', appOfflineStatusHandler)
+window.addEventListener('offline', appOfflineStatusHandler)
+
+appOfflineStatusHandler()
 
 class App extends Component {
 
@@ -82,6 +92,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     //checking for updates
     window.require('electron').ipcRenderer.on("app-update-avaliavle", (event, res) => {
       if (res) {
@@ -331,6 +342,7 @@ class App extends Component {
               langPack={this.state.langPack.settings_page}
               languageHandler={this.languageHandler}
             />
+            <OfflineAlert />
         </div>
       </Router>
     )

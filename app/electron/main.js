@@ -2,7 +2,7 @@ const fs = require('fs')
 const electron = require('electron')
 
 // Module to control application life.
-const { app, Menu, shell, Tray, dialog } = require('electron')
+const { app, Menu, shell, Tray } = require('electron')
 
 //Updates module
 const { autoUpdater } = require('electron-updater')
@@ -503,8 +503,7 @@ app.on('web-contents-created', (e, contents) => {
         shell.openExternal(url)
       })
     }
-  })
-
+})
 
 exports.clearApp = () => {
     const ses = mainWindow.webContents.session

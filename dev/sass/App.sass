@@ -1606,3 +1606,19 @@ input
     background-color: rgb(0, 0, 0)
 
   100%
+
+.offline-alert
+  position: fixed
+  right: 30px
+  bottom: 30px
+  display: none
+  cursor: default
+  z-index: 1000000
+
+.offline-alert .offline-icon
+  width: 32px
+  height: 32px
+
+.card.offline-alert:hover
+  transform: none
+  box-shadow: 0px 0px 50px -3px $primary-light-color
