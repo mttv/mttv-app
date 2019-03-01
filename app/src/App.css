@@ -1739,3 +1739,22 @@ input:checked + .slider:before {
   50% {
     background-color: black; }
   100% { } }
+
+.offline-alert {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  display: none;
+  cursor: default;
+  z-index: 1000000; }
+
+.offline-alert .offline-icon {
+  width: 32px;
+  height: 32px; }
+
+.card.offline-alert:hover {
+  -webkit-transform: none;
+      -ms-transform: none;
+          transform: none;
+  -webkit-box-shadow: 0px 0px 50px -3px #7a5fb9;
+          box-shadow: 0px 0px 50px -3px #7a5fb9; }
