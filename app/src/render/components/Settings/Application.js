@@ -52,7 +52,6 @@ export default class Application extends Component {
         const option = localStorage.getItem("dev-console")
         const newVal = (option === "false" || !option) ? true : false
         localStorage.setItem("dev-console", newVal)
-        console.log(newVal)
         // main.devConsole(newVal)
     }
 

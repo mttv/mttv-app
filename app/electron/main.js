@@ -2,7 +2,7 @@ const fs = require('fs')
 const electron = require('electron')
 
 // Module to control application life.
-const { app, Menu, shell, Tray } = require('electron')
+const { app, Menu, shell, Tray, ipcMain } = require('electron')
 
 //Updates module
 const { autoUpdater } = require('electron-updater')
@@ -508,6 +508,12 @@ exports.clearApp = () => {
     ses.clearStorageData()
 }
 
+ipcMain.on("open-dev-tools", (event, res) => {
+    if (res) {
+        mainWindow.webContents.openDevTools()
+    }
+})
+
 const template = [
     {
       label: 'Edit',
@@ -534,7 +540,9 @@ const template = [
             accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
             click: () => {
                 if (mainWindow) {
-                    mainWindow.webContents.openDevTools()
+                    if (mainWindow) {
+                        mainWindow.webContents.send("try-open-dev-tools", true)
+                    }
                 }
             }
         },
