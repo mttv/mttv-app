@@ -3,7 +3,7 @@
   "author": "webif",
   "description": "empty",
   "main": "electron/main.js",
-  "version": "0.2.13",
+  "version": "0.3.2",
   "license": "MIT",
   "homepage": "./",
   "private": false,
@@ -28,14 +28,12 @@
       }
     ],
     "win": {
-      "target": [
-        {
-          "target": "nsis",
-          "arch": ["ia32" ]
-        }
-      ],
+      "target": {
+          "target": "nsis-web",
+          "arch": "ia32" 
+      },
       "icon": "build/icon.ico",
-      "publisherName": "webifua"
+      "publisherName": ["webifua"]
     },
     "nsis": {
       "oneClick": false,
@@ -52,7 +50,7 @@
     "appId": "com.mttv.app",
     "extends": null,
     "electronVersion": "3.0.0",
-    "buildVersion": "0.2.13",
+    "buildVersion": "0.3.2",
     "copyright": "webifua 2019",
     "files": [
       "build/**/*",
