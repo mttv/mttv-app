@@ -29,42 +29,6 @@ const main = remote.require("./main.js")
 const api = require('twitch-api-v5')
 api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
 
-// const APP_VERSION = "0.2.3"
-// const USER_ID = main.getAppID()
-// const APP_NAME = "MTTV"
-// const APP_ID = "com.mttv.app"
-
-// const analytics = new Analytics('UA-133347961-3')
-
-// analytics.set('uid', USER_ID)
-
-// const analyticsTestScreen = () => {
-//   return analytics.screen(APP_NAME, APP_VERSION, APP_ID, 'com.mttv.installer', 'screenTest', USER_ID)
-//   .then((response) => {
-//     console.log(response)
-//     return response
-//   }).catch((err) => {
-//     console.log(err)
-//     return err
-//   })
-// }
-
-// const analyticsTestPageView = () => {
-//   return analytics.pageview('https://mttv-app.firebaseapp.com/', '/pageViewTest', 'pageViewTest', USER_ID)
-//   .then((response) => {
-//     console.log(response)
-//     return response
-//   }).catch((err) => {
-//     console.log(err)
-//     return err
-//   })
-// }
-
-// analyticsTestScreen()
-// analyticsTestPageView()
-
-// console.log(USER_ID)
-
 //cheking user online status
 const appOfflineStatusHandler = () => {
   navigator.onLine ? $("#offline-alert").hide() : $("#offline-alert").fadeIn()
@@ -92,16 +56,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-
     //checking for updates
+    window.require('electron').ipcRenderer.on("app-update-message", (event, res) => {
+      console.log(res)
+    })
+
     window.require('electron').ipcRenderer.on("app-update-avaliavle", (event, res) => {
       if (res) {
         this.appUpdateHandler()
       }
-    })
-
-    window.require('electron').ipcRenderer.on("app-update-status", (event, res) => {
-      console.log(res)
     })
 
     this.darkModeHandler()
