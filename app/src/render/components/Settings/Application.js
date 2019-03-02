@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+// import Swal from 'sweetalert2'
+// import withReactContent from 'sweetalert2-react-content'
 
 const { webFrame } = window.require("electron")
-const remote = window.require("electron").remote
-const main = remote.require("./main.js")
+// const remote = window.require("electron").remote
+// const main = remote.require("./main.js")
 
 export default class Application extends Component {
 
@@ -21,33 +21,39 @@ export default class Application extends Component {
         const devConsole = localStorage.getItem("dev-console")
 
         hardware ? $("#hardware-btn input").prop("checked", true) : $("#hardware-btn input").prop("checked", false)
-        devConsole ? $("#dev-console-btn input").prop("checked", true) : $("#dev-console-btn input").prop("checked", false)
         darkMode ? this.darkModeHandler() : this.lightModeHandler()
+        if (devConsole === "false" || !devConsole) {
+            $("#dev-console-btn input").prop("checked", false)
+        } else {
+            $("#dev-console-btn input").prop("checked", true)
+        }
 
-        window.require('electron').ipcRenderer.on("dev-console-enable", (event, res) => {
-            const option = localStorage.getItem("dev-console")
-            if (res) {
-                if (option) {
-                    localStorage.removeItem("dev-console")
-                    this.props.restartAppHandler()
-                } else {
-                    localStorage.setItem("dev-console", true)
-                    this.props.restartAppHandler()
-                }
-            } else {
-                const Alert = withReactContent(Swal)
-                    Alert.fire({
-                        type: 'error',
-                        text: 'Oops something went wrong!Try again later.'
-                })
-            }
-        })
+        // window.require('electron').ipcRenderer.on("dev-console-enable", (event, res) => {
+        //     const option = localStorage.getItem("dev-console")
+        //     if (res) {
+        //         if (option) {
+        //             localStorage.removeItem("dev-console")
+        //             this.props.restartAppHandler()
+        //         } else {
+        //             localStorage.setItem("dev-console", true)
+        //             this.props.restartAppHandler()
+        //         }
+        //     } else {
+        //         const Alert = withReactContent(Swal)
+        //             Alert.fire({
+        //                 type: 'error',
+        //                 text: 'Oops something went wrong!Try again later.'
+        //         })
+        //     }
+        // })
     }
 
     devConsoleHandler = () => {
         const option = localStorage.getItem("dev-console")
-        const newVal = option ? false : true
-        main.devConsole(newVal)
+        const newVal = (option === "false" || !option) ? true : false
+        localStorage.setItem("dev-console", newVal)
+        console.log(newVal)
+        // main.devConsole(newVal)
     }
 
     hardwareHandler = () => {
@@ -116,9 +122,9 @@ export default class Application extends Component {
                             </label>
                             <p>{this.props.langPack.dev_console.message}</p>
                         </div>
-                        <div className="alert alert-warning" role="alert">
+                        {/* <div className="alert alert-warning" role="alert">
                             {this.props.langPack.dev_console.alert_msg}
-                        </div>
+                        </div> */}
                         <h5>{this.props.langPack.rendering.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
                             <label className="switch" id="hardware-btn">
