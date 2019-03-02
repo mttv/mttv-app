@@ -93,7 +93,7 @@ export default class Settings extends Component {
                                             <a className="list-group-item list-group-item-action" id="list-notifications" data-toggle="list" href="#notifications" role="tab" aria-controls="notifications">{this.props.langPack.notifications_settings.title}</a>
                                             <a className="list-group-item list-group-item-action" href="https://mttv.github.io/contacts" target="_blank" rel="noopener noreferrer">{this.props.langPack.contact_btn}</a>
                                             <a className="list-group-item list-group-item-action" href="https://github.com/mttv/mttv-app/releases" target="_blank" rel="noopener noreferrer">{this.props.langPack.log_btn}</a>
-                                            <p className="app-version">{this.props.langPack.version}: 0.2.13 - Public Alpha</p>
+                                            <p className="app-version">{this.props.langPack.version}: 0.3.2 - Public Alpha</p>
                                             <div className="row settings-social-footer">
                                                 <a className="social-icon twitter" href="https://twitter.com/mttvapp" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
                                                 <a className="social-icon github" href="https://github.com/mttv" target="_blank" rel="noopener noreferrer"><i className="fab fa-github-alt"></i></a>
