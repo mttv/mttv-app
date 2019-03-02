@@ -61,6 +61,17 @@ class App extends Component {
       console.log(res)
     })
 
+    window.require('electron').ipcRenderer.on("try-open-dev-tools", (event, res) => {
+      if (res) {
+        const option = localStorage.getItem("dev-console")
+        if (option === "false" || !option) {
+          window.require('electron').ipcRenderer.send("open-dev-tools", false)
+        } else {
+          window.require('electron').ipcRenderer.send("open-dev-tools", true)
+        }
+      }
+    })
+
     window.require('electron').ipcRenderer.on("app-update-avaliavle", (event, res) => {
       if (res) {
         this.appUpdateHandler()

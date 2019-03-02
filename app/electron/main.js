@@ -2,7 +2,7 @@ const fs = require('fs')
 const electron = require('electron')
 
 // Module to control application life.
-const { app, Menu, shell, Tray } = require('electron')
+const { app, Menu, shell, Tray, ipcMain } = require('electron')
 
 //Updates module
 const { autoUpdater } = require('electron-updater')
@@ -130,7 +130,7 @@ createWindow = () => {
       autoHideMenuBar: true,
       webPreferences: {
         webSecurity: false,
-        devTools: conf.app.devTools,
+        devTools: true,
         allowRunningInsecureContent: true
       },
       backgroundColor: '#0c0d0e'
@@ -208,7 +208,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         backgroundColor: '#0c0d0e',
         webPreferences: {
             webSecurity: false,
-            devTools: conf.app.devTools,
+            devTools: false,
             allowRunningInsecureContent: true,
           }
     })
@@ -231,45 +231,45 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
     })
 }
 
-exports.devConsole = (enable) => {
-    fs.readFile(confUrl, 'utf8', (err, data) => {
-        if (err) {
-            mainWindow.webContents.send("dev-console-enable", false)
-        } else {
-            if (enable) {
-                try {
-                    conf = JSON.parse(data)
-                    conf.app.devTools = true
-                    conf = JSON.stringify(conf)
-                    fs.writeFile(confUrl, conf, (err) => {
-                        if (err) {
-                            mainWindow.webContents.send("dev-console-enable", false)
-                        } else {
-                            mainWindow.webContents.send("dev-console-enable", true)
-                        }
-                    })
-                } catch (err) {
-                    mainWindow.webContents.send("dev-console-enable", false)
-                }   
-            } else {
-                try {
-                    conf = JSON.parse(data)
-                    conf.app.devTools = false
-                    conf = JSON.stringify(conf)
-                    fs.writeFile(confUrl, conf, (err) => {
-                        if (err) {
-                            mainWindow.webContents.send("dev-console-enable", false)
-                        } else {
-                            mainWindow.webContents.send("dev-console-enable", true)
-                        }
-                    })
-                } catch (err) {
-                    mainWindow.webContents.send("dev-console-enable", false)
-                } 
-            }
-        }
-    })
-}
+// exports.devConsole = (enable) => {
+//     fs.readFile(confUrl, 'utf8', (err, data) => {
+//         if (err) {
+//             mainWindow.webContents.send("dev-console-enable", false)
+//         } else {
+//             if (enable) {
+//                 try {
+//                     conf = JSON.parse(data)
+//                     conf.app.devTools = true
+//                     conf = JSON.stringify(conf)
+//                     fs.writeFile(confUrl, conf, (err) => {
+//                         if (err) {
+//                             mainWindow.webContents.send("dev-console-enable", false)
+//                         } else {
+//                             mainWindow.webContents.send("dev-console-enable", true)
+//                         }
+//                     })
+//                 } catch (err) {
+//                     mainWindow.webContents.send("dev-console-enable", false)
+//                 }   
+//             } else {
+//                 try {
+//                     conf = JSON.parse(data)
+//                     conf.app.devTools = false
+//                     conf = JSON.stringify(conf)
+//                     fs.writeFile(confUrl, conf, (err) => {
+//                         if (err) {
+//                             mainWindow.webContents.send("dev-console-enable", false)
+//                         } else {
+//                             mainWindow.webContents.send("dev-console-enable", true)
+//                         }
+//                     })
+//                 } catch (err) {
+//                     mainWindow.webContents.send("dev-console-enable", false)
+//                 } 
+//             }
+//         }
+//     })
+// }
 
 exports.resizablePlayer = (enable) => {
     fs.readFile(confUrl, 'utf8', (err, data) => {
@@ -443,7 +443,6 @@ app.on('ready', () => {
                                 preloader()
                                 // appUpdateWindow()
                             } catch (err) {
-                                app.exit()
                                 fs.writeFile(confErrUrl, err, (err) => {
                                     app.exit()
                                 })
@@ -465,7 +464,6 @@ app.on('ready', () => {
                 preloader()
                 // appUpdateWindow()
             } catch (err) {
-                app.exit()
                 fs.writeFile(confErrUrl, err, (err) => {
                     app.exit()
                 })
@@ -510,6 +508,12 @@ exports.clearApp = () => {
     ses.clearStorageData()
 }
 
+ipcMain.on("open-dev-tools", (event, res) => {
+    if (res) {
+        mainWindow.webContents.openDevTools()
+    }
+})
+
 const template = [
     {
       label: 'Edit',
@@ -530,7 +534,18 @@ const template = [
       submenu: [
         {role: 'reload'},
         {role: 'forcereload'},
-        {role: 'toggledevtools'}, //remove in prod
+        // {role: 'toggledevtools'},
+        {
+            label: 'Toggle Developer Tools',
+            accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
+            click: () => {
+                if (mainWindow) {
+                    if (mainWindow) {
+                        mainWindow.webContents.send("try-open-dev-tools", true)
+                    }
+                }
+            }
+        },
         {type: 'separator'},
         {role: 'resetzoom'},
         {role: 'zoomin'},
