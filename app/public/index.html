@@ -8,7 +8,6 @@
       manifest.json provides metadata used when your web app is added to the
       homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
     -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -40,12 +39,6 @@
     <!-- Insert this line above script imports  -->
     <link rel="stylesheet" type="text/css" href="%PUBLIC_URL%/NightMode.css" id="night-mode" disabled>
     <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <script>
-      //app updates listener
-      require('electron').ipcRenderer.on("app-update-message", (event, res) => {
-        console.log("Updater:" + res)
-      })
-    </script>
     <!-- normal script imports etc  -->
     <script defer src="%PUBLIC_URL%/libs.min.js"></script>
     <script defer src="%PUBLIC_URL%/animate.js"></script>

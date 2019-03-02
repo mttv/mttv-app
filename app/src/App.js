@@ -7,6 +7,7 @@ import $ from 'jquery'
 import MainNav from './render/components/MainNav/MainNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'
+import OfflineAlert from './render/components/Alerts/OfflineAlert'
 import icon from './img/icon.png'
 import './libs/libs.css'
 import './index.css'
@@ -28,42 +29,15 @@ const main = remote.require("./main.js")
 const api = require('twitch-api-v5')
 api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
 
-// const APP_VERSION = "0.2.3"
-// const USER_ID = main.getAppID()
-// const APP_NAME = "MTTV"
-// const APP_ID = "com.mttv.app"
+//cheking user online status
+const appOfflineStatusHandler = () => {
+  navigator.onLine ? $("#offline-alert").hide() : $("#offline-alert").fadeIn()
+}
 
-// const analytics = new Analytics('UA-133347961-3')
+window.addEventListener('online', appOfflineStatusHandler)
+window.addEventListener('offline', appOfflineStatusHandler)
 
-// analytics.set('uid', USER_ID)
-
-// const analyticsTestScreen = () => {
-//   return analytics.screen(APP_NAME, APP_VERSION, APP_ID, 'com.mttv.installer', 'screenTest', USER_ID)
-//   .then((response) => {
-//     console.log(response)
-//     return response
-//   }).catch((err) => {
-//     console.log(err)
-//     return err
-//   })
-// }
-
-// const analyticsTestPageView = () => {
-//   return analytics.pageview('https://mttv-app.firebaseapp.com/', '/pageViewTest', 'pageViewTest', USER_ID)
-//   .then((response) => {
-//     console.log(response)
-//     return response
-//   }).catch((err) => {
-//     console.log(err)
-//     return err
-//   })
-// }
-
-// analyticsTestScreen()
-// analyticsTestPageView()
-
-// console.log(USER_ID)
-
+appOfflineStatusHandler()
 
 class App extends Component {
 
@@ -83,14 +57,14 @@ class App extends Component {
 
   componentDidMount() {
     //checking for updates
+    window.require('electron').ipcRenderer.on("app-update-message", (event, res) => {
+      console.log(res)
+    })
+
     window.require('electron').ipcRenderer.on("app-update-avaliavle", (event, res) => {
       if (res) {
         this.appUpdateHandler()
       }
-    })
-
-    window.require('electron').ipcRenderer.on("app-update-status", (event, res) => {
-      console.log(res)
     })
 
     this.darkModeHandler()
@@ -331,6 +305,7 @@ class App extends Component {
               langPack={this.state.langPack.settings_page}
               languageHandler={this.languageHandler}
             />
+            <OfflineAlert />
         </div>
       </Router>
     )
