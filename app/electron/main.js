@@ -7,7 +7,7 @@ const { app, Menu, shell, Tray, ipcMain } = require('electron')
 //Updates module
 const { autoUpdater } = require('electron-updater')
 //Disabling autoDownload for custom screen
-autoUpdater.autoDownload = false
+// autoUpdater.autoDownload = false
 
 //checking app status
 const isDev = require('electron-is-dev')
@@ -80,7 +80,7 @@ preloader = () => {
                 label: 'Check for Updates',
                 click: () => {
                     if (!isDev) {
-                        autoUpdater.checkForUpdates()   
+                        autoUpdater.checkForUpdatesAndNotify() 
                     }
                 }
             },
@@ -150,12 +150,13 @@ createWindow = () => {
         preloaderWindow.close()
         preloaderWindow = null
         mainWindow.show()
+        mainWindow.webContents.openDevTools()
         //watching for app updates  
         // loading bttv
         BrowserWindow.removeExtension("BetterTTV")
         BrowserWindow.addExtension(bttvUrl)
         if (!isDev) {
-            autoUpdater.checkForUpdates()   
+            autoUpdater.checkForUpdatesAndNotify()
         }
         // if (mainWindow) {
         //     setInterval(() => {
@@ -226,7 +227,9 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
     })
     
     playerWindow.on('closed', () => {
-        mainWindow.webContents.send('close-player-window', true)
+        if (mainWindow) {
+            mainWindow.webContents.send('close-player-window', true)
+        }
         playerWindow = null
     })
 }
@@ -366,7 +369,7 @@ exports.subscribeWindow = (channelName) => {
     subWindow.loadURL(subWinUrl)
 
     subWindow.webContents.on('did-finish-load', () => {
-        subWindow.webContents.send('get-subscription-url', "https://www.twitch.tv/products/" + channelName)
+        subWindow.webContents.send('get-subscription-url', "https://www.twitch.tv/subs/" + channelName)
     })
 
     subWindow.on('closed', () => {
@@ -639,9 +642,11 @@ autoUpdater.on('checking-for-update', () => {
 })
 
 autoUpdater.on('update-available', (info) => {
-    if (mainWindow) {
-        mainWindow.webContents.send('app-update-avaliavle', true)
-    }
+    // appUpdateWindow()
+    sendStatusToWindow('Update available.')
+    // if (mainWindow) {
+    //     mainWindow.webContents.send('app-update-avaliavle', true)
+    // }
 })
 
 autoUpdater.on('update-not-available', (info) => {
@@ -658,23 +663,26 @@ autoUpdater.on('error', (err) => {
 })
 
 //If user grant permission, update will start
-exports.downloadUpdate = (permission) => {
-    if (permission) {
-        appUpdateWindow()
-        setTimeout(() => {
-            autoUpdater.downloadUpdate()
-        }, 1000)
-    }
-}
+// exports.downloadUpdate = (permission) => {
+//     if (permission) {
+//         appUpdateWindow()
+//         setTimeout(() => {
+//             autoUpdater.downloadUpdate()
+//         }, 1000)
+//     }
+// }
 
 autoUpdater.on('download-progress', (progressObj) => {
-    const downloadInfo = {
-        speed: progressObj.bytesPerSecond,
-        progress: Math.floor(progressObj.percent),
-        transferred: progressObj.transferred,
-        total: progressObj.total
-    }
-   appUpdateWin.webContents.send('app-update-status', downloadInfo)
+    // const downloadInfo = {
+    //     speed: progressObj.bytesPerSecond,
+    //     progress: Math.floor(progressObj.percent),
+    //     transferred: progressObj.transferred,
+    //     total: progressObj.total
+    // }
+    sendStatusToWindow('app-update-status', progressObj)
+    // if (appUpdateWin) {
+    //     appUpdateWin.webContents.send('app-update-status', downloadInfo)
+    // }
 })
 
 autoUpdater.on('update-downloaded', (info) => {

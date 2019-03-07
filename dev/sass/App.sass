@@ -157,7 +157,6 @@
   padding: 10px
 
 .btn.load-more:hover
-  background-color: $primary-dark-color
   box-shadow: 0 2px 10px 0 rgba(0,0,0,0.8)
 
 .logo div
@@ -555,13 +554,28 @@
   color: $primary-dark-color
   border: 1px solid $primary-dark-color
 
-.container-block.channel-top-header .btn:hover
-  background-color: $primary-dark-color
+.container-block.channel-top-header .btn.subscribe
+  background: linear-gradient(to right, #8699df 52%, #F7971E)
   color: #fff
+  border: none
+  transition: all 0.3s ease
+
+.container-block.channel-top-header .btn.subscribe:hover
+  transform: scale(1.1)
+  margin-left: 5px
+
+.container-block.channel-top-header .btn.subscribe.true
+  background: linear-gradient(to right, #F7971E, #FFD200)
+  border: none
 
 .container-block.channel-top-header .btn.following
   margin-top: 10px
   margin-right: 10px
+
+.container-block.channel-top-header .btn.following:hover
+  background: $success
+  border: 1px solid $success
+  color: #ffffff
 
 .container-block.channel-top-header .btn.following.true
   color: $success
@@ -574,14 +588,6 @@
 
 .container-block.channel-top-header .btn.subscribe
   margin-top: 10px
-
-.container-block.channel-top-header .btn.subscribe.true
-  color: #fff
-  border: 1px solid $success
-  background-color: $success
-
-.container-block.channel-top-header .btn.subscribe.true:hover
-  box-shadow: 0 0 20px 0 rgba(230, 230, 0, 0.5)
 
 .container-block .channel-top-nav
   margin: 0
