@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
 import { WatchAttributes } from 'react-mutation-observer'
+import IntroBg from '../components/WelcomeIntro/index'
 // import Intro from '../components/Login/Intro'
 
 export default class Login extends Component {
@@ -22,13 +23,14 @@ export default class Login extends Component {
   render() {
     return(
       <div className="welcome-container">
+        <IntroBg />
         <div id="close-login"><i className="fas fa-window-close"></i></div>
         <WatchAttributes onChange={(res) => {
           if (res.name === "src") {
             this.props.layoutHandler(res.to)
           }
         }}>
-          <webview id="login-view-container" webpreferences="javascript=yes" />
+        <webview id="login-view-container" webpreferences="javascript=yes" />
         </WatchAttributes>
         <div className="welcome-start">
           <div id="logo-intro" className="logo">

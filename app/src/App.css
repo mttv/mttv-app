@@ -1,15 +1,3 @@
-.welcome-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: #2C2F33;
-  -webkit-background-size: cover;
-          background-size: cover; }
-
 #login-view-container {
   display: none;
   position: fixed;
@@ -1803,3 +1791,16 @@ input:checked + .slider:before {
   height: 32px;
   margin-bottom: 8px;
   float: right; }
+
+.welcome-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: #2C2F33;
+  -webkit-background-size: cover;
+          background-size: cover;
+  overflow: hidden; }
