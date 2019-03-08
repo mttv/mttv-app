@@ -1,6 +1,7 @@
 import React from 'react'
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn'
 import ChannelCard from '../../components/Cards/ChannelCard'
+import ChannelIcon from '../../../img/follow-icon.png'
 
 const channelsListLayout = (props) => {
     const { channelsList, error, total, limit, query, langPack, getChannelsHandler, langPackOthers } = props
@@ -8,7 +9,7 @@ const channelsListLayout = (props) => {
         return(
             <div className="row" id="channels-list">
                 <div className="jumbotron msg">
-                    <i className="fas fa-heart icon"></i>
+                    <img src={ChannelIcon} alt="" />
                     <p className="lead">{langPack.channels_title}</p>
                 </div>
             </div>

@@ -8,7 +8,7 @@
   height: 100%
   background-repeat: no-repeat
   background-attachment: fixed
-  background-image: url("../src/img/welcome-bg.gif")
+  background-color: $bg-color-dark
   background-size: cover
 
 #login-view-container
@@ -497,6 +497,7 @@
 .profile-logo.channel-header
   position: relative
   bottom: 5px
+  border-radius: 50%
 
 .verified-icon
   position: relative
@@ -559,6 +560,16 @@
   color: #fff
   border: none
   transition: all 0.3s ease
+  background-size: 400% 400%
+  animation: SubscribeGradient 5s ease infinite
+
+@keyframes SubscribeGradient 
+	0% 
+		background-position: 0% 50%
+	50% 
+		background-position: 100% 50%
+	100% 
+		background-position: 0% 50%
 
 .container-block.channel-top-header .btn.subscribe:hover
   transform: scale(1.1)
@@ -890,7 +901,8 @@
   box-shadow: none
 
 .jumbotron.msg
-  width: 100%
+  width: 80%
+  margin: 0 auto
   text-align: center
   color: #fff
   background-color: $primary-light-color
@@ -902,12 +914,14 @@
   margin-top: 25px
 
 .form-group.form-check.settings
-  background-color: $bg-color
+  background-color: #fff
   width: 100%
   padding: 10px
   vertical-align: middle
-  border: 1px solid #ccc
-  border-radius: 5px
+  border-bottom: 1px solid #ccc
+
+.container-block p
+    color: #333
 
 .form-group.form-check.settings.language-picker
   text-align: left
@@ -1234,8 +1248,8 @@
 .drop-container .jumbotron  #drop-container .drop-icon
   font-size: 55px
 
-.drop-container .jumbotron  #drop-container h4
-  margin-top: -150px
+.drop-container .jumbotron #drop-container h4
+  margin-top: -120px
 
 .carousel-indicators
   left: 0
@@ -1628,3 +1642,9 @@ input
 .card.offline-alert:hover
   transform: none
   box-shadow: 0px 0px 50px -3px $primary-light-color
+
+.language-icon
+  width: 32px
+  height: 32px
+  margin-bottom: 8px
+  float: right

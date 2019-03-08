@@ -6,7 +6,7 @@
   height: 100%;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-image: url("../src/img/welcome-bg.gif");
+  background-color: #2C2F33;
   -webkit-background-size: cover;
           background-size: cover; }
 
@@ -544,7 +544,9 @@
 
 .profile-logo.channel-header {
   position: relative;
-  bottom: 5px; }
+  bottom: 5px;
+  -webkit-border-radius: 50%;
+          border-radius: 50%; }
 
 .verified-icon {
   position: relative;
@@ -626,7 +628,27 @@
   border: none;
   -webkit-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
+  transition: all 0.3s ease;
+  -webkit-background-size: 400% 400%;
+          background-size: 400% 400%;
+  -webkit-animation: SubscribeGradient 5s ease infinite;
+          animation: SubscribeGradient 5s ease infinite; }
+
+@-webkit-keyframes SubscribeGradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
+
+@keyframes SubscribeGradient {
+  0% {
+    background-position: 0% 50%; }
+  50% {
+    background-position: 100% 50%; }
+  100% {
+    background-position: 0% 50%; } }
 
 .container-block.channel-top-header .btn.subscribe:hover {
   -webkit-transform: scale(1.1);
@@ -1004,7 +1026,8 @@
           box-shadow: none; }
 
 .jumbotron.msg {
-  width: 100%;
+  width: 80%;
+  margin: 0 auto;
   text-align: center;
   color: #fff;
   background-color: #8699df; }
@@ -1016,13 +1039,14 @@
   margin-top: 25px; }
 
 .form-group.form-check.settings {
-  background-color: #eeeeee;
+  background-color: #fff;
   width: 100%;
   padding: 10px;
   vertical-align: middle;
-  border: 1px solid #ccc;
-  -webkit-border-radius: 5px;
-          border-radius: 5px; }
+  border-bottom: 1px solid #ccc; }
+
+.container-block p {
+  color: #333; }
 
 .form-group.form-check.settings.language-picker {
   text-align: left;
@@ -1378,7 +1402,7 @@
   font-size: 55px; }
 
 .drop-container .jumbotron #drop-container h4 {
-  margin-top: -150px; }
+  margin-top: -120px; }
 
 .carousel-indicators {
   left: 0;
@@ -1773,3 +1797,9 @@ input:checked + .slider:before {
           transform: none;
   -webkit-box-shadow: 0px 0px 50px -3px #8699df;
           box-shadow: 0px 0px 50px -3px #8699df; }
+
+.language-icon {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+  float: right; }

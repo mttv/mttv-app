@@ -220,7 +220,7 @@ export default class Search extends Component {
             <div id="search">
                 <div className="container">
                     <h1 className="page-title">{this.props.langPack.title}</h1>
-                    <input type="text" id="search-input" className="form-control" placeholder={this.props.langPack.title + "..."} onChange={this.searchHandler} />
+                    <input type="text" id="search-input" className="form-control form-control-lg border-0 shadow-sm" placeholder={this.props.langPack.title + "..."} onChange={this.searchHandler} />
                     <ul className="nav nav-tabs" id="search-categories-tabs" role="tablist">
                         <li className="nav-item">
                             <a className="nav-link active" id="streams-tab" data-toggle="tab" href="#streams" role="tab" aria-controls="streams" aria-selected="true">{this.props.langPackCategories.streams}</a>

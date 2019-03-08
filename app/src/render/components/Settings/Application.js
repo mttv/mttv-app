@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 // import Swal from 'sweetalert2'
 // import withReactContent from 'sweetalert2-react-content'
+import DarkIcon from '../../../img/dark-icon.png'
 
 const { webFrame } = window.require("electron")
 // const remote = window.require("electron").remote
@@ -107,7 +108,9 @@ export default class Application extends Component {
                         <h5>{this.props.langPack.theme.title}</h5>
                         <div className="form-group form-check settings" id="light-mode-btn" style={{cursor: "pointer"}} onClick={this.lightModeHandler}>
                             <input type="checkbox" className="form-check-input" />
-                            <label className="form-check-label" htmlFor="light-mode-btn">{this.props.langPack.theme.light}</label>
+                            <label className="form-check-label" htmlFor="light-mode-btn">
+                                {this.props.langPack.theme.light}
+                                </label>
                         </div>
                         <div className="form-group form-check settings" id="dark-mode-btn" style={{cursor: "pointer"}} onClick={this.darkModeHandler}>
                             <input type="checkbox" className="form-check-input" />

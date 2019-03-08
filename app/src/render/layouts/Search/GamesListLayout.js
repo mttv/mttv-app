@@ -1,5 +1,6 @@
 import React from 'react'
 import GameCard from '../../components/Cards/GameCard'
+import GamepadIcon from '../../../img/gamepad-icon.png'
 
 const gamesListLayout = (props) => {
     const { gamesList, error, langPack, langPackOthers } = props
@@ -7,7 +8,7 @@ const gamesListLayout = (props) => {
         return(
             <div className="row" id="games-list">
                 <div className="jumbotron msg">
-                    <i className="fas fa-gamepad icon"></i>
+                    <img src={GamepadIcon} alt="" />
                     <p className="lead">{langPack.games_title}</p>
                 </div>
             </div>
