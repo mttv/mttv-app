@@ -3,7 +3,7 @@
   "author": "webif",
   "description": "empty",
   "main": "electron/main.js",
-  "version": "0.4.0-b",
+  "version": "0.3.8",
   "license": "MIT",
   "homepage": "./",
   "private": false,
@@ -51,7 +51,7 @@
     "appId": "com.mttv.app",
     "extends": null,
     "electronVersion": "3.0.0",
-    "buildVersion": "0.4.0-b",
+    "buildVersion": "0.3.8",
     "copyright": "webifua 2019",
     "files": [
       "build/**/*",
