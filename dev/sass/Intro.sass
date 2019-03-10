@@ -11,6 +11,17 @@
   box-shadow: inset -16px 4px 5px rgba(0,0,0,0.4), 0 0 3rem fade-out(#B1B1C5, 1)
   background-image: linear-gradient(to left top, #b1b1c5, #928fa3, #746f82, #575162, #3c3444)
   transition: all 1s ease
+  animation: float 10s ease infinite
+
+@keyframes float
+  0%
+    transform: translatey(0px)
+
+  50%
+    transform: translatey(-10px)
+
+  100%
+    transform: translatey(0px)
 
 .super-moon:hover
     box-shadow: inset -16px 4px 5px rgba(0,0,0,0.4), 0px 0px 48px 0px rgba(255, 255, 255, 0.4)

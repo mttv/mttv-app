@@ -1804,3 +1804,108 @@ input:checked + .slider:before {
   -webkit-background-size: cover;
           background-size: cover;
   overflow: hidden; }
+
+#updating-alert {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #2C2F33;
+  z-index: 1000000000;
+  display: none; }
+
+#download-msg-2 {
+  display: none; }
+
+.update-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%); }
+
+.spinner-box {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: transparent; }
+
+/* SPINNING CIRCLE */
+.circle-border {
+  width: 100px;
+  height: 100px;
+  padding: 3px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  background: #7a5fb9;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(33%, rgba(122, 95, 185, 0.1)), to(#8699df));
+  background: -webkit-linear-gradient(bottom, rgba(122, 95, 185, 0.1) 33%, #8699df 100%);
+  background: -o-linear-gradient(bottom, rgba(122, 95, 185, 0.1) 33%, #8699df 100%);
+  background: linear-gradient(0deg, rgba(122, 95, 185, 0.1) 33%, #8699df 100%);
+  -webkit-animation: spin .8s linear 0s infinite;
+          animation: spin .8s linear 0s infinite; }
+
+.circle-core {
+  width: 100%;
+  height: 100%;
+  background-color: #2C2F33;
+  -webkit-border-radius: 50%;
+          border-radius: 50%; }
+
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg); } }
+
+@keyframes spin {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(359deg);
+            transform: rotate(359deg); } }
+
+@-webkit-keyframes stop-spin {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); } }
+
+@keyframes stop-spin {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0); }
+  to {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); } }

@@ -252,7 +252,7 @@ export default class MultiStream extends Component {
                             <Droppable droppableId="drop-container">
                                 {(provided, snapshot) => (
                                     <div id="drop-container" style={{width: "100%", height: "100%"}} ref={provided.innerRef} {...provided.droppableProps}>
-                                        <img src={DndIcon} alt="" />
+                                        <img src={DndIcon} alt="" style={{marginBottom: "50px"}} />
                                         <h4>{this.props.langPack.title}</h4>
                                         {provided.placeholder}
                                     </div> 

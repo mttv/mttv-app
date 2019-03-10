@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 // import Swal from 'sweetalert2'
 // import withReactContent from 'sweetalert2-react-content'
-import DarkIcon from '../../../img/dark-icon.png'
 
 const { webFrame } = window.require("electron")
 // const remote = window.require("electron").remote

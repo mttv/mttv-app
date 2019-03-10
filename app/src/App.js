@@ -8,6 +8,7 @@ import MainNav from './render/components/MainNav/MainNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'
 import OfflineAlert from './render/components/Alerts/OfflineAlert'
+import UpdatingAlert from './render/components/Alerts/UpdatingAlert'
 import icon from './img/icon.png'
 import './libs/libs.css'
 import './index.css'
@@ -59,6 +60,12 @@ class App extends Component {
     //checking for updates
     window.require('electron').ipcRenderer.on("app-update-message", (event, res) => {
       console.log(res)
+      if (res === "Update available.") {
+        $("#updating-alert").fadeIn()
+      } else if (res === "Update downloaded.") {
+        $("#download-msg-1").hide()
+        $("#download-msg-2").fadeIn()
+      }
     })
 
     window.require('electron').ipcRenderer.on("try-open-dev-tools", (event, res) => {
@@ -316,6 +323,7 @@ class App extends Component {
               langPack={this.state.langPack.settings_page}
               languageHandler={this.languageHandler}
             />
+            <UpdatingAlert />
             <OfflineAlert />
         </div>
       </Router>

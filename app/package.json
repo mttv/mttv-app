@@ -3,7 +3,7 @@
   "author": "webif",
   "description": "empty",
   "main": "electron/main.js",
-  "version": "0.3.1",
+  "version": "0.4.0-a",
   "license": "MIT",
   "homepage": "./",
   "private": false,
@@ -16,8 +16,8 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "pack-src": "electron-builder --dir",
-    "ebuild": "yarn electron-builder --ia32 --win && node_modules/.bin/build",
-    "gh-publish": "yarn electron-builder --ia32 --win -p always && node_modules/.bin/build"
+    "ebuild": "yarn electron-builder && node_modules/.bin/build",
+    "gh-publish": "yarn electron-builder -p always && node_modules/.bin/build"
   },
   "build": {
     "publish": [
@@ -32,6 +32,7 @@
           "target": "nsis",
           "arch": "ia32" 
       },
+      "verifyUpdateCodeSignature": false,
       "icon": "build/icon.ico",
       "publisherName": ["webifua"]
     },
@@ -50,7 +51,7 @@
     "appId": "com.mttv.app",
     "extends": null,
     "electronVersion": "3.0.0",
-    "buildVersion": "0.3.1",
+    "buildVersion": "0.4.0-a",
     "copyright": "webifua 2019",
     "files": [
       "build/**/*",
