@@ -3,7 +3,7 @@
   "author": "webif",
   "description": "empty",
   "main": "electron/main.js",
-  "version": "0.3.8",
+  "version": "0.4.0",
   "license": "MIT",
   "homepage": "./",
   "private": false,
@@ -33,7 +33,7 @@
           "arch": "ia32" 
       },
       "verifyUpdateCodeSignature": false,
-      "icon": "build/icon.ico",
+      "icon": "build/icon_r.ico",
       "publisherName": ["webifua"]
     },
     "nsis": {
@@ -43,15 +43,15 @@
       "allowToChangeInstallationDirectory": true,
       "deleteAppDataOnUninstall": true,
       "createDesktopShortcut": true,
-      "installerIcon": "build/icon.ico",
-      "uninstallerIcon": "build/icon.ico",
+      "installerIcon": "build/icon_r.ico",
+      "uninstallerIcon": "build/icon_r.ico",
       "uninstallDisplayName": "Uninstall MTTV"
     },
     "productName": "MTTV",
     "appId": "com.mttv.app",
     "extends": null,
     "electronVersion": "3.0.0",
-    "buildVersion": "0.3.8",
+    "buildVersion": "0.4.0",
     "copyright": "webifua 2019",
     "files": [
       "build/**/*",
