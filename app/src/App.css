@@ -1909,3 +1909,25 @@ input:checked + .slider:before {
   to {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg); } }
+
+.check-update-btn {
+  background-color: #8699df;
+  color: #fff;
+  width: 50%;
+  padding: 5px;
+  height: 40%; }
+
+.check-update-btn.check-upd-warn {
+  background-color: #d39e00;
+  border-color: #d39e00;
+  color: #fff; }
+
+.check-update-btn.check-upd-danger {
+  background-color: #cc0000;
+  border-color: #cc0000;
+  color: #fff; }
+
+.check-update-btn.check-upd-success {
+  background-color: #00b33c;
+  border-color: #00b33c;
+  color: #fff; }

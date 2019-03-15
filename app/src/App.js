@@ -61,6 +61,12 @@ class App extends Component {
     window.require('electron').ipcRenderer.on("app-update-message", (event, res) => {
       console.log(res)
       if (res === "Update available.") {
+          if (localStorage.getItem("auto-update")) {
+            main.downloadUpdate(true)
+          } else {
+            this.appUpdateHandler()
+          }
+      } else if (res === "Downloading update.") {
         $("#updating-alert").fadeIn()
       } else if (res === "Update downloaded.") {
         $("#download-msg-1").hide()
@@ -76,12 +82,6 @@ class App extends Component {
         } else {
           window.require('electron').ipcRenderer.send("open-dev-tools", true)
         }
-      }
-    })
-
-    window.require('electron').ipcRenderer.on("app-update-avaliavle", (event, res) => {
-      if (res) {
-        this.appUpdateHandler()
       }
     })
 

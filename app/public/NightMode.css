@@ -123,6 +123,9 @@ input[type]:focus {
 .inline button {
   background-color: #8699df; }
 
+.form-group.form-check.settings {
+  border-bottom: 1px solid #4d4d4d; }
+
 #sidebar {
   background-color: #0e0c13; }
 

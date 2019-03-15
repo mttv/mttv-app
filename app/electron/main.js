@@ -149,7 +149,6 @@ createWindow = () => {
         preloaderWindow.close()
         preloaderWindow = null
         mainWindow.show()
-        mainWindow.webContents.openDevTools()
         //watching for app updates  
         // loading bttv
         BrowserWindow.removeExtension("BetterTTV")
@@ -596,7 +595,6 @@ autoUpdater.on('checking-for-update', () => {
 
 autoUpdater.on('update-available', (info) => {
     sendStatusToWindow('Update available.')
-    autoUpdater.downloadUpdate()
 })
 
 autoUpdater.on('update-not-available', (info) => {
@@ -604,7 +602,8 @@ autoUpdater.on('update-not-available', (info) => {
 })
 
 autoUpdater.on('error', (err) => {
-    sendStatusToWindow('Error in auto-updater. ' + err)
+    sendStatusToWindow("Error in auto-updater.")
+    sendStatusToWindow(err)
 })
 
 autoUpdater.on('update-downloaded', (info) => {
@@ -613,3 +612,16 @@ autoUpdater.on('update-downloaded', (info) => {
         autoUpdater.quitAndInstall()
     }, 1000 * 10)
 })
+
+exports.downloadUpdate = (permission) => {
+    if (permission) {
+        sendStatusToWindow("Downloading update.")
+        autoUpdater.downloadUpdate()   
+    }
+}
+
+exports.checkForUpdates = () => {
+    if (!isDev) {
+        autoUpdater.checkForUpdates()
+    }
+}

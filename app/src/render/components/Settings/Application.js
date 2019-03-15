@@ -4,8 +4,8 @@ import $ from 'jquery'
 // import withReactContent from 'sweetalert2-react-content'
 
 const { webFrame } = window.require("electron")
-// const remote = window.require("electron").remote
-// const main = remote.require("./main.js")
+const remote = window.require("electron").remote
+const main = remote.require("./main.js")
 
 export default class Application extends Component {
 
@@ -14,38 +14,52 @@ export default class Application extends Component {
     }
 
     componentDidMount() {
+        window.require('electron').ipcRenderer.on("app-update-message", (event, res) => {
+            console.log(res)
+            if (res === "Update available.") {
+                $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
+                $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
+                $("#check-for-updates-btn").addClass("check-upd-success disabled")
+                $("#check-for-updates-btn").html("Update is available!")
+                setTimeout(() => {
+                    $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+                    $("#check-for-updates-btn").html("Check for Updates")
+                }, 1000 * 10)
+            } else if (res === "Update not available.") {
+                $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+                $("#check-for-updates-btn").addClass("check-upd-warn disabled")
+                $("#check-for-updates-btn").html("No updates...")
+                setTimeout(() => {
+                    $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
+                    $("#check-for-updates-btn").html("Check for Updates")
+                }, 5000)
+            } else if (res === "Error in auto-updater.") {
+                $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+                $("#check-for-updates-btn").addClass("check-upd-danger disabled")
+                $("#check-for-updates-btn").html("Updating Error!")
+                setTimeout(() => {
+                    $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
+                    $("#check-for-updates-btn").html("Check for Updates")
+                }, 5000)
+            }
+        })
+
         webFrame.setZoomFactor(this.state.zoomLevel)
 
         const darkMode = localStorage.getItem("darkMode")
         const hardware = localStorage.getItem("hardware")
         const devConsole = localStorage.getItem("dev-console")
+        const checkUpdates = localStorage.getItem("auto-update")
 
+        checkUpdates ? $("#update-btn-console-btn input").prop("checked", true) : $("#update-btn-console-btn input").prop("checked", false)
         hardware ? $("#hardware-btn input").prop("checked", true) : $("#hardware-btn input").prop("checked", false)
         darkMode ? this.darkModeHandler() : this.lightModeHandler()
+
         if (devConsole === "false" || !devConsole) {
             $("#dev-console-btn input").prop("checked", false)
         } else {
             $("#dev-console-btn input").prop("checked", true)
         }
-
-        // window.require('electron').ipcRenderer.on("dev-console-enable", (event, res) => {
-        //     const option = localStorage.getItem("dev-console")
-        //     if (res) {
-        //         if (option) {
-        //             localStorage.removeItem("dev-console")
-        //             this.props.restartAppHandler()
-        //         } else {
-        //             localStorage.setItem("dev-console", true)
-        //             this.props.restartAppHandler()
-        //         }
-        //     } else {
-        //         const Alert = withReactContent(Swal)
-        //             Alert.fire({
-        //                 type: 'error',
-        //                 text: 'Oops something went wrong!Try again later.'
-        //         })
-        //     }
-        // })
     }
 
     devConsoleHandler = () => {
@@ -101,6 +115,19 @@ export default class Application extends Component {
         this.themeHandler()
     }
 
+    autoUpdateHandler = () => {
+        const checkUpdates = localStorage.getItem("auto-update")
+        if (checkUpdates) {
+            localStorage.removeItem("auto-update")
+        } else {
+            localStorage.setItem("auto-update", true)
+        }
+    }
+
+    checkForUpdatesHandler = () => {
+        main.checkForUpdates()
+    }
+
     render() {
         return(
             <div className="tab-pane fade show active card-settings" id="application" role="tabpanel" aria-labelledby="list-application">
@@ -114,6 +141,18 @@ export default class Application extends Component {
                         <div className="form-group form-check settings" id="dark-mode-btn" style={{cursor: "pointer"}} onClick={this.darkModeHandler}>
                             <input type="checkbox" className="form-check-input" />
                             <label className="form-check-label" htmlFor="dark-mode-btn">{this.props.langPack.theme.dark}</label>
+                        </div>
+                        <h5>Version and Updates</h5>
+                        <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
+                            <label className="switch" id="update-btn-console-btn">
+                                <input type="checkbox" onClick={this.autoUpdateHandler} />
+                                <span className="slider round" />
+                            </label>
+                            <p>Update will be installed automatically without notifications.</p>
+                        </div>
+                        <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
+                            <button className="btn check-update-btn" id="check-for-updates-btn" onClick={this.checkForUpdatesHandler}>Check for Updates</button>
+                            <p>Check if a newer version is available.</p>
                         </div>
                         <h5>{this.props.langPack.dev_console.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
@@ -134,7 +173,7 @@ export default class Application extends Component {
                             </label>
                             <p>{this.props.langPack.rendering.message}</p>
                         </div>
-                        <div className="alert alert-warning" role="alert">
+                        <div className="alert alert-danger" role="alert">
                             {this.props.langPack.rendering.alert_msg_1}
                         </div>
                         <div className="alert alert-warning" role="alert">
