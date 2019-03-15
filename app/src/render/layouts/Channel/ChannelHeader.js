@@ -118,7 +118,7 @@ export default class ChannelHeader extends Component {
                 if (this.state.isSubscribed) {
                     return <button onClick={() => this.subscribeHandler(this.props.linkname)} className="btn subscribe true">{this.props.langPack.subscribe_btn_2}</button>
                 } else {
-                    return <button onClick={() => this.subscribeHandler(this.props.linkname)} className="btn subscribe">{this.props.langPack.subscribe_btn}</button>
+                    return <button onClick={() => this.subscribeHandler(this.props.linkname)} className="btn subscribe">{this.props.langPack.subscribe_btn} <i className="fas fa-dollar-sign"></i></button>
                 }
             } else {
                 return <div id="no-partner-btn" />

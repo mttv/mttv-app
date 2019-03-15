@@ -5,6 +5,7 @@ import withReactContent from 'sweetalert2-react-content'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import SideBar from '../layouts/MultiStream/SideBar'
 import ActiveStreamsLayout from '../layouts/MultiStream/ActiveStreamsLayout'
+import DndIcon from '../../img/dnd-icon.png'
 
 let timeout = null
 
@@ -251,7 +252,7 @@ export default class MultiStream extends Component {
                             <Droppable droppableId="drop-container">
                                 {(provided, snapshot) => (
                                     <div id="drop-container" style={{width: "100%", height: "100%"}} ref={provided.innerRef} {...provided.droppableProps}>
-                                        <i className="fas fa-arrow-circle-down drop-icon"></i>
+                                        <img src={DndIcon} alt="" style={{marginBottom: "50px"}} />
                                         <h4>{this.props.langPack.title}</h4>
                                         {provided.placeholder}
                                     </div> 

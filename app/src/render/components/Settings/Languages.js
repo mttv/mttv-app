@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
+import UKIcon from '../../../img/languages/uk.png'
+import UAIcon from '../../../img/languages/ua.png'
+import DEIcon from '../../../img/languages/de.png'
+import RUIcon from '../../../img/languages/ru.png'
 
 export default class Languages extends Component {
 
@@ -35,26 +39,30 @@ export default class Languages extends Component {
                             <div className="form-group form-check settings language-picker" id="en" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
                                 <label className="form-check-label">
-                                    English
+                                    English, UK
                                 </label>
+                                <img src={UKIcon} alt="" className="language-icon" />
                             </div>
                             <div className="form-group form-check settings language-picker" id="ru" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
                                 <label className="form-check-label">
                                     Русский
                                 </label>
+                                <img src={RUIcon} alt="" className="language-icon" />
                             </div>
                             <div className="form-group form-check settings language-picker" id="ua" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
                                 <label className="form-check-label">
                                     Українська
                                 </label>
+                                <img src={UAIcon} alt="" className="language-icon" />
                             </div>
                             <div className="form-group form-check settings language-picker" id="de" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
                                 <label className="form-check-label">
                                     Deutsch
                                 </label>
+                                <img src={DEIcon} alt="" className="language-icon" />
                             </div>
                         </div>
                     </div>

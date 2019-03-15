@@ -193,7 +193,7 @@ export default class PlayerSettings extends Component {
                         </div>
                         <h5>{this.props.langPack.mp_size.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
-                            <div className="form-group form-check settings">
+                            <div className="form-group form-check settings" style={{borderBottom: "none"}}>
                                 <select className="form-control" id="mp-size" onChange={this.miniPlayerSizeHandler}>
                                     <option id="mp_1" value={'{"w":480,"h":270,"id": 1}'}>480x270</option>
                                     <option id="mp_2" value={'{"w":720,"h":480,"id": 2}'}>720x480</option>

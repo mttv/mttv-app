@@ -1,10 +1,11 @@
 @font-face {
-  font-family: "Billabong";
-  src: url("./webfonts/Billabong.ttf"); }
+  font-family: "Custom";
+  src: url("./webfonts/Whitney-Medium.ttf"); }
 
 body {
   overflow-x: hidden;
-  background-color: #eeeeee; }
+  background-color: #eeeeee;
+  font-family: "Custom"; }
 
 a {
   color: #000; }
@@ -16,13 +17,13 @@ a:focus {
   color: #000; }
 
 ::-webkit-scrollbar {
-  width: 5px; }
+  width: 4px; }
 
 ::-webkit-scrollbar-track {
   background-color: #eeeeee; }
 
 ::-webkit-scrollbar-thumb {
-  background: #6441A4;
+  background: #8699df;
   -webkit-border-radius: 5px;
           border-radius: 5px; }
 
@@ -38,7 +39,7 @@ textarea {
   width: 100%;
   background-color: #e6e6e6;
   border: 2px solid #fff;
-  color: #6441A4;
+  color: #8699df;
   -webkit-transition: all 0.15s ease;
   -o-transition: all 0.15s ease;
   transition: all 0.15s ease; }
@@ -47,7 +48,7 @@ select {
   width: 100%;
   background-color: #e6e6e6;
   border: 2px solid #fff;
-  color: #6441A4;
+  color: #8699df;
   -webkit-transition: all 0.15s ease;
   -o-transition: all 0.15s ease;
   transition: all 0.15s ease; }
@@ -65,7 +66,7 @@ textarea:hover {
 
 textarea:focus {
   background-color: #e6e6e6;
-  border: 2px solid #7a5fb9;
+  border: 2px solid #8699df;
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #000; }
@@ -75,7 +76,7 @@ input[type]:hover {
 
 input[type]:focus {
   background-color: #e6e6e6;
-  border: 2px solid #6441A4;
+  border: 2px solid #8699df;
   -webkit-box-shadow: none;
           box-shadow: none;
   color: #000; }

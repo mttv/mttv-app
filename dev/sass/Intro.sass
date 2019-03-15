@@ -1,0 +1,257 @@
+@import "_colors.sass"
+
+.super-moon
+  position: fixed
+  top: 8%
+  height: 120px
+  width: 120px
+  border-radius: 50%
+  left: 5%
+  z-index: 1000
+  box-shadow: inset -16px 4px 5px rgba(0,0,0,0.4), 0 0 3rem fade-out(#B1B1C5, 1)
+  background-image: linear-gradient(to left top, #b1b1c5, #928fa3, #746f82, #575162, #3c3444)
+  transition: all 1s ease
+  animation: float 10s ease infinite
+
+@keyframes float
+  0%
+    transform: translatey(0px)
+
+  50%
+    transform: translatey(-10px)
+
+  100%
+    transform: translatey(0px)
+
+.super-moon:hover
+    box-shadow: inset -16px 4px 5px rgba(0,0,0,0.4), 0px 0px 48px 0px rgba(255, 255, 255, 0.4)
+  
+.crater 
+    width: 30px
+    height: 30px
+    background: rgba(92,3,1,0.9)
+    background: radial-gradient(circle at 5px 175px,  #b1b1c5, #928fa3, #746f82,)
+    border-radius: 50%
+    box-shadow: inset 6px -4px 5px rgba(0,0,0,0.4)
+    -webkit-transform: translateX(90px) translateY(-50px) skewX(15deg) skewY(2deg)
+    position: absolute
+    top: 73px
+    left: -35px
+  
+.crater2 
+    width: 15px
+    height: 15px
+    background: rgba(92,3,1,0.5)
+    background: radial-gradient(circle at 5px 175px,  #b1b1c5, #928fa3, #746f82,)
+    border-radius: 50%
+    box-shadow: inset 4px -4px 5px rgba(0,0,0,0.35)
+    -webkit-transform: translateX(120px) translateY(-120px) skewX(4deg) skewY(2deg)
+    position: relative
+    position: absolute
+    top: 178px
+    left: -57px
+    
+.crater3 
+    width: 8px
+    height: 8px
+    background: rgba(92,3,1,0.7)
+    background: radial-gradient(circle at 5px 175px,  #b1b1c5, #928fa3, #746f82,)
+    border-radius: 50%
+    box-shadow: inset 3px -4px 5px rgba(0,0,0,0.35)
+    -webkit-transform: translateX(70px) translateY(-280px) skewX(4deg) skewY(2deg)
+    position: absolute
+    top: 325px
+    left: -25px
+
+.wave
+  position: absolute
+  width: 150%
+  bottom: 0
+  &::before
+    content: ""
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    height: 20px
+    background-size: 40px 40px
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    background-repeat: repeat
+    height: 27px
+    background-size: 80px 40px
+  transition: 3s
+
+.wave_1
+  height: 80px
+  background: #978db5
+  z-index: 30
+  &::before
+    background-image: radial-gradient(circle at 20px 28px, transparent 24px, #695b93 25px)
+  &::after
+    background-image: radial-gradient(circle at 10px 0px, #695b93 14px, transparent 25px)
+
+.wave_2
+  left: -30px
+  height: 120px
+  background: #695b93
+  z-index: 20
+  &::before
+    background-image: radial-gradient(circle at 20px 28px, transparent 24px, #503760 25px)
+  &::after
+    background-image: radial-gradient(circle at 10px 0px, #503760 14px, transparent 15px)
+
+.wave_3
+  left: -10px
+  height: 150px
+  background: #503760
+  z-index: 10
+  &::before
+    background-image: radial-gradient(circle at 20px 28px, transparent 24px, $bg-color-dark 25px)
+  &::after
+    background-image: radial-gradient(circle at 10px 0px, $bg-color-dark 14px, transparent 25px)
+
+.wave_1
+  animation: wave1 10s infinite
+
+@keyframes wave1
+  0%
+    transform: translateX(0px)
+
+  25%
+    transform: translateX(-50px)
+
+  50%
+    transform: translateX(0px)
+
+  75%
+    transform: translateX(-30px)
+
+  100%
+    transform: translateX(0px)
+
+
+.wave_2
+  animation: wave2 12s infinite
+
+@keyframes wave2
+  0%
+    transform: translateX(0px)
+
+  25%
+    transform: translateX(25px)
+
+  50%
+    transform: translateX(0px)
+
+  75%
+    transform: translateX(30px)
+
+  100%
+    transform: translateX(0px)
+
+
+.wave_3
+  animation: wave3 9s infinite
+
+@keyframes wave3
+  0%
+    transform: translateX(0px)
+
+  25%
+    transform: translateX(-30px)
+
+  50%
+    transform: translateX(0px)
+
+  75%
+    transform: translateX(-10px)
+
+  100%
+    transform: translateX(0px)
+
+@function multiple-box-shadow ($n) 
+  $value: '#{random(2000)}px #{random(2000)}px #FFF'
+  @for $i from 2 through $n
+    $value: '#{$value} , #{random(2000)}px #{random(2000)}px #FFF'
+
+  @return unquote($value)
+
+$shadows-small:  multiple-box-shadow(700)
+$shadows-medium: multiple-box-shadow(200)
+$shadows-big:    multiple-box-shadow(100)
+
+.stars
+  width: 1px
+  height: 1px
+  background: transparent
+  box-shadow: $shadows-small
+    
+  &:after
+    content: " "
+    position: absolute
+    top: 2000px
+    width: 1px
+    height: 1px
+    background: transparent
+    box-shadow: $shadows-small
+    
+.stars2
+  width: 2px
+  height: 2px
+  background: transparent
+  box-shadow: $shadows-medium
+  animation: movingStars 500s linear infinite
+    
+  &:after
+    content: " "
+    position: absolute
+    top: 2000px
+    width: 2px
+    height: 2px
+    background: transparent
+    box-shadow: $shadows-medium
+    
+.stars3
+  width: 3px
+  height: 3px
+  background: transparent
+  box-shadow: $shadows-big
+  animation: movingStars 250s linear infinite
+    
+  &:after
+    content: " "
+    position: absolute
+    top: 2000px
+    width: 3px
+    height: 3px
+    background: transparent
+    box-shadow: $shadows-big
+
+@keyframes movingStars
+  from	
+    transform: translateY(0px)
+  to		
+    transform: translateY(-2000px)
+
+.c-rocket
+    width: 70px
+    height: 70px
+    position: fixed
+    bottom: 30%
+    left: 5vh
+    transform: rotate(6deg)
+    animation: rocket-fly 120s infinite linear forwards
+
+@keyframes rocket-fly
+  0%
+    bottom: 30%
+    left: -100px
+
+  100%
+    bottom: 130%
+    left: 130%

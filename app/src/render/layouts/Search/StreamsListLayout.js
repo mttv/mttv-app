@@ -1,6 +1,7 @@
 import React from 'react'
 import StreamPreviewCard from '../../components/Cards/StreamPreviewCard'
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn'
+import StreamsIcon from '../../../img/tv-icon.png'
 
 const streamsListLayout = (props) => {
     const { streamsList, error, total, limit, query, langPack, langPackOthers, getStreamsHandler } = props
@@ -8,7 +9,7 @@ const streamsListLayout = (props) => {
         return(
             <div className="row" id="streams-list">
                <div className="jumbotron msg" id="streams-list">
-                    <i className="fas fa-tv icon"></i>
+                    <img src={StreamsIcon} alt="" />
                     <p className="lead">{langPack.streams_title}</p>
                 </div> 
             </div>

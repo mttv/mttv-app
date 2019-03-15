@@ -39,7 +39,6 @@ const url = require('url')
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let preloaderWindow
-let appUpdateWin
 let playerWindow
 let subWindow
 let tWindow
@@ -60,7 +59,7 @@ preloader = () => {
         fullscreenable: false,
         movable: true,
         backgroundColor: '#0c0d0e',
-        icon: __dirname + '/icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.ico',
         webPreferences: {
             devTools: false
         }
@@ -74,13 +73,13 @@ preloader = () => {
     preloaderWindow.loadURL(preloaderUrl)
 
     preloaderWindow.on('ready-to-show', () => {
-        tray = new Tray(__dirname + '/icons/icon_r.png')
+        tray = new Tray(__dirname + '/icons/icon_r.ico')
         const contextMenu = Menu.buildFromTemplate([
             {
                 label: 'Check for Updates',
                 click: () => {
                     if (!isDev) {
-                        autoUpdater.checkForUpdates()   
+                        autoUpdater.checkForUpdates() 
                     }
                 }
             },
@@ -125,7 +124,7 @@ createWindow = () => {
       frame: true,
       show: false,
       fullscreen: conf.app.fullScreenLaunch,
-      icon: __dirname + '/icons/icon_r.png',
+      icon: __dirname + '/icons/icon_r.ico',
       fullscreenable: true,
       autoHideMenuBar: true,
       webPreferences: {
@@ -155,7 +154,7 @@ createWindow = () => {
         BrowserWindow.removeExtension("BetterTTV")
         BrowserWindow.addExtension(bttvUrl)
         if (!isDev) {
-            autoUpdater.checkForUpdates()   
+            autoUpdater.checkForUpdates()
         }
         // if (mainWindow) {
         //     setInterval(() => {
@@ -204,7 +203,7 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         movable: true,
         resizable: resizable,
         alwaysOnTop: true,
-        icon: __dirname + '/icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.ico',
         backgroundColor: '#0c0d0e',
         webPreferences: {
             webSecurity: false,
@@ -226,7 +225,9 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
     })
     
     playerWindow.on('closed', () => {
-        mainWindow.webContents.send('close-player-window', true)
+        if (mainWindow) {
+            mainWindow.webContents.send('close-player-window', true)
+        }
         playerWindow = null
     })
 }
@@ -353,7 +354,7 @@ exports.subscribeWindow = (channelName) => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + '/icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.ico',
         backgroundColor: '#0c0d0e'
     })
 
@@ -366,7 +367,7 @@ exports.subscribeWindow = (channelName) => {
     subWindow.loadURL(subWinUrl)
 
     subWindow.webContents.on('did-finish-load', () => {
-        subWindow.webContents.send('get-subscription-url', "https://www.twitch.tv/products/" + channelName)
+        subWindow.webContents.send('get-subscription-url', "https://www.twitch.tv/subs/" + channelName)
     })
 
     subWindow.on('closed', () => {
@@ -387,7 +388,7 @@ exports.twitchWindow = () => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + '/icons/icon_r.png',
+        icon: __dirname + '/icons/icon_r.ico',
         backgroundColor: '#0c0d0e'
     })
 
@@ -441,7 +442,6 @@ app.on('ready', () => {
                                     })
                                 }
                                 preloader()
-                                // appUpdateWindow()
                             } catch (err) {
                                 fs.writeFile(confErrUrl, err, (err) => {
                                     app.exit()
@@ -462,7 +462,6 @@ app.on('ready', () => {
                     })
                 }
                 preloader()
-                // appUpdateWindow()
             } catch (err) {
                 fs.writeFile(confErrUrl, err, (err) => {
                     app.exit()
@@ -583,48 +582,6 @@ const template = [
 const menu = Menu.buildFromTemplate(template)
 Menu.setApplicationMenu(menu)
 
-//Updater setup
-appUpdateWindow = () => {
-    appUpdateWin = new BrowserWindow({
-        width: 420,
-        height: 500,
-        frame: false,
-        show: false,
-        resizable: false,
-        fullscreen: false,
-        fullscreenable: false,
-        movable: true,
-        backgroundColor: '#0c0d0e',
-        icon: __dirname + '/icons/icon_r.png',
-        webPreferences: {
-            devTools: true
-        }
-    })
-
-    const updateWinUrl = url.format({
-        pathname: path.join(__dirname, './windows/updateWindow.html'),
-        protocol: 'file',
-        slashes: true
-    })
-
-    appUpdateWin.loadURL(updateWinUrl)
-
-    appUpdateWin.on('ready-to-show', () => {
-        appUpdateWin.show()
-        setTimeout(() => {
-            if (mainWindow) mainWindow.close()
-            if (playerWindow) playerWindow.close()
-            if (subWindow) subWindow.close()
-            if (tWindow) tWindow.close()
-        }, 1000)
-    })
-
-    appUpdateWin.on('closed', () => {
-        appUpdateWin = null
-    })
-    
-}
-
 const sendStatusToWindow = (text) => {
     log.info(text)
     if (mainWindow) {
@@ -633,51 +590,38 @@ const sendStatusToWindow = (text) => {
 }
 
 autoUpdater.on('checking-for-update', () => {
-    if (mainWindow) {
-        sendStatusToWindow('Checking for update...')
-    }
+    sendStatusToWindow('Checking for update...')
 })
 
 autoUpdater.on('update-available', (info) => {
-    if (mainWindow) {
-        mainWindow.webContents.send('app-update-avaliavle', true)
-    }
+    sendStatusToWindow('Update available.')
 })
 
 autoUpdater.on('update-not-available', (info) => {
-    if (mainWindow) {
-        sendStatusToWindow('Update not available.')
-    }
+    sendStatusToWindow('Update not available.')
 })
 
 autoUpdater.on('error', (err) => {
-    sendStatusToWindow('Error in auto-updater. ' + err)
-    if (mainWindow) {
-        mainWindow.webContents.webContents('app-update-error', true)   
-    }
-})
-
-//If user grant permission, update will start
-exports.downloadUpdate = (permission) => {
-    if (permission) {
-        appUpdateWindow()
-        setTimeout(() => {
-            autoUpdater.downloadUpdate()
-        }, 1000)
-    }
-}
-
-autoUpdater.on('download-progress', (progressObj) => {
-    const downloadInfo = {
-        speed: progressObj.bytesPerSecond,
-        progress: Math.floor(progressObj.percent),
-        transferred: progressObj.transferred,
-        total: progressObj.total
-    }
-   appUpdateWin.webContents.send('app-update-status', downloadInfo)
+    sendStatusToWindow("Error in auto-updater.")
+    sendStatusToWindow(err)
 })
 
 autoUpdater.on('update-downloaded', (info) => {
-    // sendStatusToWindow('Update downloaded')
-    autoUpdater.quitAndInstall()
+    sendStatusToWindow('Update downloaded.')
+    setTimeout(() => {
+        autoUpdater.quitAndInstall()
+    }, 1000 * 10)
 })
+
+exports.downloadUpdate = (permission) => {
+    if (permission) {
+        sendStatusToWindow("Downloading update.")
+        autoUpdater.downloadUpdate()   
+    }
+}
+
+exports.checkForUpdates = () => {
+    if (!isDev) {
+        autoUpdater.checkForUpdates()
+    }
+}
