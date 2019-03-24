@@ -5,7 +5,7 @@ import ImgPreloader from './ImgPreloader'
 
 const streamPreviewCard = (props) => {
   return(
-    <div className="col-sm-6 col-md-6 col-lg-3 col-xl-2">
+    <div className="col-sm-6 col-md-6 col-lg-4 col-xl-2">
         <Link to={{
             pathname: '/app/channel',
             search: '?id=' + props.channelId

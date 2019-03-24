@@ -21,13 +21,13 @@ export default class ChannelHeader extends Component {
     }
 
     componentDidMount() {
-        const w = $(window).scroll(() => {
-            if (w.scrollTop() > 520) {
-              $(".container-block.channel-top-header").addClass("fixed")
-            } else {
-              $(".container-block.channel-top-header").removeClass("fixed")
-            }
-        })
+        // const w = $(window).scroll(() => {
+        //     if (w.scrollTop() > 520) {
+        //       $(".container-block.channel-top-header").addClass("fixed")
+        //     } else {
+        //       $(".container-block.channel-top-header").removeClass("fixed")
+        //     }
+        // })
 
         $(".load-btn-group").click(() => {
             $(".btns-container").toggleClass("open")

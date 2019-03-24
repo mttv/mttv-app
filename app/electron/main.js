@@ -2,7 +2,7 @@ const fs = require('fs')
 const electron = require('electron')
 
 // Module to control application life.
-const { app, Menu, shell, Tray, ipcMain } = require('electron')
+const { app, Menu, shell, Tray, ipcMain, globalShortcut } = require('electron')
 
 //Updates module
 const { autoUpdater } = require('electron-updater')
@@ -44,9 +44,46 @@ let subWindow
 let tWindow
 let tray = null
 
+let testWindow
+
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=512')
 
 // app.disableHardwareAcceleration()
+
+overlay = () => {
+    testWindow = new BrowserWindow({
+        width: 1920,
+        height: 1080,
+        frame: false,
+        show: false,
+        resizable: true,
+        fullscreen: true,
+        fullscreenable: true,
+        movable: false,
+        enableLargerThanScreen: true,
+        alwaysOnTop: true,
+        transparent: true,
+        icon: __dirname + '/icons/icon_r.ico',
+        webPreferences: {
+            devTools: true
+        }
+    })
+
+    const testWindowUrl = url.format({
+        pathname: path.join(__dirname, './windows/testWindow.html'),
+        protocol: 'file',
+        slashes: true
+    })
+    testWindow.loadURL(testWindowUrl)
+
+    testWindow.on('ready-to-show', () => {
+       testWindow.show()
+    })
+
+    testWindow.on('closed', () => {
+        testWindow = null
+    })
+}
 
 preloader = () => {
     preloaderWindow = new BrowserWindow({
@@ -417,6 +454,15 @@ exports.getAppID = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
+    //shortcuts for overlay
+    const overlayShortcut = globalShortcut.register('Shift+M', () => {
+        if (testWindow) {
+            testWindow.close()
+        } else {
+            overlay()
+        }
+    })
+
     //loading app configuration
     fs.readFile(confUrl, 'utf8', (err, data) => {
         if (err) {
@@ -471,6 +517,14 @@ app.on('ready', () => {
     })
 })
 
+app.on('activate', () => {
+    // On OS X it's common to re-create a window in the app when the
+    // dock icon is clicked and there are no other windows open.
+    if (preloaderWindow === null) {
+        preloader()
+    }
+})
+
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
     // On OS X it is common for applications and their menu bar
@@ -482,12 +536,8 @@ app.on('window-all-closed', () => {
     }
 })
 
-app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (preloaderWindow === null) {
-        preloader()
-    }
+app.on('will-quit', () => {
+    globalShortcut.unregisterAll()
 })
 
 // Listen for web contents being created

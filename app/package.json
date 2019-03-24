@@ -3,7 +3,7 @@
   "author": "webif",
   "description": "empty",
   "main": "electron/main.js",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "license": "MIT",
   "homepage": "./",
   "private": false,
@@ -27,6 +27,10 @@
         "repo": "mttv-app"
       }
     ],
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icon_r.ico"
+    },
     "win": {
       "target": {
           "target": "nsis",
@@ -51,7 +55,7 @@
     "appId": "com.mttv.app",
     "extends": null,
     "electronVersion": "3.0.0",
-    "buildVersion": "0.4.0",
+    "buildVersion": "0.4.1",
     "copyright": "webifua 2019",
     "files": [
       "build/**/*",
