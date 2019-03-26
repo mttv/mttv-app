@@ -24,10 +24,12 @@
         column-count: 2
         padding: 50px
 
-@media (min-width: 1000px)
-    .container-fluid
-        left: 130px
+@media (min-width: 768px)
+    .container.games-list
+        max-width: 65%
+        margin: 0 auto
 
+@media (min-width: 1000px)
     .container
         width: 80%
         padding: 0
@@ -36,18 +38,6 @@
     .side-menu
         width: 180px
         left: 70px
-
-    .setting-open-btn
-        text-align: left
-        padding: 5px 28px
-
-    .setting-open-btn span
-        position: relative
-        top: -6px
-        left: 10px
-        vertical-align: middle
-        font-size: 12px
-        text-transform: uppercase
 
     .menu ul li a
         text-align: left
@@ -74,9 +64,10 @@
 
     .container.games-list
         max-width: 85%
+        margin: 50px auto
 
     .container.streams-live
-        max-width: 70%
+        max-width: 75%
 
     .container.channel
         max-width: 97.5%
@@ -90,6 +81,7 @@
 
     .container.channels-preview
         max-width: 90%
+        margin: 0 100px
 
     #player-container
         width: 66.5%
@@ -146,3 +138,10 @@
 
     .modal-content
         width: 70%
+
+    .container.games-list
+        max-width: 65%
+
+    .col-lg-2
+        padding-left: 15px
+        padding-right: 15px

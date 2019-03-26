@@ -23,7 +23,7 @@ input[type]:focus {
 .app-version {
   color: #8699df; }
 
-#following-nav {
+#main-nav {
   background-color: #232329; }
 
 .side-menu {
@@ -125,9 +125,6 @@ input[type]:focus {
 
 .form-group.form-check.settings label {
   color: #fff; }
-
-.setting-open-btn span {
-  color: #72767d; }
 
 .inline button {
   background-color: #8699df; }
@@ -246,3 +243,6 @@ input:focus + .slider {
 
 .modal-header.container-block {
   background-color: #2C2F33; }
+
+.card.stream-preview.stream .card-body {
+  background: rgba(24, 25, 27, 0.85); }

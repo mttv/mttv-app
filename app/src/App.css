@@ -399,7 +399,7 @@
   min-height: 100%;
   overflow: hidden; }
 
-#following-nav {
+#main-nav {
   width: 70px;
   height: 100%;
   position: fixed;
@@ -409,10 +409,10 @@
   overflow-x: hidden;
   background-color: #eee; }
 
-#following-nav::-webkit-scrollbar {
+#main-nav::-webkit-scrollbar {
   width: 0px; }
 
-#following-nav .dropdown {
+#main-nav .dropdown {
   margin: 0;
   padding: 0;
   display: -webkit-box;
@@ -429,14 +429,34 @@
       -ms-flex-pack: center;
           justify-content: center; }
 
-#following-nav .dropdown a {
+#main-nav .dropdown a {
   padding: 5px; }
 
-#following-nav .dropdown a.active .following-nav-avatar {
+#main-nav .dropdown .nav-btn {
+  font-size: 20px;
+  background-color: #8699df;
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  display: block;
+  margin: 5px auto;
+  text-align: center;
+  width: 50px;
+  line-height: 40px;
+  color: #ffffff;
+  height: 50px;
+  -webkit-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+
+#main-nav .dropdown .nav-btn:hover {
+  -webkit-border-radius: 25%;
+          border-radius: 25%; }
+
+#main-nav .dropdown a.active .following-nav-avatar {
   -webkit-border-radius: 10%;
           border-radius: 10%; }
 
-#following-nav .dropdown a:hover .following-nav-avatar {
+#main-nav .dropdown a:hover .following-nav-avatar {
   -webkit-border-radius: 25%;
           border-radius: 25%; }
 
@@ -905,12 +925,53 @@
   margin-top: 25px;
   margin-bottom: 0; }
 
+.card.stream-preview.stream:hover {
+  z-index: 100; }
+
+.card.stream-preview.stream:hover .card-body {
+  opacity: 1; }
+
+.card.stream-preview.stream .card-body {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  -webkit-border-radius: 10px;
+          border-radius: 10px;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.75);
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease; }
+
+.card.stream-preview.stream .card-body .badge {
+  background-color: #8699df;
+  margin-right: 10px;
+  color: #ffffff; }
+
+.card.stream-preview.stream .card-body .card-text {
+  margin-bottom: 0px; }
+
+.card.stream-preview.stream .card-img-top {
+  -webkit-border-radius: 10px;
+          border-radius: 10px; }
+
+.card.stream-preview.stream .card-verified-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 50px;
+  bottom: 10px; }
+
 .card.stream-preview .card-img-top {
   -webkit-border-top-left-radius: 10px;
           border-top-left-radius: 10px;
   -webkit-border-top-right-radius: 10px;
           border-top-right-radius: 10px;
-  height: 180px; }
+  height: auto; }
 
 .card.stream-preview .card-image-container {
   position: relative; }
@@ -939,6 +1000,13 @@
   top: 10px;
   left: 10px;
   text-align: left; }
+
+.card.stream-preview.stream .card-image-container .card-img-overlay .card-avatar {
+  -webkit-border-radius: 50%;
+          border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  bottom: 10px; }
 
 .card.stream-preview .card-image-container .card-img-overlay .card-avatar {
   position: absolute;
@@ -1338,6 +1406,7 @@
   padding-bottom: 30px; }
 
 .container.channel {
+  width: 100%;
   max-width: 97.5%;
   margin: 0;
   padding-bottom: 30px;
@@ -1620,11 +1689,6 @@ input:checked + .slider:before {
   .slider.round:before {
     -webkit-border-radius: 50%;
             border-radius: 50%; }
-
-.setting-open-btn {
-  color: #333;
-  text-align: left;
-  padding: 5px 28px; }
 
 .twitch-btn {
   font-size: 20px; }

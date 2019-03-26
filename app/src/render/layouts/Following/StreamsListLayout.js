@@ -35,6 +35,7 @@ const streamsListLayout = (props) => {
                 channelName={res.channel.display_name}
                 viewers={res.viewers}
                 langPackOthers={langPackOthers}
+                verified={res.channel.partner}
             />
         })
         return(

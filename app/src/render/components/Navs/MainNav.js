@@ -64,7 +64,7 @@ export default class mainNav extends Component {
             <div className="side-menu shadow" id="main-menu">
                 <div className="menu">
                     <ul className="dropdown">
-                        <this.layoutHandler />
+                        {/* <this.layoutHandler /> */}
 			            <li><NavLink to="/app/home" activeClassName="active" className="btn nav-link"><i className="fas fa-home menu-icon"></i><span>{this.props.langPack.home}</span></NavLink></li>
                         <li><NavLink to="/app/search" activeClassName="active" className="btn nav-link"><i className="fas fa-search menu-icon"></i><span>{this.props.langPack.search}</span></NavLink></li>
                         <li><NavLink to="/app/multistream" activeClassName="active" className="btn nav-link"><i className="fas fa-window-restore menu-icon"></i><span>{this.props.langPack.multistream}</span></NavLink></li>
