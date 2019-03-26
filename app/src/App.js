@@ -229,7 +229,7 @@ class App extends Component {
         return(
           <div id="app">
             {this.state.logoutRedirect ? <Redirect to='/' /> : <div id="no-logout-redirect" />}
-            <FollowingNav api={api} />
+            <FollowingNav api={api} langPack={this.state.langPack.menu_titles} />
             {/* <MainNav api={api} langPack={this.state.langPack.menu_titles} /> */}
               <div id="container-fade">
                 <Suspense fallback={<div />}>

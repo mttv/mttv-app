@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import LiveIcon from '../../../img/live.png'
 
 export default class FollowingNav extends Component {
     constructor(props) {
@@ -93,7 +94,7 @@ export default class FollowingNav extends Component {
         } else if (error) {
             return(
                 <ul className="dropdown mt-3">
-                    <p>{error}</p>
+                    <p>error</p>
                 </ul>
             )
         } else if (streamsList === "") {
@@ -104,7 +105,12 @@ export default class FollowingNav extends Component {
             )
         } else if (streamsList !== null) {
             const list = streamsList.map((res, i) => {
-                return <li key={i} ><NavLink to={`/app/channel?id=${res.channel._id}`} activeClassName="active" className="btn nav-link"><img className="following-nav-avatar" src={res.channel.logo} alt="" /></NavLink></li>
+                return <li key={i} >
+                            <NavLink to={`/app/channel?id=${res.channel._id}`} activeClassName="active" className="btn nav-link">
+                                <img className="following-nav-avatar" src={res.channel.logo} alt="" />
+                            </NavLink>
+                            <div className="following-live-card-info"></div>
+                        </li>
                 // return <StreamPreviewCard 
                 //     key={i}
                 //     channelId={res.channel._id}
@@ -120,6 +126,7 @@ export default class FollowingNav extends Component {
             })
             return(
                 <ul className="dropdown mt-3">
+                    <h6 className="live-counter">Live <img src={LiveIcon} alt="" /></h6>
                     {list}
                 </ul>
             )
@@ -134,15 +141,15 @@ export default class FollowingNav extends Component {
         return(
             <div id="main-nav">
                 <ul className="dropdown mt-3">
-                    <li><NavLink to="/app/home" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-home menu-icon"></i></NavLink></li>
-                    <li><NavLink to="/app/search" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-search menu-icon"></i></NavLink></li>
-                    <li><NavLink to="/app/multistream" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-window-restore menu-icon"></i></NavLink></li>
-                    <li><NavLink to="/app/games" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-gamepad menu-icon"></i></NavLink></li>
-                    <li><NavLink to="/app/watch" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-tv menu-icon"></i></NavLink></li>
-                    <li><NavLink to="/app/following"  activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-heart menu-icon"></i></NavLink></li>
-                    <li><NavLink to="/app/notifications" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-bell menu-icon"></i></NavLink></li>
-                    {/* <li><div onClick={this.twitchHandler} className="btn nav-link setting-open-btn nav-btn twitch-btn"><i className="fab fa-twitch menu-icon"></i></div></li> */}
-                    <li><div className="btn nav-btn" data-toggle="modal" data-target="#settings-modal"><i className="fas fa-cog menu-icon"></i></div></li>
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.home}><NavLink to="/app/home" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-home menu-icon"></i></NavLink></li>
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.search}><NavLink to="/app/search" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-search menu-icon"></i></NavLink></li>
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.multistream}><NavLink to="/app/multistream" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-window-restore menu-icon"></i></NavLink></li>
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.games}><NavLink to="/app/games" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-gamepad menu-icon"></i></NavLink></li>
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.watch}><NavLink to="/app/watch" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-tv menu-icon"></i></NavLink></li>
+                    {this.state.streams.list ? <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.following}><NavLink to="/app/following" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-heart menu-icon"></i></NavLink></li> : <li />}
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.notifications}><NavLink to="/app/notifications" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-bell menu-icon"></i></NavLink></li>
+                    <li data-toggle="tooltip" data-placement="right" title="twitch"><div onClick={this.twitchHandler} className="btn nav-btn"><i className="fab fa-twitch menu-icon"></i></div></li>
+                    <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.settings}><div className="btn nav-btn" data-toggle="modal" data-target="#settings-modal"><i className="fas fa-cog menu-icon"></i></div></li>
                 </ul>
                 <this.streamsListLayout streamsList={this.state.streams.list} error={this.state.streams.error} />
             </div>
