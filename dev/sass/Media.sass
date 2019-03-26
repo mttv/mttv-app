@@ -1,3 +1,5 @@
+@import "_fonts.sass"
+
 @media (min-width: 576px)
     .side-menu
         width: 50px
@@ -21,16 +23,47 @@
     .card-columns
         column-count: 2
         padding: 50px
+        
+    .container
+        width: 80%
+        padding: 0
+        margin: 50px auto
 
-@media (min-width: 1000px)
+@media (min-width: 768px)
+    .container.games-list
+        max-width: 65%
+        margin: 0 auto
+
+@media (min-width: 1000px) 
     .side-menu
-        width: 3.5%
+        width: 180px
+        left: 70px
+
+    .menu ul li a
+        text-align: left
+        padding: 5px 28px
+        text-transform: uppercase
+
+    .menu ul li a.active
+        padding: 5px 25px
+
+    .menu ul li a span
+        position: relative
+        top: 6px
+        left: 10px
+        vertical-align: middle
+        font-size: 12px
+        font-family: "Custom Light"
+
+    .menu ul li a:hover
+        background-color: #5f636d
 
     .container.games-list
         max-width: 85%
+        margin: 50px auto
 
     .container.streams-live
-        max-width: 90%
+        max-width: 75%
 
     .container.channel
         max-width: 97.5%
@@ -44,6 +77,7 @@
 
     .container.channels-preview
         max-width: 90%
+        margin: 0 auto
 
     #player-container
         width: 66.5%
@@ -95,11 +129,15 @@
         width: 90%
         margin: 0 auto
 
-    .side-menu
-        width: 70px
-
     .modal.show .modal-dialog
         justify-content: center
 
     .modal-content
         width: 70%
+
+    .container.games-list
+        max-width: 100%
+
+    .col-lg-2
+        padding-left: 15px
+        padding-right: 15px

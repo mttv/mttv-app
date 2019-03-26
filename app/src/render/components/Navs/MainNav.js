@@ -64,17 +64,17 @@ export default class mainNav extends Component {
             <div className="side-menu shadow" id="main-menu">
                 <div className="menu">
                     <ul className="dropdown">
-                        <this.layoutHandler />
-			            <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.home}><NavLink to="/app/home" activeClassName="active" className="btn nav-link"><i className="fas fa-home menu-icon"></i></NavLink></li>
-                        <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.search}><NavLink to="/app/search" activeClassName="active" className="btn nav-link"><i className="fas fa-search menu-icon"></i></NavLink></li>
-                        <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.multistream}><NavLink to="/app/multistream" activeClassName="active" className="btn nav-link"><i className="fas fa-window-restore menu-icon"></i></NavLink></li>
-                        <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.games}><NavLink to="/app/games" activeClassName="active" className="btn nav-link"><i className="fas fa-gamepad menu-icon"></i></NavLink></li>
-                        <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.watch}><NavLink to="/app/watch" activeClassName="active" className="btn nav-link"><i className="fas fa-tv menu-icon"></i></NavLink></li>
+                        {/* <this.layoutHandler /> */}
+			            <li><NavLink to="/app/home" activeClassName="active" className="btn nav-link"><i className="fas fa-home menu-icon"></i><span>{this.props.langPack.home}</span></NavLink></li>
+                        <li><NavLink to="/app/search" activeClassName="active" className="btn nav-link"><i className="fas fa-search menu-icon"></i><span>{this.props.langPack.search}</span></NavLink></li>
+                        <li><NavLink to="/app/multistream" activeClassName="active" className="btn nav-link"><i className="fas fa-window-restore menu-icon"></i><span>{this.props.langPack.multistream}</span></NavLink></li>
+                        <li><NavLink to="/app/games" activeClassName="active" className="btn nav-link"><i className="fas fa-gamepad menu-icon"></i><span>{this.props.langPack.games}</span></NavLink></li>
+                        <li><NavLink to="/app/watch" activeClassName="active" className="btn nav-link"><i className="fas fa-tv menu-icon"></i><span>{this.props.langPack.watch}</span></NavLink></li>
                         {/* <li data-toggle="tooltip" data-placement="right" title="communities"><NavLink to="/app/communities" activeClassName="active" className="btn nav-link"><i className="fas fa-users  menu-icon"></i></NavLink></li> */}
-                        {this.state.name ? <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.following}><NavLink to="/app/following"  activeClassName="active" className="btn nav-link"><i className="fas fa-heart menu-icon"></i></NavLink></li> : ""}
-			            <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.notifications}><NavLink to="/app/notifications"  activeClassName="active" className="btn nav-link"><i className="fas fa-bell menu-icon"></i></NavLink></li>
-                        <li data-toggle="tooltip" data-placement="right" title="twitch"><div onClick={this.twitchHandler} className="btn nav-link setting-open-btn twitch-btn"><i className="fab fa-twitch menu-icon"></i></div></li>
-                        <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.settings}><div className="btn nav-link setting-open-btn" data-toggle="modal" data-target="#settings-modal"><i className="fas fa-cog menu-icon"></i></div></li>
+                        {this.state.name ? <li><NavLink to="/app/following"  activeClassName="active" className="btn nav-link"><i className="fas fa-heart menu-icon"></i><span>{this.props.langPack.following}</span></NavLink></li> : ""}
+			            <li><NavLink to="/app/notifications" activeClassName="active" className="btn nav-link"><i className="fas fa-bell menu-icon"></i><span>{this.props.langPack.notifications}</span></NavLink></li>
+                        <li><div onClick={this.twitchHandler} className="btn nav-link setting-open-btn twitch-btn"><i className="fab fa-twitch menu-icon"></i><span>twitch</span></div></li>
+                        <li><div className="btn nav-link setting-open-btn" data-toggle="modal" data-target="#settings-modal"><i className="fas fa-cog menu-icon"></i><span>{this.props.langPack.settings}</span></div></li>
                     </ul>
                     {/* <button className="hide-btn" id="hide-menu-btn"><i className="fas fa-angle-left"></i></button> */}
                 </div>

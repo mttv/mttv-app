@@ -12,7 +12,6 @@ const gameList = (props) => {
       >
         <div className="card game shadow-sm">
           <div className="img-container">
-            <div className="img-shadow" />
               <Img 
                 className="card-img-top" 
                 src={props.img} 
@@ -21,8 +20,10 @@ const gameList = (props) => {
                 />
           </div>
           <div className="card-body">
-            <h6 className="card-title">{props.title}</h6>
-            {props.viewers ? <p className="card-text">{props.viewers} {props.langPackOthers.viewers}</p> : <div />}
+            <div className="card-body-content">
+              <h6 className="card-title">{props.title}</h6>
+              {props.viewers ? <p className="card-text">{props.viewers} {props.langPackOthers.viewers}</p> : <div />}
+            </div>
           </div>
         </div>
       </Link>

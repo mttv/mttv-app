@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import GameCard from '../../components/Cards/GameCard'
 import LoadMoreBtn from '../../components/LoadMoreBtn/LoadMoreBtn'
 
@@ -21,16 +21,19 @@ const gamesListLayout = (props) => {
               />
       })
       return(
-        <div className="row" id="games-list">
-            {list}
-            <LoadMoreBtn
-                query={""}
-                total={total} 
-                limit={showLimit}
-                functionHandler={getGamesHandler}
-                langPackOthers={langPackOthers}
-            />
-        </div>
+        <Fragment>
+          <div className="row games" id="games-list">
+              {list}
+          </div>
+          <LoadMoreBtn
+            query={""}
+            total={total} 
+            limit={showLimit}
+            functionHandler={getGamesHandler}
+            langPackOthers={langPackOthers}
+          />
+        </Fragment>
+
       )
     } else if(gamesListError) {
       return(

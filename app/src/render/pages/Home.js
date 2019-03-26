@@ -108,7 +108,7 @@ export default class Home extends Component {
     }
 
     featuredHandler = () => {
-        this.props.api.streams.featured({limit: 10}, (err, res) => {
+        this.props.api.streams.featured({limit: 8}, (err, res) => {
             if (err) {
                 this.setState({
                     featured: {

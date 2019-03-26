@@ -25,11 +25,17 @@ input[type]:focus
 .app-version
   color: $primary-light-color
 
+#main-nav
+    background-color: #232329
+
 .side-menu
-    background-color: #0c0c0e
+    background-color: #2f3136
 
 .menu ul li a
     color: #fff
+
+.menu ul li a span
+    color: #72767d
 
 .menu ul li a:hover
   color: $primary-light-color
@@ -134,8 +140,8 @@ input[type]:focus
     color: #fff
     box-shadow: 0 2px 10px 0 rgba(0,0,0,0.8)
 
-.card.game .img-container .img-shadow
-    box-shadow: inset 0px -41px 38px -8px #18191b
+.card.game:hover .card-body
+    background-color: rgba(35, 35, 41, 0.85)
 
 .card.description a
     color: $primary-light-color
@@ -230,3 +236,10 @@ input
 
 .modal-header.container-block
     background-color: $bg-color-dark
+
+.card.stream-preview.stream .card-body
+    background: rgba(24, 25, 27, .85)
+
+.live-counter
+    color: #ffffff
+    border-color: $primary-dark-color

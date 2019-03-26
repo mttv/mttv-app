@@ -14,6 +14,7 @@ const streamsListLayout = (props) => {
         const list = streamsList.map((res, i) => {
             return <StreamPreviewCard 
                         key={i}
+                        verified={res.channel.partner}
                         channelId={res.channel._id}
                         game={res.game} 
                         type={res.stream_type} 

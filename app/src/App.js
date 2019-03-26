@@ -4,7 +4,8 @@ import { HashRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import $ from 'jquery'
-import MainNav from './render/components/MainNav/MainNav'
+import MainNav from './render/components/Navs/MainNav'
+import FollowingNav from './render/components/Navs/FollowingNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'
 import OfflineAlert from './render/components/Alerts/OfflineAlert'
@@ -228,7 +229,8 @@ class App extends Component {
         return(
           <div id="app">
             {this.state.logoutRedirect ? <Redirect to='/' /> : <div id="no-logout-redirect" />}
-            <MainNav api={api} langPack={this.state.langPack.menu_titles} />
+            <FollowingNav api={api} langPack={this.state.langPack.menu_titles} />
+            {/* <MainNav api={api} langPack={this.state.langPack.menu_titles} /> */}
               <div id="container-fade">
                 <Suspense fallback={<div />}>
                   <Switch>
