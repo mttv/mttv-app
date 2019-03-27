@@ -44,46 +44,9 @@ let subWindow
 let tWindow
 let tray = null
 
-let testWindow
-
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=512')
 
 // app.disableHardwareAcceleration()
-
-overlay = () => {
-    testWindow = new BrowserWindow({
-        width: 1920,
-        height: 1080,
-        frame: false,
-        show: false,
-        resizable: true,
-        fullscreen: true,
-        fullscreenable: true,
-        movable: false,
-        enableLargerThanScreen: true,
-        alwaysOnTop: true,
-        transparent: true,
-        icon: __dirname + '/icons/icon_r.ico',
-        webPreferences: {
-            devTools: true
-        }
-    })
-
-    const testWindowUrl = url.format({
-        pathname: path.join(__dirname, './windows/testWindow.html'),
-        protocol: 'file',
-        slashes: true
-    })
-    testWindow.loadURL(testWindowUrl)
-
-    testWindow.on('ready-to-show', () => {
-       testWindow.show()
-    })
-
-    testWindow.on('closed', () => {
-        testWindow = null
-    })
-}
 
 preloader = () => {
     preloaderWindow = new BrowserWindow({
@@ -455,13 +418,13 @@ exports.getAppID = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     //shortcuts for overlay
-    const overlayShortcut = globalShortcut.register('Shift+M', () => {
-        if (testWindow) {
-            testWindow.close()
-        } else {
-            overlay()
-        }
-    })
+    // const overlayShortcut = globalShortcut.register('Shift+M', () => {
+    //     if (testWindow) {
+    //         testWindow.close()
+    //     } else {
+    //         overlay()
+    //     }
+    // })
 
     //loading app configuration
     fs.readFile(confUrl, 'utf8', (err, data) => {
@@ -536,9 +499,9 @@ app.on('window-all-closed', () => {
     }
 })
 
-app.on('will-quit', () => {
-    globalShortcut.unregisterAll()
-})
+// app.on('will-quit', () => {
+//     globalShortcut.unregisterAll()
+// })
 
 // Listen for web contents being created
 app.on('web-contents-created', (e, contents) => {
