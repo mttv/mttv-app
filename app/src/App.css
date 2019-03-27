@@ -406,7 +406,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 5001;
+  z-index: 1000;
   overflow-x: hidden;
   background-color: #eee; }
 
@@ -1419,10 +1419,7 @@
   margin: 0 auto; }
 
 #settings-modal {
-  z-index: 10000; }
-
-.swal2-container {
-  z-index: 10001; }
+  z-index: 1001; }
 
 #settings-modal .modal-body {
   padding: 0; }
@@ -1501,7 +1498,7 @@
 
 .drop-container {
   position: relative;
-  z-index: 1000;
+  z-index: 997;
   display: table-cell;
   vertical-align: middle;
   opacity: 1;
@@ -1614,7 +1611,7 @@
   right: 0;
   top: 50%;
   width: 93%;
-  z-index: 1001;
+  z-index: 998;
   -webkit-transform: translateY(-50%);
       -ms-transform: translateY(-50%);
           transform: translateY(-50%);
