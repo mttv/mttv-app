@@ -1,6 +1,6 @@
 @import "_colors.sass"
 
-#login-view-container
+#login-view-container, #discord-login-view-container
   display: none
   position: fixed
   top: 0
@@ -10,7 +10,7 @@
   transition: all 0.5s ease
   z-index: 5000
 
-#close-login
+#close-login, #close-dis-login
   position: fixed
   top: 15px
   right: 35px
@@ -370,7 +370,7 @@
   position: fixed
   top: 0
   left: 0
-  z-index: 5001
+  z-index: 1000
   overflow-x: hidden
   background-color: #eee
 
@@ -1241,10 +1241,7 @@
   margin: 0 auto
 
 #settings-modal
-  z-index: 10000
-
-.swal2-container
-  z-index: 10001
+  z-index: 1001
 
 #settings-modal .modal-body
   padding: 0
@@ -1321,7 +1318,7 @@
 
 .drop-container
   position: relative
-  z-index: 1000
+  z-index: 997
   // transform: translateY(50%)
   // margin: auto
   // width: 500px
@@ -1427,7 +1424,7 @@
   right: 0
   top: 50%
   width: 93%
-  z-index: 1001
+  z-index: 998
   transform: translateY(-50%)
   margin: auto
   opacity: 1
@@ -1864,3 +1861,9 @@ input
   width: 18px
   height: 18px
   margin-bottom: 4px
+
+.jumbotron.twitch
+  background-color: #6441A4
+
+.jumbotron.discord
+  background-color: #7289da

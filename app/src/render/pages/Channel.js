@@ -58,6 +58,30 @@ export default class Channel extends Component {
         }, 500)
     }
 
+    componentDidUpdate() {
+        /*  If user connected discord to app, 
+            we will show in discord that he is watching current channel
+        */
+       window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
+            if (res) {
+                if (localStorage.getItem("d-rpc")) {
+                    const startTimestamp = new Date()
+                    main.setActivity(this.state.channel.display_name, startTimestamp)
+                }
+            }
+        })
+        if (localStorage.getItem("d-rpc")) {
+            const startTimestamp = new Date()
+            main.setActivity(this.state.channel.display_name, startTimestamp)
+        }
+    }
+
+    componentWillUnmount() {
+        if (localStorage.getItem("d-rpc")) {
+            main.setActivity("none")
+        }
+    }
+
     shouldComponentUpdate(nextProps, nextState) {
         if (this.state.showCounter !== nextState.showCounter) {
             return true
