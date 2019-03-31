@@ -38,12 +38,18 @@ export default class Connections extends Component {
 
     componentDidMount() {
         window.require('electron').ipcRenderer.on("discord-rpc-status", (event, res) => {
+            console.log(res)
             if (res) {
-                console.log(res)
                 localStorage.setItem("d-rpc", true)
                 this.setState({d_rpc_status: true})
+            } else {
+                localStorage.removeItem("d-rpc")
+                this.setState({d_rpc_status: false})
             }
         })
+        if (localStorage.getItem("d-rpc")) {
+            this.discordRPCHandler(true)
+        }
     }
 
     discordAuthHandler = (token) => {
@@ -90,8 +96,6 @@ export default class Connections extends Component {
 
     discordRPCHandler = () => {
         main.authDiscordRPC(true)
-        localStorage.setItem("d-rpc", true)
-        this.setState({d_rpc_status: true})
     }
 
     discordLayout = (props) => {

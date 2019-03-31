@@ -20,7 +20,7 @@ const DiscordRPC = require('discord-rpc')
 const clientId = '558341590888742914'
 const scopes = ['identify', 'email', 'rpc', 'rpc.api', 'rpc.notifications.read']
 
-DiscordRPC.register(clientId)
+// DiscordRPC.register(clientId)
 const rpc = new DiscordRPC.Client({transport: 'ipc'})
 // let rpcReady = false
 
@@ -34,10 +34,12 @@ exports.authDiscordRPC = (status) => {
     if (status) {
         rpc.login({clientId, scopes})
             .then(r => {
-                mainWindow.webContents.send("discord-rpc-status", true)
-            })
-            .catch(e => {
-                mainWindow.webContents.send("discord-rpc-status", false)
+                if (rpc.user === null) {
+                    mainWindow.webContents.send("discord-rpc-status", false)
+                } else {
+                    mainWindow.webContents.send("discord-rpc-status", true)
+                }
+                    mainWindow.webContents.send("discord-rpc-status", rpc.user)
             })
 
     }
@@ -52,7 +54,7 @@ exports.setActivity = async (channelName, startTimestamp) => {
 
     //if user leave channel presense will be cleared
     if (channelName === "none") {
-        rpc.clearActivity()
+        clearDiscordPresence()
     } else {
         rpc.setActivity({
             details: `Watching ${channelName}`,
@@ -61,6 +63,10 @@ exports.setActivity = async (channelName, startTimestamp) => {
             instance: false
         })
     }
+}
+
+const clearDiscordPresence = () => {
+    rpc.clearActivity()
 }
 
 //Updates log conf
@@ -224,6 +230,14 @@ createWindow = () => {
         // in an array if your app supports multi windows, this is the time
         // when you should delete the corresponding element.
         mainWindow = null
+    })
+
+    mainWindow.on('minimize', () => {
+        clearDiscordPresence()
+    })
+
+    mainWindow.on('restore', () => {
+        mainWindow.webContents.send("reset-discord-presence", true)
     })
 
     //Opening external links in a browser
