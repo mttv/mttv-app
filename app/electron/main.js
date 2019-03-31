@@ -389,7 +389,12 @@ exports.twitchWindow = () => {
         fullscreenable: true,
         autoHideMenuBar: true,
         icon: __dirname + '/icons/icon_r.ico',
-        backgroundColor: '#0c0d0e'
+        backgroundColor: '#0c0d0e',
+        webPreferences: {
+            webSecurity: false,
+            devTools: true,
+            allowRunningInsecureContent: true
+        }
     })
 
     const twitchWinUrl = url.format({
@@ -401,7 +406,7 @@ exports.twitchWindow = () => {
     tWindow.loadURL(twitchWinUrl)
 
    tWindow.webContents.on('did-finish-load', () => {
-        tWindow.webContents.send('get-subscription-url', "https://www.twitch.tv")
+        tWindow.webContents.send('get-subscription-url', "https://discordapp.com")
     })
 
     tWindow.on('closed', () => {

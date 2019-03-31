@@ -33,12 +33,14 @@
     },
     "win": {
       "target": {
-          "target": "nsis",
-          "arch": "ia32" 
+        "target": "nsis",
+        "arch": "ia32"
       },
       "verifyUpdateCodeSignature": false,
       "icon": "build/icon_r.ico",
-      "publisherName": ["webifua"]
+      "publisherName": [
+        "webifua"
+      ]
     },
     "nsis": {
       "oneClick": false,
@@ -63,6 +65,9 @@
     ]
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "btoa": "^1.2.1",
+    "discord.js": "^11.4.2",
     "electron-google-analytics": "^0.1.0",
     "electron-is-dev": "^1.0.1",
     "electron-log": "^2.2.17",
@@ -70,6 +75,7 @@
     "electron-updater": "^4.0.6",
     "jquery": "^3.3.1",
     "prettysize": "^2.0.0",
+    "qs": "^6.7.0",
     "react": "^16.4.2",
     "react-beautiful-dnd": "^10.0.3",
     "react-dom": "^16.4.2",

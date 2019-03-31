@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import LiveIcon from '../../../img/live.png'
 
+const remote = window.require("electron").remote
+const main = remote.require("./main.js")
+
 export default class FollowingNav extends Component {
     constructor(props) {
         super(props)
@@ -135,6 +138,10 @@ export default class FollowingNav extends Component {
                 <ul className="dropdown mt-3" />
             )
         }
+    }
+
+    twitchHandler = () => {
+        main.twitchWindow()
     }
 
     render() {

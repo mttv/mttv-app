@@ -4,7 +4,6 @@ import { HashRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import $ from 'jquery'
-import MainNav from './render/components/Navs/MainNav'
 import FollowingNav from './render/components/Navs/FollowingNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'

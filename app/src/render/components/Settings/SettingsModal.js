@@ -6,6 +6,7 @@ import Application from './Application'
 import Languages from './Languages'
 import Notifications from './Notifications'
 import PlayerSettings from './PlayerSettings'
+import Connections from './Connections'
 
 const remote = window.require("electron").remote
 const main = remote.require("./main.js")
@@ -88,6 +89,7 @@ export default class Settings extends Component {
                                         <div className="list-group" id="list-tab" role="tablist" style={{paddingBottom: "0px"}}>
                                             <h5 className="modal-title">{this.props.langPack.title}</h5>
                                             <a className="list-group-item list-group-item-action active" id="list-application" data-toggle="list" href="#application" role="tab" aria-controls="application">{this.props.langPack.application_settings.title}</a>
+                                            <a className="list-group-item list-group-item-action" id="list-connections" data-toggle="list" href="#connections" role="tab" aria-controls="connections">Connections</a>
                                             <a className="list-group-item list-group-item-action" id="list-player" data-toggle="list" href="#player" role="tab" aria-controls="player">{this.props.langPack.twitch_player_settings.title}</a>
                                             <a className="list-group-item list-group-item-action" id="list-languages" data-toggle="list" href="#languages" role="tab" aria-controls="languages">{this.props.langPack.languages_settings.title}</a>
                                             <a className="list-group-item list-group-item-action" id="list-notifications" data-toggle="list" href="#notifications" role="tab" aria-controls="notifications">{this.props.langPack.notifications_settings.title}</a>
@@ -104,6 +106,7 @@ export default class Settings extends Component {
                                     <div className="col-8">
                                         <div className="tab-content settings" id="nav-tabContent">
                                             <Application langPack={this.props.langPack.application_settings} restartAppHandler={this.restartAppHandler} />
+                                            <Connections />
                                             <PlayerSettings langPack={this.props.langPack.twitch_player_settings} restartAppHandler={this.restartAppHandler} />
                                             <Languages langPack={this.props.langPack.languages_settings} languageHandler={this.props.languageHandler} />
                                             <Notifications langPack={this.props.langPack.notifications_settings} />
