@@ -32,6 +32,7 @@ const rpc = new DiscordRPC.Client({transport: 'ipc'})
 //auth app for discord rpc
 exports.authDiscordRPC = (status) => {
     if (status) {
+        mainWindow.webContents.send("discord-rpc-status", rpc.user)
         rpc.login({clientId, scopes})
             .then(r => {
                 if (rpc.user === null) {
@@ -39,8 +40,7 @@ exports.authDiscordRPC = (status) => {
                 } else {
                     mainWindow.webContents.send("discord-rpc-status", true)
                 }
-                    mainWindow.webContents.send("discord-rpc-status", rpc.user)
-            })
+            }).catch(e => mainWindow.webContents.send("discord-rpc-status", e))
 
     }
 }
