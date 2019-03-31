@@ -454,7 +454,7 @@ exports.twitchWindow = () => {
     tWindow.loadURL(twitchWinUrl)
 
    tWindow.webContents.on('did-finish-load', () => {
-        tWindow.webContents.send('get-subscription-url', "https://discordapp.com")
+        tWindow.webContents.send('get-subscription-url', "https://www.twitch.tv/")
     })
 
     tWindow.on('closed', () => {
