@@ -27,6 +27,8 @@ const MultiStream = lazy(() => import('./render/pages/MultiStream'))
 const remote = window.require("electron").remote
 const main = remote.require("./main.js")
 
+
+//twitch lib
 const api = require('twitch-api-v5')
 api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
 
@@ -268,13 +270,14 @@ class App extends Component {
                       path={"/app/watch"} 
                       exact 
                       component={props => <Watch 
-                      api={api} 
+                      api={api}
                       langPack={this.state.langPack.watch_page} 
                       langPackOthers={this.state.langPack.others} />} />
                     <Route 
                       path={"/app/channel"} 
                       component={props => <Channel 
-                      api={api} 
+                      api={api}
+                      // discord={discord}
                       langPack={this.state.langPack.channel_page} 
                       langPackCategories={this.state.langPack.categories} 
                       langPackOthers={this.state.langPack.others} />} />

@@ -15,6 +15,54 @@ const isDev = require('electron-is-dev')
 //generating app unique id
 const uuid = require('uuid/v4')
 
+////discord lib
+const DiscordRPC = require('discord-rpc')
+const clientId = '558341590888742914'
+const scopes = ['identify', 'email', 'rpc', 'rpc.api', 'rpc.notifications.read']
+
+DiscordRPC.register(clientId)
+const rpc = new DiscordRPC.Client({transport: 'ipc'})
+// let rpcReady = false
+
+//checking if rpc is running
+// rpc.on('ready', () => {
+//     rpcReady = true
+// })
+
+//auth app for discord rpc
+exports.authDiscordRPC = (status) => {
+    if (status) {
+        rpc.login({clientId, scopes})
+            .then(r => {
+                mainWindow.webContents.send("discord-rpc-status", true)
+            })
+            .catch(e => {
+                mainWindow.webContents.send("discord-rpc-status", false)
+            })
+
+    }
+}
+
+//Main func for discord user activity handler
+exports.setActivity = async (channelName, startTimestamp) => {
+
+    if (!rpc || !mainWindow) {
+        return
+    }
+
+    //if user leave channel presense will be cleared
+    if (channelName === "none") {
+        rpc.clearActivity()
+    } else {
+        rpc.setActivity({
+            details: `Watching ${channelName}`,
+            startTimestamp,
+            largeImageKey: "icon_discord",
+            instance: false
+        })
+    }
+}
+
 //Updates log conf
 const log = require('electron-log')
 autoUpdater.logger = log
