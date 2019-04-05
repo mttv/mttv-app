@@ -103,8 +103,8 @@ export default class Connections extends Component {
         const { dUsr } = props
         if (dUsr) {
             return(
-                <div className="jumbotron discord p-2 d-flex align-items-center justify-content-center shadow-sm">
-                    <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> Connected</p>
+                <div className="jumbotron discord p-0 d-flex align-items-center justify-content-center shadow-sm">
+                    <p className="lead m-2 d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> Connected</p>
                 </div>
             )
         } else {
@@ -131,7 +131,7 @@ export default class Connections extends Component {
             <div className="tab-pane fade card-settings" id="connections" role="tabpanel" aria-labelledby="list-connections">
                 <h5>Connections</h5>
                 <p>Connect this accounts and unlock special integrations with MTTV.</p>
-                <div className="jumbotron twitch p-2 d-flex align-items-center justify-content-center shadow-sm mt-4">
+                <div className="jumbotron twitch p-1 d-flex align-items-center justify-content-center shadow-sm mt-4">
                     <p className="lead m-2 text-white"><i className="fab fa-twitch mt-2 mr-2"></i> {sessionStorage.getItem("userName")}</p>
                 </div>
                 <this.discordLayout dUsr={this.state.d_rpc_status} />

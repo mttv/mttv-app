@@ -60,15 +60,6 @@ export default class Channel extends Component {
                     $('#loaded').fadeIn()
             })
         }, 500)
-        
-        window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
-            if (res) {
-                if (localStorage.getItem("d-rpc")) {
-                    const startTimestamp = new Date()
-                    main.setActivity(this.state.channel.display_name, startTimestamp)
-                }
-            }
-        })
     }
 
     componentDidUpdate() {
@@ -80,6 +71,15 @@ export default class Channel extends Component {
             const startTimestamp = new Date()
             main.setActivity(this.state.channel.display_name, startTimestamp)
         }
+        window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
+            console.log(res)
+            if (res) {
+                if (localStorage.getItem("d-rpc")) {
+                    const startTimestamp = new Date()
+                    main.setActivity(this.state.channel.display_name, startTimestamp)
+                }
+            }
+        })
     }
 
     componentWillUnmount() {
