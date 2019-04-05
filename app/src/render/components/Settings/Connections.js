@@ -45,18 +45,15 @@ export default class Connections extends Component {
             } else {
                 localStorage.removeItem("d-rpc")
                 this.setState({d_rpc_status: false})
-                this.discordRPCHandler(true)
+                // this.discordRPCHandler(true)
             }
         })
-        if (!localStorage.getItem("d-rpc")) {
-            this.discordRPCHandler(true)
-        }
     }
 
     discordAuthHandler = (token) => {
         let data = {
-            client_id: "558341590888742914",
-            client_secret: "xdKKmz5va-ZNV0Wz4HpubHBkloJkFHef",
+            client_id: "",
+            client_secret: "",
             grant_type: "authorization_code",
             code: token,
             redirect_uri: "https://mttvapp.com/oauth2/discord",
@@ -103,8 +100,8 @@ export default class Connections extends Component {
         const { dUsr } = props
         if (dUsr) {
             return(
-                <div className="jumbotron discord p-0 d-flex align-items-center justify-content-center shadow-sm">
-                    <p className="lead m-2 d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> Connected</p>
+                <div className="jumbotron discord p-2 d-flex align-items-center justify-content-center shadow-sm">
+                    <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> Connected</p>
                 </div>
             )
         } else {

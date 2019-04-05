@@ -1,8 +1,6 @@
 const fs = require('fs')
-const electron = require('electron')
-
 // Module to control application life.
-const { app, Menu, shell, Tray, ipcMain, globalShortcut } = require('electron')
+const { app, Menu, shell, Tray, ipcMain, BrowserWindow } = require('electron')
 
 //Updates module
 const { autoUpdater } = require('electron-updater')
@@ -18,10 +16,75 @@ const uuid = require('uuid/v4')
 //discord lib
 const DiscordRPC = require('discord-rpc')
 const clientId = '558341590888742914'
-const scopes = ['identify', 'email', 'rpc', 'rpc.api', 'rpc.notifications.read']
+const scopes = ['identify', 'email', 'rpc', 'rpc.api']
 
-// DiscordRPC.register(clientId)
+DiscordRPC.register(clientId)
 const rpc = new DiscordRPC.Client({transport: 'ipc'})
+
+rpc.login({clientId, scopes})
+    .then(r => {
+        if (rpc.user === null) {
+            if (mainWindow) {
+                mainWindow.webContents.send("discord-rpc-status", false)
+            }
+        } else {
+             if (mainWindow) {
+                mainWindow.webContents.send("discord-rpc-status", true)
+            }
+        }
+    }).catch(e => {
+        if (mainWindow) {
+            mainWindow.webContents.send("discord-rpc-status", false)
+            mainWindow.webContents.send("discord-rpc-status", e)  
+        }
+    })
+
+//auth app for discord rpc
+exports.authDiscordRPC = (status) => {
+    if (status) {
+        rpc.login({clientId, scopes})
+            .then(r => {
+                if (rpc.user === null) {
+                    mainWindow.webContents.send("discord-rpc-status", false)
+                } else {
+                    mainWindow.webContents.send("discord-rpc-status", true)
+                }
+            }).catch(e => {
+                mainWindow.webContents.send("discord-rpc-status", false)
+                if (e.code === 4002) {
+                    mainWindow.webContents.send("discord-rpc-status", true)
+                } else {
+                    mainWindow.webContents.send("discord-rpc-status", false)
+                    mainWindow.webContents.send("discord-rpc-status", e)
+                }
+            })
+
+    }
+}
+
+//Main func for discord user activity handler
+exports.setActivity = async (channelName, startTimestamp) => {
+
+    if (!rpc || !mainWindow) {
+        return
+    }
+
+    //if user leave channel presense will be cleared
+    if (channelName === "none") {
+        clearDiscordPresence()
+    } else {
+        rpc.setActivity({
+            details: `Watching ${channelName}`,
+            startTimestamp,
+            largeImageKey: "icon_discord",
+            instance: false
+        })
+    }
+}
+
+const clearDiscordPresence = () => {
+    rpc.clearActivity()
+}
 
 //Updates log conf
 const log = require('electron-log')
@@ -33,9 +96,6 @@ log.info('App starting...')
 const confUrl = app.getPath("userData") + '/app-conf.json'
 const confErrUrl = app.getPath("userData") + '/app-crash-error.json'
 const bttvUrl = __dirname + '/extensions/bttv'
-
-// Module to create native browser window.
-const BrowserWindow = electron.BrowserWindow
 
 //if app-conf.json can not load, app won't launch
 let conf = null
@@ -658,44 +718,4 @@ exports.checkForUpdates = () => {
     if (!isDev) {
         autoUpdater.checkForUpdates()
     }
-}
-
-//auth app for discord rpc
-exports.authDiscordRPC = (status) => {
-    if (status) {
-        mainWindow.webContents.send("discord-rpc-status", rpc.user)
-        rpc.login({clientId, scopes})
-            .then(r => {
-                if (rpc.user === null) {
-                    mainWindow.webContents.send("discord-rpc-status", false)
-                } else {
-                    mainWindow.webContents.send("discord-rpc-status", true)
-                }
-            }).catch(e => mainWindow.webContents.send("discord-rpc-status", e))
-
-    }
-}
-
-//Main func for discord user activity handler
-exports.setActivity = async (channelName, startTimestamp) => {
-
-    if (!rpc || !mainWindow) {
-        return
-    }
-
-    //if user leave channel presense will be cleared
-    if (channelName === "none") {
-        clearDiscordPresence()
-    } else {
-        rpc.setActivity({
-            details: `Watching ${channelName}`,
-            startTimestamp,
-            largeImageKey: "icon_discord",
-            instance: false
-        })
-    }
-}
-
-const clearDiscordPresence = () => {
-    rpc.clearActivity()
 }
