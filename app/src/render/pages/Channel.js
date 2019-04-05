@@ -42,27 +42,26 @@ export default class Channel extends Component {
         const auth = sessionStorage.getItem("token")
         const channelId = urlString.split("=").pop()
         const userId = sessionStorage.getItem("userId")
+
         this.getChannelHandler(channelId)
         this.checkFollowHander(userId, channelId)
         this.checkSubscriptionHandler(auth, userId, channelId)
+
         this.setState({ableToOpenWindow: true})
+
         window.require('electron').ipcRenderer.on('close-player-window', (event, res) => {
             this.setState({isPlaying: res})
             this.setState({showCounter: this.state.showCounter + 1})
         })
+
         setTimeout(() => {
             $('#loaded').ready(() => {
                 $('#loaded').hide()
                     $('#loaded').fadeIn()
             })
         }, 500)
-    }
-
-    componentDidUpdate() {
-        /*  If user connected discord to app, 
-            we will show in discord that he is watching current channel
-        */
-       window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
+        
+        window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
             if (res) {
                 if (localStorage.getItem("d-rpc")) {
                     const startTimestamp = new Date()
@@ -70,6 +69,13 @@ export default class Channel extends Component {
                 }
             }
         })
+    }
+
+    componentDidUpdate() {
+        /*  
+            If user connected discord to app, 
+            we will show in discord that he is watching current channel
+        */
         if (localStorage.getItem("d-rpc")) {
             const startTimestamp = new Date()
             main.setActivity(this.state.channel.display_name, startTimestamp)

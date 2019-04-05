@@ -14,36 +14,6 @@ export default class Application extends Component {
     }
 
     componentDidMount() {
-        window.require('electron').ipcRenderer.on("app-update-message", (event, res) => {
-            console.log(res)
-            if (res === "Update available.") {
-                $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
-                $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
-                $("#check-for-updates-btn").addClass("check-upd-success disabled")
-                $("#check-for-updates-btn").html("Update is available!")
-                setTimeout(() => {
-                    $("#check-for-updates-btn").removeClass("check-upd-success disabled")
-                    $("#check-for-updates-btn").html("Check for Updates")
-                }, 1000 * 10)
-            } else if (res === "Update not available.") {
-                $("#check-for-updates-btn").removeClass("check-upd-success disabled")
-                $("#check-for-updates-btn").addClass("check-upd-warn disabled")
-                $("#check-for-updates-btn").html("No updates...")
-                setTimeout(() => {
-                    $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
-                    $("#check-for-updates-btn").html("Check for Updates")
-                }, 5000)
-            } else if (res === "Error in auto-updater.") {
-                $("#check-for-updates-btn").removeClass("check-upd-success disabled")
-                $("#check-for-updates-btn").addClass("check-upd-danger disabled")
-                $("#check-for-updates-btn").html("Updating Error!")
-                setTimeout(() => {
-                    $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
-                    $("#check-for-updates-btn").html("Check for Updates")
-                }, 5000)
-            }
-        })
-
         webFrame.setZoomFactor(this.state.zoomLevel)
 
         const darkMode = localStorage.getItem("darkMode")

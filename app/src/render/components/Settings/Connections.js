@@ -45,9 +45,10 @@ export default class Connections extends Component {
             } else {
                 localStorage.removeItem("d-rpc")
                 this.setState({d_rpc_status: false})
+                this.discordRPCHandler(true)
             }
         })
-        if (localStorage.getItem("d-rpc")) {
+        if (!localStorage.getItem("d-rpc")) {
             this.discordRPCHandler(true)
         }
     }

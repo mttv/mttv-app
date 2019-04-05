@@ -68,11 +68,35 @@ class App extends Component {
           } else {
             this.appUpdateHandler()
           }
+          $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
+          $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
+          $("#check-for-updates-btn").addClass("check-upd-success disabled")
+          $("#check-for-updates-btn").html("Update is available!")
+          setTimeout(() => {
+            $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+            $("#check-for-updates-btn").html("Check for Updates")
+          }, 1000 * 10)
+      } else if (res === "Update not available.") {
+          $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+          $("#check-for-updates-btn").addClass("check-upd-warn disabled")
+          $("#check-for-updates-btn").html("No updates...")
+          setTimeout(() => {
+              $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
+              $("#check-for-updates-btn").html("Check for Updates")
+          }, 5000)
+      } else if (res === "Error in auto-updater.") {
+          $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+          $("#check-for-updates-btn").addClass("check-upd-danger disabled")
+          $("#check-for-updates-btn").html("Updating Error!")
+          setTimeout(() => {
+              $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
+              $("#check-for-updates-btn").html("Check for Updates")
+          }, 5000)
       } else if (res === "Downloading update.") {
-        $("#updating-alert").fadeIn()
+          $("#updating-alert").fadeIn()
       } else if (res === "Update downloaded.") {
-        $("#download-msg-1").hide()
-        $("#download-msg-2").fadeIn()
+          $("#download-msg-1").hide()
+          $("#download-msg-2").fadeIn()
       }
     })
 
