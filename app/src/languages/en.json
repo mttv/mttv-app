@@ -117,6 +117,15 @@
                 "indicator_msg": "Level"
             }
         },
+        "integrations_settings": {
+            "title": "Integrations",
+            "sub_title": "Connect this accounts and unlock special integrations with MTTV.",
+            "discord": {
+                "btn_connect": "Connect",
+                "status_connected": "Connected",
+                "btn_disconnect": "Disconnect"
+            }
+        },
         "twitch_player_settings": {
             "title": "Player",
             "ratio": {

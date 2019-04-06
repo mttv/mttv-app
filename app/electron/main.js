@@ -439,15 +439,6 @@ exports.getAppID = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-    //shortcuts for overlay
-    // const overlayShortcut = globalShortcut.register('Shift+M', () => {
-    //     if (testWindow) {
-    //         testWindow.close()
-    //     } else {
-    //         overlay()
-    //     }
-    // })
-
     //loading app configuration
     fs.readFile(confUrl, 'utf8', (err, data) => {
         if (err) {

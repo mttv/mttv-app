@@ -101,13 +101,13 @@ export default class Connections extends Component {
         if (dUsr) {
             return(
                 <div className="jumbotron discord p-0 d-flex align-items-center justify-content-center shadow-sm">
-                    <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> Connected</p>
+                    <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> {this.props.langPack.discord.status_connected}</p>
                 </div>
             )
         } else {
             return(
                 <div className="jumbotron discord p-1 d-flex align-items-center justify-content-center shadow-sm">
-                    <p className="lead m-2 d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mr-3 mt-2"></i> <button id="discord-login-btn" onClick={this.discordRPCHandler} className="btn btn-outline-light p-1">Connect</button></p>
+                    <p className="lead m-2 d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mr-3 mt-2"></i> <button id="discord-login-btn" onClick={this.discordRPCHandler} className="btn btn-outline-light p-1">{this.props.langPack.discord.btn_connect}</button></p>
                 </div>
             )
         }
@@ -126,8 +126,8 @@ export default class Connections extends Component {
     render() {
         return(
             <div className="tab-pane fade card-settings" id="connections" role="tabpanel" aria-labelledby="list-connections">
-                <h5>Connections</h5>
-                <p>Connect this accounts and unlock special integrations with MTTV.</p>
+                <h5>{this.props.langPack.title}</h5>
+                <p>{this.props.langPack.sub_title}</p>
                 <div className="jumbotron twitch p-1 d-flex align-items-center justify-content-center shadow-sm mt-4">
                     <p className="lead m-2 text-white"><i className="fab fa-twitch mt-2 mr-2"></i> {sessionStorage.getItem("userName")}</p>
                 </div>

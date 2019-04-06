@@ -117,6 +117,15 @@
                 "indicator_msg": "Рівень"
             }
         },
+        "integrations_settings": {
+            "title": "Інтеграції",
+            "sub_title": "Підключіть ці облікові записи та розблокуйте спеціальні інтеграції з MTTV.",
+            "discord": {
+                "btn_connect": "Прив'язати",
+                "status_connected": "Підключено",
+                "btn_disconnect": "Від'єднати"
+            }
+        },
         "twitch_player_settings": {
             "title": "Плеєр",
             "ratio": {
