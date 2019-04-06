@@ -227,11 +227,11 @@ createWindow = () => {
         mainWindow = null
     })
 
-    mainWindow.on('minimize', () => {
+    mainWindow.on('blur', () => {
         clearDiscordPresence()
     })
 
-    mainWindow.on('restore', () => {
+    mainWindow.on('focus', () => {
         mainWindow.webContents.send("reset-discord-presence", true)
     })
 

@@ -1,4 +1,4 @@
-const { Menu } = require('electron')
+const { app, Menu } = require('electron')
 
 module.exports = Menu.buildFromTemplate([
     {
