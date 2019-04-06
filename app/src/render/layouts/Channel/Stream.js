@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import ReactPlayer from 'react-player/lib/players/Twitch'
 import $ from 'jquery'
-// import chatcss from '../../Chat.css'
-
 
 export default class Stream extends Component {
 

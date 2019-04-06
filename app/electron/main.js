@@ -13,6 +13,13 @@ const isDev = require('electron-is-dev')
 //generating app unique id
 const uuid = require('uuid/v4')
 
+//Loading all main menus
+const appMenu = require('./menus/appMenu')
+const trayMenu = require('./menus/trayMenu')
+
+//Setting up app menu
+Menu.setApplicationMenu(appMenu)
+
 //discord lib
 const DiscordRPC = require('discord-rpc')
 const clientId = '558341590888742914'
@@ -142,34 +149,8 @@ preloader = () => {
 
     preloaderWindow.on('ready-to-show', () => {
         tray = new Tray(__dirname + '/icons/icon_r.ico')
-        const contextMenu = Menu.buildFromTemplate([
-            {
-                label: 'Check for Updates',
-                click: () => {
-                    if (!isDev) {
-                        autoUpdater.checkForUpdates() 
-                    }
-                }
-            },
-            { 
-                label: 'Open App', 
-                click:  () => {
-                    if (!mainWindow) {
-                        createWindow()
-                    } else {
-                        mainWindow.show()
-                    }
-                }
-            },
-            {
-                label: 'Exit MTTV',
-                click:  () => {
-                    app.quit()
-                }
-            }
-        ])
         tray.setToolTip('MTTV')
-        tray.setContextMenu(contextMenu)
+        tray.setContextMenu(trayMenu)
         preloaderWindow.show()
         setTimeout(() => {
             createWindow()
@@ -307,46 +288,6 @@ exports.miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
         playerWindow = null
     })
 }
-
-// exports.devConsole = (enable) => {
-//     fs.readFile(confUrl, 'utf8', (err, data) => {
-//         if (err) {
-//             mainWindow.webContents.send("dev-console-enable", false)
-//         } else {
-//             if (enable) {
-//                 try {
-//                     conf = JSON.parse(data)
-//                     conf.app.devTools = true
-//                     conf = JSON.stringify(conf)
-//                     fs.writeFile(confUrl, conf, (err) => {
-//                         if (err) {
-//                             mainWindow.webContents.send("dev-console-enable", false)
-//                         } else {
-//                             mainWindow.webContents.send("dev-console-enable", true)
-//                         }
-//                     })
-//                 } catch (err) {
-//                     mainWindow.webContents.send("dev-console-enable", false)
-//                 }   
-//             } else {
-//                 try {
-//                     conf = JSON.parse(data)
-//                     conf.app.devTools = false
-//                     conf = JSON.stringify(conf)
-//                     fs.writeFile(confUrl, conf, (err) => {
-//                         if (err) {
-//                             mainWindow.webContents.send("dev-console-enable", false)
-//                         } else {
-//                             mainWindow.webContents.send("dev-console-enable", true)
-//                         }
-//                     })
-//                 } catch (err) {
-//                     mainWindow.webContents.send("dev-console-enable", false)
-//                 } 
-//             }
-//         }
-//     })
-// }
 
 exports.resizablePlayer = (enable) => {
     fs.readFile(confUrl, 'utf8', (err, data) => {
@@ -606,75 +547,6 @@ ipcMain.on("open-dev-tools", (event, res) => {
         mainWindow.webContents.openDevTools()
     }
 })
-
-const template = [
-    {
-      label: 'Edit',
-      submenu: [
-        {role: 'undo'},
-        {role: 'redo'},
-        {type: 'separator'},
-        {role: 'cut'},
-        {role: 'copy'},
-        {role: 'paste'},
-        {role: 'pasteandmatchstyle'},
-        {role: 'delete'},
-        {role: 'selectall'}
-      ]
-    },
-    {
-      label: 'View',
-      submenu: [
-        {role: 'reload'},
-        {role: 'forcereload'},
-        // {role: 'toggledevtools'},
-        {
-            label: 'Toggle Developer Tools',
-            accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
-            click: () => {
-                if (mainWindow) {
-                    if (mainWindow) {
-                        mainWindow.webContents.send("try-open-dev-tools", true)
-                    }
-                }
-            }
-        },
-        {type: 'separator'},
-        {role: 'resetzoom'},
-        {role: 'zoomin'},
-        {role: 'zoomout'},
-        {type: 'separator'},
-        {role: 'togglefullscreen'}
-      ]
-    },
-    {
-      role: 'window',
-      submenu: [
-        {role: 'minimize'},
-        {role: 'close'}
-      ]
-    }
-  ]
-  
-  if (process.platform === 'darwin') {
-    template.unshift({
-      label: app.getName(),
-      submenu: [
-        {role: 'about'},
-        {type: 'separator'},
-        {role: 'services', submenu: []},
-        {type: 'separator'},
-        {role: 'hide'},
-        {role: 'hideothers'},
-        {role: 'unhide'},
-        {type: 'separator'},
-        {role: 'quit'}
-      ]
-    })
-  }
-
-const menu = Menu.buildFromTemplate(template)
-Menu.setApplicationMenu(menu)
 
 const sendStatusToWindow = (text) => {
     log.info(text)
