@@ -13,6 +13,9 @@ node_modules*
 # libs
 /dev/libs*
 
+# config with private keys
+/app/src/config.js
+
 # misc
 .DS_Store*
 .env.local*

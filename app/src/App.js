@@ -4,6 +4,9 @@ import { HashRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import $ from 'jquery'
+//conf with api keys
+import CONFIG from './config'
+//Compenents that are rendering all the time
 import FollowingNav from './render/components/Navs/FollowingNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'
@@ -30,7 +33,7 @@ const main = remote.require("./main.js")
 
 //twitch lib
 const api = require('twitch-api-v5')
-api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
+api.clientID = CONFIG.TWITCH_API_PRIVATE_KEY
 
 //cheking user online status
 const appOfflineStatusHandler = () => {

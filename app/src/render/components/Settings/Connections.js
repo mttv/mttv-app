@@ -100,13 +100,13 @@ export default class Connections extends Component {
         const { dUsr } = props
         if (dUsr) {
             return(
-                <div className="jumbotron discord p-2 d-flex align-items-center justify-content-center shadow-sm">
+                <div className="jumbotron discord p-0 d-flex align-items-center justify-content-center shadow-sm">
                     <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> Connected</p>
                 </div>
             )
         } else {
             return(
-                <div className="jumbotron discord p-2 d-flex align-items-center justify-content-center shadow-sm">
+                <div className="jumbotron discord p-1 d-flex align-items-center justify-content-center shadow-sm">
                     <p className="lead m-2 d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mr-3 mt-2"></i> <button id="discord-login-btn" onClick={this.discordRPCHandler} className="btn btn-outline-light p-1">Connect</button></p>
                 </div>
             )
