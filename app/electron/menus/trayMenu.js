@@ -1,5 +1,8 @@
 const { app, Menu } = require('electron')
 
+//checking app status
+const isDev = require('electron-is-dev')
+
 module.exports = Menu.buildFromTemplate([
     {
         label: 'Check for Updates',
