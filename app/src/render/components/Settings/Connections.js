@@ -93,7 +93,7 @@ export default class Connections extends Component {
     }
 
     discordRPCHandler = () => {
-        main.authDiscordRPC(true)
+        main.authDiscordRPC()
     }
 
     discordLayout = (props) => {

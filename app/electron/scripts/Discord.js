@@ -1,60 +1,56 @@
 //discord lib
 const DiscordRPC = require('discord-rpc')
-const clientId = '558341590888742914'
-const scopes = ['identify', 'email', 'rpc', 'rpc.api']
+
+const config = require('../config')
+const clientId = config.DISCORD_API_ID
+const scopes = config.DISCORD_RPC_SCOPES
+
+const windows = require('../windows/index')
+const scripts = require('./index')
 
 DiscordRPC.register(clientId)
 const rpc = new DiscordRPC.Client({transport: 'ipc'})
 
 module.exports = {
     login,
-    clearDiscordPresence,
+    clearPresence,
     setActivity
 }
 
 //auth app for discord rpc
-exports.authDiscordRPC = (status) => {
-    if (status) {
-        rpc.login({clientId, scopes})
-            .then(r => {
-                if (rpc.user === null) {
-                    mainWindow.webContents.send("discord-rpc-status", false)
-                } else {
-                    mainWindow.webContents.send("discord-rpc-status", true)
-                }
-            }).catch(e => {
-                mainWindow.webContents.send("discord-rpc-status", false)
-                if (e.code === 4002) {
-                    mainWindow.webContents.send("discord-rpc-status", true)
-                } else {
-                    mainWindow.webContents.send("discord-rpc-status", false)
-                    mainWindow.webContents.send("discord-rpc-status", e)
-                }
-            })
-
-    }
+function login(){
+    rpc.login({clientId, scopes})
+        .then(res => {
+            if (rpc.user === null) {
+                scripts.eventHandler.sendMessage(windows.mainWindow.win, "discord-rpc-status", false)
+            } else {
+                scripts.eventHandler.sendMessage(windows.mainWindow.win, "discord-rpc-status", true)
+            }
+        }).catch(err => {
+            if (err.code === 4002) {
+                scripts.eventHandler.sendMessage(windows.mainWindow.win, "discord-rpc-status", true)
+            } else {
+                scripts.eventHandler.sendMessage(windows.mainWindow.win, "discord-rpc-status", false)
+                scripts.eventHandler.sendMessage(windows.mainWindow.win, "discord-rpc-status", err)
+            }
+        })
 }
 
 //Main func for discord user activity handler
-exports.setActivity = async (channelName, startTimestamp) => {
+async function setActivity(channelName, startTimestamp) {
 
-    if (!rpc || !mainWindow) {
+    if (!rpc || !windows.mainWindow.win) {
         return
     }
 
-    //if user leave channel presense will be cleared
-    if (channelName === "none") {
-        clearDiscordPresence()
-    } else {
-        rpc.setActivity({
-            details: `Watching ${channelName}`,
-            startTimestamp,
-            largeImageKey: "icon_discord",
-            instance: false
-        })
-    }
+    rpc.setActivity({
+        details: `Watching ${channelName}`,
+        startTimestamp,
+        largeImageKey: "icon_discord",
+        instance: false
+    })
 }
 
-const clearDiscordPresence = () => {
+function clearPresence() {
     rpc.clearActivity()
 }

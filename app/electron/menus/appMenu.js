@@ -1,5 +1,8 @@
 const { Menu } = require('electron')
 
+const windows = require('../windows/index')
+const scripts = require('../scripts/index')
+
 module.exports = Menu.buildFromTemplate([
     {
       label: 'Edit',
@@ -25,10 +28,8 @@ module.exports = Menu.buildFromTemplate([
             label: 'Toggle Developer Tools',
             accelerator: process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
             click: () => {
-                if (mainWindow) {
-                    if (mainWindow) {
-                        mainWindow.webContents.send("try-open-dev-tools", true)
-                    }
+                if (windows.mainWindow.win) {
+                  scripts.eventHandler.sendMessage(windows.mainWindow.win, "try-open-dev-tools", true)
                 }
             }
         },

@@ -1,6 +1,17 @@
-//Exporting twitch subscripiton window
-exports.subscribeWindow = (channelName) => {
-    subWindow = windows.subWindow = new BrowserWindow({
+const { BrowserWindow } = require('electron')
+const path = require('path')
+const url = require('url')
+
+const config = require('../../config')
+const scripts = require('../../scripts/index')
+
+const subscribeWindow = module.exports = {
+    initWindow,
+    win: null
+}
+
+subscribe = (channelName) => {
+    const win = subscribeWindow.win = new BrowserWindow({
         width: 940,
         height: 740,
         minWidth: 940,
@@ -11,23 +22,32 @@ exports.subscribeWindow = (channelName) => {
         fullscreen: false,
         fullscreenable: true,
         autoHideMenuBar: true,
-        icon: __dirname + '/icons/icon_r.ico',
-        backgroundColor: '#0c0d0e'
+        icon: config.APP_ICON,
+        backgroundColor: '#0c0d0e',
+        webPreferences: {
+            devTools: false
+        }
     })
 
     const subWinUrl = url.format({
-        pathname: path.join(__dirname, './windows/subscribeWindow.html'),
+        pathname: path.join(__dirname, './subscribeWindow.html'),
         protocol: 'file',
         slashes: true
     })
 
-    subWindow.loadURL(subWinUrl)
+    win.loadURL(subWinUrl)
 
-    subWindow.webContents.on('did-finish-load', () => {
-        subWindow.webContents.send('get-subscription-url', "https://www.twitch.tv/subs/" + channelName)
+    win.webContents.on('did-finish-load', () => {
+        scripts.eventHandler.sendMessage(subscribeWindow.win, "get-subscription-url", `https://www.twitch.tv/subs/${channelName}`)
     })
 
-    subWindow.on('closed', () => {
-        subWindow = null
+    win.on('closed', () => {
+        subscribeWindow.win = null
     })
+}
+
+function initWindow(channelName) {
+    if (!subscribeWindow.win) {
+        subscribe(channelName)
+    }
 }

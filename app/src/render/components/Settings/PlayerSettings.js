@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import $ from 'jquery'
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
 
 const remote = window.require("electron").remote
 const main = remote.require("./main.js")
@@ -38,51 +36,32 @@ export default class PlayerSettings extends Component {
             default: $("#ar-select #ar-16_9").prop("selected", true)
                 break
         }
-
-        window.require('electron').ipcRenderer.on("resizable-player", (event, res) => {
-            const option = localStorage.getItem("resizable-mini-player")
-            if (res) {
-                if (option) {
-                    localStorage.removeItem("resizable-mini-player")
-                    this.props.restartAppHandler()
-                } else {
-                    localStorage.setItem("resizable-mini-player", true)
-                    this.props.restartAppHandler()
-                }
-            } else {
-                const Alert = withReactContent(Swal)
-                    Alert.fire({
-                        type: 'error',
-                        text: 'Oops something went wrong!Try again later.'
-                })
-            }
-        })
-
-        window.require('electron').ipcRenderer.on("mp-size", (event, res) => {
-            if (res === false) {
-                const Alert = withReactContent(Swal)
-                    Alert.fire({
-                        type: 'error',
-                        text: 'Oops something went wrong!Try again later.'
-                })
-                // if (option) {
-                //     localStorage.removeItem("resizable-mini-player")
-                //     this.props.restartAppHandler()
-                // } else {
-                //     localStorage.setItem("resizable-mini-player", true)
-                //     this.props.restartAppHandler()
-                // }
-            } else {
-                localStorage.setItem("mp-size", res)
-                this.props.restartAppHandler()
-            }
-        })
     }
 
     resizablePlayerHandler = () => {
         const option = localStorage.getItem("resizable-mini-player")
         const newVal = option ? false : true
         main.resizablePlayer(newVal)
+            .then(res => {
+                res ? localStorage.setItem("resizable-mini-player", res) : localStorage.removeItem("resizable-mini-player")
+            })
+            .catch(err => {
+                localStorage.removeItem("resizable-mini-player")
+            })
+    }
+    
+    miniPlayerSizeHandler = (event) => {
+        const val = JSON.parse(event.target.value)
+        const id = "mp_" + val.id
+        const width = val.w
+        const height = val.h
+        main.mpSize(width, height, id)
+            .then(res => {
+                localStorage.setItem("mp-size", res)
+            })
+            .catch(err => {
+                localStorage.removeItem("mp-size")
+            })
     }
 
     mutePlayerHandler = () => {
@@ -122,15 +101,6 @@ export default class PlayerSettings extends Component {
     playerRatioHandler = (event) => {
         localStorage.setItem("player-ratio", event.target.value)
     }
-
-    miniPlayerSizeHandler = (event) => {
-        const val = JSON.parse(event.target.value)
-        const id = "mp_" + val.id
-        const width = val.w
-        const height = val.h
-        main.mpSize(width, height, id)
-    }
-
 
     render() {
         return(

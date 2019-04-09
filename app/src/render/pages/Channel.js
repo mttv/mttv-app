@@ -69,14 +69,14 @@ export default class Channel extends Component {
         */
         if (localStorage.getItem("d-rpc")) {
             const startTimestamp = new Date()
-            main.setActivity(this.state.channel.display_name, startTimestamp)
+            main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
         }
         window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
             console.log(res)
             if (res) {
                 if (localStorage.getItem("d-rpc")) {
                     const startTimestamp = new Date()
-                    main.setActivity(this.state.channel.display_name, startTimestamp)
+                    main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
                 }
             }
         })
@@ -84,7 +84,7 @@ export default class Channel extends Component {
 
     componentWillUnmount() {
         if (localStorage.getItem("d-rpc")) {
-            main.setActivity("none")
+            main.clearDiscordPresence()
         }
     }
 
@@ -100,7 +100,7 @@ export default class Channel extends Component {
         if (this.state.ableToOpenWindow) {
             this.setState({isPlaying: false})
             this.setState({showCounter: this.state.showCounter + 1})
-            main.miniPlayer(this.state.channel.name, localStorage.getItem("mp-width"), localStorage.getItem("mp-heigth"), localStorage.getItem("mp-resizable"))
+            main.playerWindow(this.state.channel.name)
         }
     }
 

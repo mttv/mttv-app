@@ -14,33 +14,20 @@ autoUpdater.autoDownload = false
 //checking app status
 const isDev = require('electron-is-dev')
 
-//Loading all main menus
 const appMenu = require('./menus/appMenu')
 
-//Updates log conf
-const log = require('electron-log')
-autoUpdater.logger = log
-autoUpdater.logger.transports.file.level = 'info'
-log.info('App starting...')
-
-//Keeping it global for passing to other functions
-//Without app-conf.json app shouldn't launch
-let appConf = null
-
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=512')
-
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
     // loading app configuration
-    scripts.appConfLoader.loadConf()
+    scripts.appConf.initConf()
         .then(res => {
-            appConf = res
             //Setting up app menu
             Menu.setApplicationMenu(appMenu)
-            windows.preloaderWindow.show()
+            windows.preloaderWindow.initWindow()
         })
         .catch(err => {
             dialog.showErrorBox("APP START ERROR", err)
@@ -52,7 +39,7 @@ app.on('activate', () => {
     // On OS X it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (preloaderWindow === null) {
-        windows.preloaderWindow.show()
+        windows.preloaderWindow.initWindow()
     }
 })
 
@@ -82,6 +69,68 @@ app.on('web-contents-created', (e, contents) => {
       })
     }
 })
+
+//exporting all functions from main process that are needed in app for interactions
+exports.twitchWindow = () => {
+    windows.twitchWindow.initWindow()
+}
+
+exports.playerWindow = (channelName) => {
+    if (windows.playerWindow.win) {
+        windows.playerWindow.closeWindow()
+        windows.playerWindow.initWindow(channelName)
+    } else {
+        windows.playerWindow.initWindow(channelName)
+    }
+}
+
+exports.subscribeWindow = (channelName) => {
+    windows.subscribeWindow.initWindow(channelName)
+}
+
+exports.checkForUpdates = () => {
+    if (!isDev) {
+        autoUpdater.checkForUpdates()
+    }
+}
+
+exports.authDiscordRPC = () => {
+    scripts.discord.login()
+}
+
+exports.setDiscordActivity = (channelName, startTimestamp) => {
+    scripts.discord.setActivity(channelName, startTimestamp)
+}
+
+exports.clearDiscordPresence = () => {
+    scripts.discord.clearPresence()
+}
+
+exports.resizablePlayer = (newVal) => {
+    return new Promise((resolve, reject) => {
+        scripts.appConf.miniplayerResize(newVal)
+            .then((res) => {
+                resolve(res)
+            })
+            .catch((err) => {
+                reject(err)
+                dialog.showErrorBox("RESIZE PLAYER ERROR", err)
+            })
+    })
+}
+
+exports.mpSize = (width, height, id) => {
+    return new Promise((resolve, reject) => {
+        scripts.appConf.miniplayerSize(width, height, id)
+            .then(res => {
+                resolve(res)
+            })
+            .catch(err => {
+                reject(err)
+                dialog.showErrorBox("PLAYER SIZE ERROR", err)
+            })
+    })
+}
 
 const sendStatusToWindow = (text) => {
     log.info(text)
@@ -118,11 +167,5 @@ exports.downloadUpdate = (permission) => {
     if (permission) {
         sendStatusToWindow("Downloading update.")
         autoUpdater.downloadUpdate()   
-    }
-}
-
-exports.checkForUpdates = () => {
-    if (!isDev) {
-        autoUpdater.checkForUpdates()
     }
 }

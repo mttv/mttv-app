@@ -1,13 +1,17 @@
-const { BrowserWindow, ipcMain } = require('electron')
+const { BrowserWindow, ipcMain, app } = require('electron')
 //checking app status
 const isDev = require('electron-is-dev')
+//Updates module
+const { autoUpdater } = require('electron-updater')
 const path = require('path')
 const url = require('url')
 
 const config = require('../../config')
 const windows = require('../index')
+const scripts = require('../../scripts/index')
 
 const mainWindow = module.exports = {
+    initWindow,
     show,
     win: null,
 }
@@ -15,7 +19,7 @@ const mainWindow = module.exports = {
 main = () => {
 
     // Create the browser window.
-    let win = mainWindow.win = new BrowserWindow({
+    const win = mainWindow.win = new BrowserWindow({
       width: 940,
       height: 740,
       minWidth: 940,
@@ -43,8 +47,9 @@ main = () => {
     win.loadURL(startUrl)
 
     win.on('ready-to-show', () => {
-        windows.preloaderWindow.close()
+        windows.preloaderWindow.closeWindow()
         win.show()
+        scripts.discord.login()
         //watching for app updates  
         // loading bttv
         BrowserWindow.removeExtension("BetterTTV")
@@ -56,18 +61,18 @@ main = () => {
 
     // Emitted when the window is closed.
     win.on('closed', () => {
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
-        win = null
+        app.quit()
     })
 
+    /*
+        WAITING FOR FUTURE IMPROVEMENT
+    */
     // win.on('blur', () => {
-    //     clearDiscordPresence()
+    //     scripts.discord.clearPresence()
     // })
 
     // win.on('focus', () => {
-    //     win.webContents.send("reset-discord-presence", true)
+    //     scripts.eventHandler.sendMessage(mainWindow.win, "reset-discord-presence", true)
     // })
 
     //Opening external links in a browser
@@ -83,8 +88,14 @@ ipcMain.on("open-dev-tools", (event, res) => {
     }
 })
 
-function show() {
+function initWindow() {
     if (!mainWindow.win) {
         main()
+    }
+}
+
+function show() {
+    if (mainWindow.win) {
+        mainWindow.win.show()
     }
 }

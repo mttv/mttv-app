@@ -6,17 +6,15 @@ const config = require('../../config')
 const trayMenu = require('../../menus/trayMenu')
 const windows = require('../index')
 
-let tray = null
-
 const preloaderWindow = module.exports = {
-    show,
-    close,
+    initWindow,
+    closeWindow,
     win: null
 }
 
 preloader = () => {
 
-    let win = preloaderWindow.win = new BrowserWindow({
+    const win = preloaderWindow.win = new BrowserWindow({
         width: 420,
         height: 500,
         frame: false,
@@ -37,30 +35,31 @@ preloader = () => {
         protocol: 'file',
         slashes: true
     })
+    
     win.loadURL(preloaderUrl)
 
     win.on('ready-to-show', () => {
-        tray = new Tray(config.APP_ICON)
+        const tray = new Tray(config.APP_ICON)
         tray.setToolTip('MTTV')
         tray.setContextMenu(trayMenu)
         win.show()
         setTimeout(() => {
-            windows.mainWindow.show()
+            windows.mainWindow.initWindow()
         }, 3000)
     })
 
     win.on('closed', () => {
-        win = null
+        preloaderWindow.win = null
     })
 }
 
-function show() {
+function initWindow() {
     if (!preloaderWindow.win) {
         preloader()
     }
 }
 
-function close() {
+function closeWindow() {
     if (preloaderWindow.win) {
         preloaderWindow.win.close()
     }
