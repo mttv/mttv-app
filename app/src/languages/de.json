@@ -123,7 +123,8 @@
             "discord": {
                 "btn_connect": "Verbinden",
                 "status_connected": "Verbunden",
-                "btn_disconnect": "Trennen"
+                "btn_disconnect": "Trennen",
+                "presence_description": "Zeigen Sie allen, was Sie sehen."
             }
         },
         "twitch_player_settings": {

@@ -136,32 +136,30 @@ exports.mpSize = (width, height, id) => {
     })
 }
 
-const sendStatusToWindow = (text) => {
-    log.info(text)
-    if (mainWindow) {
-        mainWindow.webContents.send('app-update-message', text)   
-    }
-}
-
 autoUpdater.on('checking-for-update', () => {
-    sendStatusToWindow('Checking for update...')
+    scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", "Checking for update...")
+    scripts.eventHandler.sendLogMessage("Checking for update...")
 })
 
 autoUpdater.on('update-available', (info) => {
-    sendStatusToWindow('Update available.')
+    scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", "Update available.")
+    scripts.eventHandler.sendLogMessage(info)
 })
 
 autoUpdater.on('update-not-available', (info) => {
-    sendStatusToWindow('Update not available.')
+    scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", "Update not available.")
+    scripts.eventHandler.sendLogMessage(info)
 })
 
 autoUpdater.on('error', (err) => {
-    sendStatusToWindow("Error in auto-updater.")
-    sendStatusToWindow(err)
+    scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", "Error in auto-updater.")
+    scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", err)
+    scripts.eventHandler.sendLogMessage(err)
 })
 
 autoUpdater.on('update-downloaded', (info) => {
-    sendStatusToWindow('Update downloaded.')
+    scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", "Update downloaded.")
+    scripts.eventHandler.sendLogMessage(info)
     setTimeout(() => {
         autoUpdater.quitAndInstall()
     }, 1000 * 10)
@@ -169,7 +167,7 @@ autoUpdater.on('update-downloaded', (info) => {
 
 exports.downloadUpdate = (permission) => {
     if (permission) {
-        sendStatusToWindow("Downloading update.")
+        scripts.eventHandler.sendMessage(windows.mainWindow.win, "app-update-message", "Downloading update.")
         autoUpdater.downloadUpdate()   
     }
 }

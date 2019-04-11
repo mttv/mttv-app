@@ -123,7 +123,8 @@
             "discord": {
                 "btn_connect": "Connect",
                 "status_connected": "Connected",
-                "btn_disconnect": "Disconnect"
+                "btn_disconnect": "Disconnect",
+                "presence_description": "Show everyone on discord what you are watching."
             }
         },
         "twitch_player_settings": {

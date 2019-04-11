@@ -117,7 +117,7 @@ export default class Connections extends Component {
                                 <input type="checkbox" onClick={this.discordActivePresenceHandler} />
                                 <span className="slider round" />
                             </label>
-                            <p>Show everyone on discord what you are watching.</p>
+                            <p>{this.props.langPack.discord.presence_description}</p>
                         </div>
                     </div>
                 </Fragment>

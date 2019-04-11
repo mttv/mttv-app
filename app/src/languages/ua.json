@@ -123,7 +123,8 @@
             "discord": {
                 "btn_connect": "Прив'язати",
                 "status_connected": "Підключено",
-                "btn_disconnect": "Від'єднати"
+                "btn_disconnect": "Від'єднати",
+                "presence_description": "Покажіть усім, що ви дивитеся."
             }
         },
         "twitch_player_settings": {
