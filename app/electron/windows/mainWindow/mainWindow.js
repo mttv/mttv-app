@@ -1,4 +1,4 @@
-const { BrowserWindow, ipcMain, app } = require('electron')
+const { BrowserWindow, ipcMain, app, shell, Menu } = require('electron')
 //checking app status
 const isDev = require('electron-is-dev')
 //Updates module
@@ -9,6 +9,7 @@ const url = require('url')
 const config = require('../../config')
 const windows = require('../index')
 const scripts = require('../../scripts/index')
+const appMenu = require('../../menus/appMenu')
 
 const mainWindow = module.exports = {
     initWindow,
@@ -48,8 +49,9 @@ main = () => {
 
     win.on('ready-to-show', () => {
         windows.preloaderWindow.closeWindow()
+        //Setting up app menu
+        Menu.setApplicationMenu(appMenu)
         win.show()
-        scripts.discord.login()
         //watching for app updates  
         // loading bttv
         BrowserWindow.removeExtension("BetterTTV")
@@ -57,6 +59,9 @@ main = () => {
         if (!isDev) {
             autoUpdater.checkForUpdates()
         }
+        setTimeout(() => {
+            scripts.discord.login()
+        }, 1500)
     })
 
     // Emitted when the window is closed.

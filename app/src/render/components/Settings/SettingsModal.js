@@ -16,12 +16,6 @@ const pretty = require('prettysize')
 
 export default class Settings extends Component {
 
-    componentDidMount() {
-        window.require('electron').ipcRenderer.on('cache-cleared', (event, res) => {
-            console.log("cache cleared...")
-        })
-    }
-
     logOutHandler = () => {
         const Alert = withReactContent(Swal)
         Alert.fire({

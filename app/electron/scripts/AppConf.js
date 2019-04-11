@@ -19,7 +19,7 @@ module.exports = {
 
 /*
     If user launch app for the first time,
-    new app-conf.json will be create from template with new unique app id.
+    new app-conf.json will be created from template with new unique app id.
     If not, we will read already created app config.
 */
 function initConf() {

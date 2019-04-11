@@ -16,17 +16,18 @@ export default class Languages extends Component {
 
     componentDidMount() {
         const pickedLang = localStorage.getItem("language")
-        if (pickedLang === "en" || !pickedLang) {
-            $("#en input").prop("checked", true)
-        } else if (pickedLang === "ru") {
-            $("#ru input").prop("checked", true)
-        } else if (pickedLang === "ua") {
-            $("#ua input").prop("checked", true)
-        } else if (pickedLang === "de") {
-            $("#de input").prop("checked", true)
-        } else {
-            $("#en input").prop("checked", true)
-          }
+        switch (pickedLang) {
+            case "en": $("#en input").prop("checked", true)
+                break
+            case "ru": $("#ru input").prop("checked", true)
+                break
+            case "ua": $("#ua input").prop("checked", true)
+                break
+            case "de": $("#de input").prop("checked", true)
+                break
+            default: $("#en input").prop("checked", true)
+                break
+        }
     }
 
     render() {

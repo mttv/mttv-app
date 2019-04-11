@@ -102,7 +102,6 @@ class App extends Component {
           $("#download-msg-2").fadeIn()
       }
     })
-
     window.require('electron').ipcRenderer.on("try-open-dev-tools", (event, res) => {
       if (res) {
         const option = localStorage.getItem("dev-console")
@@ -113,33 +112,7 @@ class App extends Component {
         }
       }
     })
-
     this.darkModeHandler()
-    
-    $("#hide-menu-btn").click(function() {
-      const menuHide = sessionStorage.getItem("menuHide")
-      if (menuHide) {
-        $("#hide-menu-btn").removeClass("rotate")
-        $("#hide-menu-btn").animate({left: "50px"})
-        $(".menu ul").fadeIn()
-        $("#main-menu").animate({width: "50px"})
-        $(".container-fluid").animate({left: "50px"})
-        sessionStorage.removeItem("menuHide")
-        setTimeout(() => {
-          $(".carousel").removeAttr("style")
-        }, 200)
-      } else {
-        $("#hide-menu-btn").addClass("rotate")
-        $("#hide-menu-btn").animate({left: "5px"})
-        $(".menu ul").fadeOut()
-        $("#main-menu").animate({width: "0px"})
-        $(".container-fluid").animate({left: 0})
-        sessionStorage.setItem("menuHide", true)
-        setTimeout(() => {
-          $(".carousel").css({"margin-left": "0"})
-        }, 200)
-      }
-    })
   }
 
   componentDidUpdate() {

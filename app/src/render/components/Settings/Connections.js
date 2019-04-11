@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 // import { WatchAttributes } from 'react-mutation-observer'
 import $ from 'jquery'
@@ -37,6 +37,8 @@ export default class Connections extends Component {
     // }
 
     componentDidMount() {
+        const discordPresenceActive = localStorage.getItem("d-rp-active")
+        discordPresenceActive ? $("#discord-presence-btn input").prop("checked", true) : $("#discord-presence-btn input").prop("checked", false)
         window.require('electron').ipcRenderer.on("discord-rpc-status", (event, res) => {
             console.log(res)
             if (res) {
@@ -96,17 +98,33 @@ export default class Connections extends Component {
         main.authDiscordRPC()
     }
 
+    discordActivePresenceHandler = () => {
+        localStorage.getItem("d-rp-active") ? localStorage.removeItem("d-rp-active") : localStorage.setItem("d-rp-active", true)
+    }
+
     discordLayout = (props) => {
         const { dUsr } = props
         if (dUsr) {
             return(
-                <div className="jumbotron discord p-0 d-flex align-items-center justify-content-center shadow-sm">
-                    <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> {this.props.langPack.discord.status_connected}</p>
-                </div>
+                <Fragment>
+                    <div className="jumbotron discord p-0 d-flex align-items-center justify-content-center shadow" style={{flexDirection: "column"}}>
+                        <div className="integration-header discord">
+                            <p className="lead m-2  d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mt-3 mr-3"></i> <span className="mt-1">{this.props.langPack.discord.status_connected}</span></p>
+                        </div>
+                        <h5 className="mt-4" style={{textTransform: "capitalize", color: "#7289da"}}>Discord presence</h5>
+                        <div className="form-group form-check settings bg-transparent" style={{display: "inline-flex", flexDirection: "row-reverse", borderBottom: "none"}}>
+                            <label className="switch" id="discord-presence-btn">
+                                <input type="checkbox" onClick={this.discordActivePresenceHandler} />
+                                <span className="slider round" />
+                            </label>
+                            <p>Show everyone on discord what you are watching.</p>
+                        </div>
+                    </div>
+                </Fragment>
             )
         } else {
             return(
-                <div className="jumbotron discord p-1 d-flex align-items-center justify-content-center shadow-sm">
+                <div className="jumbotron discord p-1 d-flex align-items-center justify-content-center shadow">
                     <p className="lead m-2 d-flex align-items-center justify-content-center text-white"><i className="fab fa-discord h4 mr-3 mt-2"></i> <button id="discord-login-btn" onClick={this.discordRPCHandler} className="btn btn-outline-light p-1">{this.props.langPack.discord.btn_connect}</button></p>
                 </div>
             )
@@ -128,7 +146,7 @@ export default class Connections extends Component {
             <div className="tab-pane fade card-settings" id="connections" role="tabpanel" aria-labelledby="list-connections">
                 <h5>{this.props.langPack.title}</h5>
                 <p>{this.props.langPack.sub_title}</p>
-                <div className="jumbotron twitch p-1 d-flex align-items-center justify-content-center shadow-sm mt-4">
+                <div className="jumbotron twitch p-1 d-flex align-items-center justify-content-center shadow mt-4">
                     <p className="lead m-2 text-white"><i className="fab fa-twitch mt-2 mr-2"></i> {sessionStorage.getItem("userName")}</p>
                 </div>
                 <this.discordLayout dUsr={this.state.d_rpc_status} />

@@ -18,7 +18,7 @@ module.exports = {
 }
 
 //auth app for discord rpc
-function login(){
+function login() {
     rpc.login({clientId, scopes})
         .then(res => {
             if (rpc.user === null) {

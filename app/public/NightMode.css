@@ -250,3 +250,6 @@ input:focus + .slider {
 .nav-icon {
   color: #ffffff;
   border-color: #8699df; }
+
+.jumbotron.discord {
+  background-color: #18191b; }

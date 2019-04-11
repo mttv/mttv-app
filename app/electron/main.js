@@ -1,5 +1,7 @@
 // Module to control application life.
-const { app, Menu, shell, dialog } = require('electron')
+const { app, Tray, shell, dialog } = require('electron')
+
+const config = require('./config')
 
 //Getting all windows
 const windows = require('./windows/index')
@@ -11,10 +13,11 @@ const { autoUpdater } = require('electron-updater')
 //Disabling autoDownload for custom screen
 autoUpdater.autoDownload = false
 
+const trayMenu = require('./menus/trayMenu')
+let tray = null
+
 //checking app status
 const isDev = require('electron-is-dev')
-
-const appMenu = require('./menus/appMenu')
 
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=512')
 
@@ -25,8 +28,9 @@ app.on('ready', () => {
     // loading app configuration
     scripts.appConf.initConf()
         .then(res => {
-            //Setting up app menu
-            Menu.setApplicationMenu(appMenu)
+            tray = new Tray(config.APP_ICON)
+            tray.setToolTip('MTTV')
+            tray.setContextMenu(trayMenu)
             windows.preloaderWindow.initWindow()
         })
         .catch(err => {

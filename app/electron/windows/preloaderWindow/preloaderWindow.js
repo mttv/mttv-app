@@ -1,9 +1,8 @@
-const { Tray, BrowserWindow } = require('electron')
+const { BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 
 const config = require('../../config')
-const trayMenu = require('../../menus/trayMenu')
 const windows = require('../index')
 
 const preloaderWindow = module.exports = {
@@ -39,9 +38,6 @@ preloader = () => {
     win.loadURL(preloaderUrl)
 
     win.on('ready-to-show', () => {
-        const tray = new Tray(config.APP_ICON)
-        tray.setToolTip('MTTV')
-        tray.setContextMenu(trayMenu)
         win.show()
         setTimeout(() => {
             windows.mainWindow.initWindow()

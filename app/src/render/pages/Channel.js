@@ -38,6 +38,12 @@ export default class Channel extends Component {
     }
 
     componentDidMount() {
+        setTimeout(() => {
+            $('#loaded').ready(() => {
+                $('#loaded').hide()
+                    $('#loaded').fadeIn()
+            })
+        }, 500)
         const urlString = window.location.href
         const auth = sessionStorage.getItem("token")
         const channelId = urlString.split("=").pop()
@@ -54,12 +60,16 @@ export default class Channel extends Component {
             this.setState({showCounter: this.state.showCounter + 1})
         })
 
-        setTimeout(() => {
-            $('#loaded').ready(() => {
-                $('#loaded').hide()
-                    $('#loaded').fadeIn()
-            })
-        }, 500)
+        // window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
+        //     console.log(res)
+        //     if (res) {
+        //         if (localStorage.getItem("d-rpc")) {
+        //             const startTimestamp = new Date()
+        //             main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
+        //         }
+        //     }
+        // })
+
     }
 
     componentDidUpdate() {
@@ -67,25 +77,17 @@ export default class Channel extends Component {
             If user connected discord to app, 
             we will show in discord that he is watching current channel
         */
-        if (localStorage.getItem("d-rpc")) {
+        if (localStorage.getItem("d-rpc") && localStorage.getItem("d-rp-active")) {
             const startTimestamp = new Date()
             main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
         }
-        window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
-            console.log(res)
-            if (res) {
-                if (localStorage.getItem("d-rpc")) {
-                    const startTimestamp = new Date()
-                    main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
-                }
-            }
-        })
     }
 
     componentWillUnmount() {
         if (localStorage.getItem("d-rpc")) {
             main.clearDiscordPresence()
         }
+        window.require('electron').ipcRenderer.removeAllListeners('close-player-window')
     }
 
     shouldComponentUpdate(nextProps, nextState) {
