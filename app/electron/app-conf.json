@@ -1,6 +1,6 @@
 {
     "app": {
-        "devTools":true,
+        "devTools":false,
         "fullScreenLaunch":false,
         "appId": "none"
     },

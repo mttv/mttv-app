@@ -4,6 +4,9 @@ import { HashRouter as Router, Route, Redirect, Switch } from "react-router-dom"
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import $ from 'jquery'
+//conf with api keys
+import CONFIG from './config'
+//Compenents that are rendering all the time
 import FollowingNav from './render/components/Navs/FollowingNav'
 import Login from './render/pages/Login'
 import SettingsModal from './render/components/Settings/SettingsModal'
@@ -30,7 +33,7 @@ const main = remote.require("./main.js")
 
 //twitch lib
 const api = require('twitch-api-v5')
-api.clientID = 'lxtgfjpg12cxsvpy32vg5x7a1ie6mc'
+api.clientID = CONFIG.TWITCH_API_PRIVATE_KEY
 
 //cheking user online status
 const appOfflineStatusHandler = () => {
@@ -68,14 +71,37 @@ class App extends Component {
           } else {
             this.appUpdateHandler()
           }
+          $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
+          $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
+          $("#check-for-updates-btn").addClass("check-upd-success disabled")
+          $("#check-for-updates-btn").html("Update is available!")
+          setTimeout(() => {
+            $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+            $("#check-for-updates-btn").html("Check for Updates")
+          }, 1000 * 10)
+      } else if (res === "Update not available.") {
+          $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+          $("#check-for-updates-btn").addClass("check-upd-warn disabled")
+          $("#check-for-updates-btn").html("No updates...")
+          setTimeout(() => {
+              $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
+              $("#check-for-updates-btn").html("Check for Updates")
+          }, 5000)
+      } else if (res === "Error in auto-updater.") {
+          $("#check-for-updates-btn").removeClass("check-upd-success disabled")
+          $("#check-for-updates-btn").addClass("check-upd-danger disabled")
+          $("#check-for-updates-btn").html("Updating Error!")
+          setTimeout(() => {
+              $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
+              $("#check-for-updates-btn").html("Check for Updates")
+          }, 5000)
       } else if (res === "Downloading update.") {
-        $("#updating-alert").fadeIn()
+          $("#updating-alert").fadeIn()
       } else if (res === "Update downloaded.") {
-        $("#download-msg-1").hide()
-        $("#download-msg-2").fadeIn()
+          $("#download-msg-1").hide()
+          $("#download-msg-2").fadeIn()
       }
     })
-
     window.require('electron').ipcRenderer.on("try-open-dev-tools", (event, res) => {
       if (res) {
         const option = localStorage.getItem("dev-console")
@@ -86,33 +112,7 @@ class App extends Component {
         }
       }
     })
-
     this.darkModeHandler()
-    
-    $("#hide-menu-btn").click(function() {
-      const menuHide = sessionStorage.getItem("menuHide")
-      if (menuHide) {
-        $("#hide-menu-btn").removeClass("rotate")
-        $("#hide-menu-btn").animate({left: "50px"})
-        $(".menu ul").fadeIn()
-        $("#main-menu").animate({width: "50px"})
-        $(".container-fluid").animate({left: "50px"})
-        sessionStorage.removeItem("menuHide")
-        setTimeout(() => {
-          $(".carousel").removeAttr("style")
-        }, 200)
-      } else {
-        $("#hide-menu-btn").addClass("rotate")
-        $("#hide-menu-btn").animate({left: "5px"})
-        $(".menu ul").fadeOut()
-        $("#main-menu").animate({width: "0px"})
-        $(".container-fluid").animate({left: 0})
-        sessionStorage.setItem("menuHide", true)
-        setTimeout(() => {
-          $(".carousel").css({"margin-left": "0"})
-        }, 200)
-      }
-    })
   }
 
   componentDidUpdate() {

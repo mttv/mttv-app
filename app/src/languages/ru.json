@@ -117,6 +117,16 @@
                 "indicator_msg": "Уровень"
             }
         },
+        "integrations_settings": {
+            "title": "Интеграции",
+            "sub_title": "Подключите эти учетные записи и разблокируйте специальные интеграции с MTTV.",
+            "discord": {
+                "btn_connect": "Подключить",
+                "status_connected": "Подключено",
+                "btn_disconnect": "Отключить",
+                "presence_description": "Покажите всем, что вы смотрите."
+            }
+        },
         "twitch_player_settings": {
             "title": "Плеер",
             "ratio": {

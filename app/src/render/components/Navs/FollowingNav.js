@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
+import Icon from '../../../img/icon.png'
 import LiveIcon from '../../../img/live.png'
 
 const remote = window.require("electron").remote
@@ -129,7 +130,7 @@ export default class FollowingNav extends Component {
             })
             return(
                 <ul className="dropdown mt-3">
-                    <h6 className="live-counter">Live <img src={LiveIcon} alt="" /></h6>
+                    <h6 className="nav-icon">Live <img src={LiveIcon} alt="" /></h6>
                     {list}
                 </ul>
             )
@@ -146,8 +147,9 @@ export default class FollowingNav extends Component {
 
     render() {
         return(
-            <div id="main-nav">
+            <div id="main-nav" className="shadow-sm">
                 <ul className="dropdown mt-3">
+                    <div className="nav-icon mttv"><img src={Icon} alt="" /><hr className="m-0 w-50 d-block m-auto" /></div>
                     <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.home}><NavLink to="/app/home" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-home menu-icon"></i></NavLink></li>
                     <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.search}><NavLink to="/app/search" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-search menu-icon"></i></NavLink></li>
                     <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.multistream}><NavLink to="/app/multistream" activeClassName="active" className="btn nav-btn nav-link"><i className="fas fa-window-restore menu-icon"></i></NavLink></li>

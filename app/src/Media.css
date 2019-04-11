@@ -124,4 +124,6 @@
     max-width: 100%; }
   .col-lg-2 {
     padding-left: 15px;
-    padding-right: 15px; } }
+    padding-right: 15px; }
+  #streams-container {
+    padding: 50px; } }

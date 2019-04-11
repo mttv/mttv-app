@@ -1513,7 +1513,7 @@ input
 .container-block.stream-options.cinema
   position: fixed
   box-shadow: none
-  width: 78%
+  width: 38%
   bottom: 0
   left: 15%
   z-index: 6000
@@ -1532,7 +1532,7 @@ input
   height: 100%
   top: 0
   right: 0
-  z-index: 6000
+  z-index: 5999
   margin: 0
 
 .modal-dialog
@@ -1848,7 +1848,7 @@ input
   border-color: $success
   color: #fff
 
-.live-counter
+.nav-icon
   color: #000
   border-bottom: 1px solid #ccc
   text-align: center
@@ -1857,13 +1857,30 @@ input
   display: inline
   border-radius: 5px
 
-.live-counter img
+.nav-icon img
   width: 18px
   height: 18px
   margin-bottom: 4px
+
+.nav-icon.mttv
+  color: #000
+  margin: 0 5px 5px 5px
+  border-bottom: none
+
+.nav-icon.mttv img
+  width: 38px
+  height: 38px
 
 .jumbotron.twitch
   background-color: #6441A4
 
 .jumbotron.discord
+  background-color: $bg-color
+
+.integration-header
+  width: 100%
+  border-top-left-radius: .3rem
+  border-top-right-radius: .3rem
+
+.integration-header.discord
   background-color: #7289da

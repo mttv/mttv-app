@@ -38,48 +38,56 @@ export default class Channel extends Component {
     }
 
     componentDidMount() {
-        const urlString = window.location.href
-        const auth = sessionStorage.getItem("token")
-        const channelId = urlString.split("=").pop()
-        const userId = sessionStorage.getItem("userId")
-        this.getChannelHandler(channelId)
-        this.checkFollowHander(userId, channelId)
-        this.checkSubscriptionHandler(auth, userId, channelId)
-        this.setState({ableToOpenWindow: true})
-        window.require('electron').ipcRenderer.on('close-player-window', (event, res) => {
-            this.setState({isPlaying: res})
-            this.setState({showCounter: this.state.showCounter + 1})
-        })
         setTimeout(() => {
             $('#loaded').ready(() => {
                 $('#loaded').hide()
                     $('#loaded').fadeIn()
             })
         }, 500)
+        const urlString = window.location.href
+        const auth = sessionStorage.getItem("token")
+        const channelId = urlString.split("=").pop()
+        const userId = sessionStorage.getItem("userId")
+
+        this.getChannelHandler(channelId)
+        this.checkFollowHander(userId, channelId)
+        this.checkSubscriptionHandler(auth, userId, channelId)
+
+        this.setState({ableToOpenWindow: true})
+
+        window.require('electron').ipcRenderer.on('close-player-window', (event, res) => {
+            this.setState({isPlaying: res})
+            this.setState({showCounter: this.state.showCounter + 1})
+        })
+
+        // window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
+        //     console.log(res)
+        //     if (res) {
+        //         if (localStorage.getItem("d-rpc")) {
+        //             const startTimestamp = new Date()
+        //             main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
+        //         }
+        //     }
+        // })
+
     }
 
     componentDidUpdate() {
-        /*  If user connected discord to app, 
+        /*  
+            If user connected discord to app, 
             we will show in discord that he is watching current channel
         */
-       window.require('electron').ipcRenderer.on("reset-discord-presence", (event, res) => {
-            if (res) {
-                if (localStorage.getItem("d-rpc")) {
-                    const startTimestamp = new Date()
-                    main.setActivity(this.state.channel.display_name, startTimestamp)
-                }
-            }
-        })
-        if (localStorage.getItem("d-rpc")) {
+        if (localStorage.getItem("d-rpc") && localStorage.getItem("d-rp-active")) {
             const startTimestamp = new Date()
-            main.setActivity(this.state.channel.display_name, startTimestamp)
+            main.setDiscordActivity(this.state.channel.display_name, startTimestamp)
         }
     }
 
     componentWillUnmount() {
         if (localStorage.getItem("d-rpc")) {
-            main.setActivity("none")
+            main.clearDiscordPresence()
         }
+        window.require('electron').ipcRenderer.removeAllListeners('close-player-window')
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -94,7 +102,7 @@ export default class Channel extends Component {
         if (this.state.ableToOpenWindow) {
             this.setState({isPlaying: false})
             this.setState({showCounter: this.state.showCounter + 1})
-            main.miniPlayer(this.state.channel.name, localStorage.getItem("mp-width"), localStorage.getItem("mp-heigth"), localStorage.getItem("mp-resizable"))
+            main.playerWindow(this.state.channel.name)
         }
     }
 
