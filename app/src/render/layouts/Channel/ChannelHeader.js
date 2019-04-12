@@ -159,7 +159,6 @@ export default class ChannelHeader extends Component {
                     <li onClick={() => this.props.navLayout("#clips")} className="nav-option"><img src={localStorage.getItem("darkMode") ? ClipsIconLight : ClipsIconDark} alt="" className="clips-icon" /> <span>0</span></li>
                 </ul>
                 <div className="btns-group">
-                    <button className="load-btn-group"><i className="fas fa-ellipsis-h"></i></button>
                     <this.actionsLayout />
                 </div>
             </div>

@@ -8,7 +8,7 @@ export default class Stream extends Component {
         super(props)
         this.state = {
             link: "https://www.twitch.tv/embed/" + this.props.name + "/chat",
-            ratio: localStorage.getItem("player-ratio") ? "container-block embed-responsive shadow-none embed-responsive-" + localStorage.getItem("player-ratio") : "container-block shadow-none embed-responsive embed-responsive-16by9"
+            ratio: localStorage.getItem("player-ratio") ? "container-block embed-responsive embed-responsive-" + localStorage.getItem("player-ratio") : "container-block embed-responsive embed-responsive-16by9"
         }
     }
 
@@ -24,10 +24,10 @@ export default class Stream extends Component {
             }
         )
 
-        const chatWebview = document.getElementById("chat_embed")
-        chatWebview.addEventListener("dom-ready", () => {
-            chatWebview.insertCSS('body{background: transparent!important}.twilight-minimal-root{background-color: transparent!important}.embed-chat-page{width:34.5%;height:100%;position:absolute;top:0;right:0;margin:0}#bttvSettingsPanel{position:fixed!important}')
-        })
+        // const chatWebview = document.getElementById("chat_embed")
+        // chatWebview.addEventListener("dom-ready", () => {
+        //     chatWebview.insertCSS('body{background: transparent!important}.twilight-minimal-root{background-color: transparent!important}.embed-chat-page{width:34.5%;height:100%;position:absolute;top:0;right:0;margin:0}#bttvSettingsPanel{position:fixed!important}@media (max-width: 768px){.embed-chat-page{width:100%!important;}}')
+        // })
 
         const darkMode = localStorage.getItem("darkMode")
         if (darkMode) {
@@ -124,7 +124,7 @@ export default class Stream extends Component {
                                 volume={this.props.volume}
                             />
                         </div>
-                        <div className="container-block shadow-none stream-options">
+                        <div className="container-block stream-options">
                         <button className="btn" id="cinema-mode-btn">{this.props.langPack.cinema_btn}</button>
                             {/* <button className="btn">Multi Stream</button> */}
                             <button className="btn" id="window-mode-btn" onClick={this.props.isPlayingHandler}>{this.props.langPack.window_btn}</button>
