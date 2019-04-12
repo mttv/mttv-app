@@ -1205,7 +1205,8 @@
   pointer-events: none; }
 
 .form-group.form-check.settings label {
-  color: #000; }
+  color: #000;
+  pointer-events: none; }
 
 .form-group.form-check.settings label.switch {
   display: inherit; }
