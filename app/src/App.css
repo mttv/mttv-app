@@ -1730,7 +1730,7 @@ input:checked + .slider:before {
   position: fixed;
   -webkit-box-shadow: none;
           box-shadow: none;
-  width: 64%;
+  width: 22%;
   height: 100%;
   top: 0;
   right: 0;
