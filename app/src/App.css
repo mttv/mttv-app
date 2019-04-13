@@ -1206,6 +1206,9 @@
 
 .form-group.form-check.settings label {
   color: #000;
+  cursor: pointer; }
+
+.form-group.form-check.settings label.lang {
   pointer-events: none; }
 
 .form-group.form-check.settings label.switch {

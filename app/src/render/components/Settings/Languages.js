@@ -39,28 +39,28 @@ export default class Languages extends Component {
                         <div className="languages-container">
                             <div className="form-group form-check settings language-picker" id="en" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
-                                <label className="form-check-label">
+                                <label className="form-check-label lang">
                                     English, UK
                                 </label>
                                 <img src={UKIcon} alt="" className="language-icon" />
                             </div>
                             <div className="form-group form-check settings language-picker" id="ru" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
-                                <label className="form-check-label">
+                                <label className="form-check-label lang">
                                     Русский
                                 </label>
                                 <img src={RUIcon} alt="" className="language-icon" />
                             </div>
                             <div className="form-group form-check settings language-picker" id="ua" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
-                                <label className="form-check-label">
+                                <label className="form-check-label lang">
                                     Українська
                                 </label>
                                 <img src={UAIcon} alt="" className="language-icon" />
                             </div>
                             <div className="form-group form-check settings language-picker" id="de" onClick={this.languageHandler}>
                                 <input className="form-check-input lang" type="radio" />
-                                <label className="form-check-label">
+                                <label className="form-check-label lang">
                                     Deutsch
                                 </label>
                                 <img src={DEIcon} alt="" className="language-icon" />
