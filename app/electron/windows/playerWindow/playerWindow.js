@@ -44,12 +44,17 @@ miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
     win.loadURL(playerUrl)
 
     win.webContents.on('did-finish-load', () => {
-        scripts.eventHandler.sendMessage(playerWindow.win, "open-player-window", `https://www.twitch.tv/${channelName}`)
+        scripts.eventHandler.sendMessage(playerWindow.win, "open-player-window", channelName) //`https://www.twitch.tv/${channelName}`
     })
     
     win.on('closed', () => {
         playerWindow.win = null
         scripts.eventHandler.sendMessage(windows.mainWindow.win, "close-player-window", true)
+    })
+
+    win.webContents.on('new-window', (event, url) => {
+        event.preventDefault()
+        shell.openExternal(url)
     })
 }
 

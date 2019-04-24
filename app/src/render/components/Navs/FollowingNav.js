@@ -115,18 +115,6 @@ export default class FollowingNav extends Component {
                             </NavLink>
                             <div className="following-live-card-info"></div>
                         </li>
-                // return <StreamPreviewCard 
-                //     key={i}
-                //     channelId={res.channel._id}
-                //     game={res.game} 
-                //     type={res.stream_type} 
-                //     previewImg={res.preview.large}
-                //     logoImg={res.channel.logo}
-                //     title={res.channel.status}
-                //     channelName={res.channel.display_name}
-                //     viewers={res.viewers}
-                //     langPackOthers={langPackOthers}
-                // />
             })
             return(
                 <ul className="dropdown mt-3">
