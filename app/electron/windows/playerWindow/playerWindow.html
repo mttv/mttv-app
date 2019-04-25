@@ -28,14 +28,12 @@
   require('electron-titlebar')
   require('electron').ipcRenderer.on('open-player-window', (event, res) => {
     const container = document.getElementById('player-container')
-    const url = res
-    const channelName = "lirik"
     const embedTwitch = new Twitch.Embed("player-container", {
       width: "100%",
       height: "100%",
-      channel: url,
-      layout: "video-with-chat",
-      theme: "dark",
+      channel: res.channelName,
+      layout: res.chatEnabled ? "video-with-chat" : "video",
+      theme: res.theme,
       allowfullscreen: false
     })
     // renderReactPlayer(container, { url, playing: true, width: "100%", height: "100%" })

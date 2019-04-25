@@ -79,12 +79,12 @@ exports.twitchWindow = () => {
     windows.twitchWindow.initWindow()
 }
 
-exports.playerWindow = (channelName) => {
+exports.playerWindow = (channelName, chatEnabled, theme) => {
     if (windows.playerWindow.win) {
         windows.playerWindow.closeWindow()
-        windows.playerWindow.initWindow(channelName)
+        windows.playerWindow.initWindow(channelName, chatEnabled, theme)
     } else {
-        windows.playerWindow.initWindow(channelName)
+        windows.playerWindow.initWindow(channelName, chatEnabled, theme)
     }
 }
 

@@ -17,12 +17,14 @@ export default class PlayerSettings extends Component {
         const resizablePlayer = localStorage.getItem("resizable-mini-player")
         const ratio = localStorage.getItem("player-ratio")
         const mpSize = localStorage.getItem("mp-size")
+        const mpChat = localStorage.getItem("mp-chat")
 
         mutePlayer ? $("#mute-player-btn input").prop("checked", true) : $("#mute-player-btn input").prop("checked", false)
         autoplayPlayer ? $("#autoplay-btn input").prop("checked", true) : $("#autoplay-btn input").prop("checked", false)
         autoplayVideo ? $("#autoplay-video-btn input").prop("checked", true) : $("#autoplay-video-btn input").prop("checked", false)
         resizablePlayer ? $("#resizable-player-btn input").prop("checked", true) : $("#resizable-player-btn input").prop("checked", false)
         mpSize ? $("#mp-size " + "#" + mpSize).prop("selected", true) : $("#mp-size #mp_1").prop("selected", true)
+        mpChat ? $("#mp-chat " + "#" + mpSize).prop("selected", true) : $("#mp-chat").prop("selected", false)
 
         switch (ratio) {
             case "16by9": $("#ar-select #ar-16_9").prop("selected", true)  
@@ -48,6 +50,15 @@ export default class PlayerSettings extends Component {
             .catch(err => {
                 localStorage.removeItem("resizable-mini-player")
             })
+    }
+
+    playerChatHandler = () => {
+        if (localStorage.getItem("mp-chat")) {
+            localStorage.removeItem("mp-chat")
+        } else {
+            localStorage.setItem("mp-chat", true)
+        }
+
     }
     
     miniPlayerSizeHandler = (event) => {
@@ -150,6 +161,14 @@ export default class PlayerSettings extends Component {
                             </label>
                             <p>{this.props.langPack.autoplay_video.message}</p>
                         </div>
+                        <h5>Mini player chat</h5>
+                        <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
+                            <label className="switch" id="mp-chat">
+                                <input type="checkbox" onClick={this.playerChatHandler} />
+                                <span className="slider round" />
+                            </label>
+                            <p>Show mini player with chat.</p>
+                        </div>
                         <h5>{this.props.langPack.resizable.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
                             <label className="switch" id="resizable-player-btn">
@@ -157,9 +176,6 @@ export default class PlayerSettings extends Component {
                                 <span className="slider round" />
                             </label>
                             <p>{this.props.langPack.resizable.message}</p>
-                        </div>
-                        <div className="alert alert-warning" role="alert">
-                            {this.props.langPack.resizable.alert_msg}
                         </div>
                         <h5>{this.props.langPack.mp_size.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
