@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import $ from 'jquery'
 import { WatchAttributes } from 'react-mutation-observer'
 import IntroBg from '../components/WelcomeIntro/index'
+import CONFIG from '../../config'
 // import Intro from '../components/Login/Intro'
 
 export default class Login extends Component {
@@ -13,7 +14,7 @@ export default class Login extends Component {
     })
 
     $("#log-in-btn").click(() => {
-      const loginUrl = "https://id.twitch.tv/oauth2/authorize?client_id=lxtgfjpg12cxsvpy32vg5x7a1ie6mc&response_type=token&force_verify=true&redirect_uri=https://mttv.github.io/&scope=channel_check_subscription+channel_subscriptions+channel_editor+user_read+user_follows_edit"
+      const loginUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CONFIG.TWITCH_API_PRIVATE_KEY}&response_type=token&force_verify=true&redirect_uri=https://mttv.github.io/&scope=channel_check_subscription+channel_subscriptions+channel_editor+user_read+user_follows_edit`
       $("#login-view-container").attr("src", loginUrl)
       $("#login-view-container").fadeIn()
       $("#close-login").fadeIn()
