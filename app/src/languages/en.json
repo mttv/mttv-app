@@ -46,6 +46,11 @@
             "cancel_btn": "cancel"
         }
     },
+    "update_page": {
+        "msg_1_1": "Downloading new update. Stay tuned!",
+        "msg_1_2": "It may take few minutes.",
+        "msg_2": "Installing update..."
+    },
     "welcome_page": {
         "login_btn": "Log In",
         "welcome_alert_msg": "Welcome back "
@@ -101,6 +106,15 @@
                 "dark": "Dark",
                 "light": "Light"
             },
+            "updates": {
+                "title": "Version and Updates",
+                "msg_1": "Update will be installed automatically without notifications.",
+                "msg_2": "Check if a newer version is available.",
+                "btn_upt": "Check for Updates",
+                "btn_upt_available": "Update is available!",
+                "btn_no_upt": "No updates...",
+                "btn_upt_err": "Updating Error!"
+            },
             "dev_console": {
                 "title": "developer console",
                 "message": "Enable dev console for test purposes.",
@@ -147,6 +161,10 @@
             "autoplay_video": {
                 "title": "autoplay video",
                 "message": "Video will start automatically when you open it."
+            },
+            "chat": {
+                "title": "Mini Player Chat",
+                "msg": "Show mini player with chat."
             },
             "resizable": {
                 "title": "resizable mini player",

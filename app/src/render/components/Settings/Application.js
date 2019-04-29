@@ -112,17 +112,17 @@ export default class Application extends Component {
                             <input type="checkbox" className="form-check-input" />
                             <label className="form-check-label" htmlFor="dark-mode-btn">{this.props.langPack.theme.dark}</label>
                         </div>
-                        <h5>Version and Updates</h5>
+                        <h5>{this.props.langPack.updates.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
                             <label className="switch" id="update-btn-console-btn">
                                 <input type="checkbox" onClick={this.autoUpdateHandler} />
                                 <span className="slider round" />
                             </label>
-                            <p>Update will be installed automatically without notifications.</p>
+                            <p>{this.props.langPack.updates.msg_1}</p>
                         </div>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
-                            <button className="btn check-update-btn" id="check-for-updates-btn" onClick={this.checkForUpdatesHandler}>Check for Updates</button>
-                            <p>Check if a newer version is available.</p>
+                            <button className="btn check-update-btn" id="check-for-updates-btn" onClick={this.checkForUpdatesHandler}>{this.props.langPack.updates.btn_upt}</button>
+                            <p>{this.props.langPack.updates.msg_2}</p>
                         </div>
                         <h5>{this.props.langPack.dev_console.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>

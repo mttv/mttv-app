@@ -161,13 +161,13 @@ export default class PlayerSettings extends Component {
                             </label>
                             <p>{this.props.langPack.autoplay_video.message}</p>
                         </div>
-                        <h5>Mini player chat</h5>
+                        <h5>{this.props.langPack.chat.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>
                             <label className="switch" id="mp-chat">
                                 <input type="checkbox" onClick={this.playerChatHandler} />
                                 <span className="slider round" />
                             </label>
-                            <p>Show mini player with chat.</p>
+                            <p>{this.props.langPack.chat.msg}</p>
                         </div>
                         <h5>{this.props.langPack.resizable.title}</h5>
                         <div className="form-group form-check settings" style={{display: "inline-flex", flexDirection: "row-reverse"}}>

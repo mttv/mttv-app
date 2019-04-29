@@ -113,12 +113,13 @@ export default class FollowingNav extends Component {
                             <NavLink to={`/app/channel?id=${res.channel._id}`} activeClassName="active" className="btn nav-link">
                                 <img className="following-nav-avatar" src={res.channel.logo} alt="" />
                             </NavLink>
-                            <div className="following-live-card-info"></div>
+                            <div className="following-live-card-info">
+                                <div className="content"></div>
+                            </div>
                         </li>
             })
             return(
                 <ul className="dropdown mt-3">
-                    <h6 className="nav-icon">Live <img src={LiveIcon} alt="" /></h6>
                     {list}
                 </ul>
             )
@@ -148,6 +149,7 @@ export default class FollowingNav extends Component {
                     <li data-toggle="tooltip" data-placement="right" title="twitch"><div onClick={this.twitchHandler} className="btn nav-btn"><i className="fab fa-twitch menu-icon"></i></div></li>
                     <li data-toggle="tooltip" data-placement="right" title={this.props.langPack.settings}><div className="btn nav-btn" data-toggle="modal" data-target="#settings-modal"><i className="fas fa-cog menu-icon"></i></div></li>
                 </ul>
+                <h6 className="nav-icon">Live <img src={LiveIcon} alt="" /></h6>
                 <this.streamsListLayout streamsList={this.state.streams.list} error={this.state.streams.error} />
             </div>
         )
