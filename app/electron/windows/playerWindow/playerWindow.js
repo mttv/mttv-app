@@ -1,4 +1,4 @@
-const { BrowserWindow, dialog } = require('electron')
+const { BrowserWindow, dialog, shell } = require('electron')
 const path = require('path')
 const url = require('url')
 
@@ -12,7 +12,7 @@ const playerWindow = module.exports = {
     win: null
 }
 
-miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
+miniPlayer = (channelName, mpWidth, mpHeight, mpResizable, chatEnabled, theme) => {
     const win = playerWindow.win = new BrowserWindow({
         width: mpWidth,
         height: mpHeight,
@@ -44,19 +44,29 @@ miniPlayer = (channelName, mpWidth, mpHeight, mpResizable) => {
     win.loadURL(playerUrl)
 
     win.webContents.on('did-finish-load', () => {
-        scripts.eventHandler.sendMessage(playerWindow.win, "open-player-window", `https://www.twitch.tv/${channelName}`)
+        const playerInfo = {
+            channelName: channelName,
+            chatEnabled: chatEnabled,
+            theme: theme
+        }
+        scripts.eventHandler.sendMessage(playerWindow.win, "open-player-window", playerInfo) //`https://www.twitch.tv/${channelName}`
     })
     
     win.on('closed', () => {
         playerWindow.win = null
         scripts.eventHandler.sendMessage(windows.mainWindow.win, "close-player-window", true)
     })
+
+    win.webContents.on('new-window', (event, url) => {
+        event.preventDefault()
+        shell.openExternal(url)
+    })
 }
 
-function initWindow(channelName) {
+function initWindow(channelName, chatEnabled, theme) {
     scripts.appConf.loadConf()
         .then(res => {
-            miniPlayer(channelName, res.playerWindow.width, res.playerWindow.height, res.playerWindow.resizable)
+            miniPlayer(channelName, res.playerWindow.width, res.playerWindow.height, res.playerWindow.resizable, chatEnabled, theme)
         })
         .catch(err => {
             dialog.showErrorBox("MINI PLAYER ERROR", err)

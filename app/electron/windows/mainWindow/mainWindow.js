@@ -14,6 +14,7 @@ const appMenu = require('../../menus/appMenu')
 const mainWindow = module.exports = {
     initWindow,
     show,
+    hide,
     win: null,
 }
 
@@ -102,5 +103,11 @@ function initWindow() {
 function show() {
     if (mainWindow.win) {
         mainWindow.win.show()
+    }
+}
+
+function hide() {
+    if (mainWindow.win) {
+        mainWindow.win.hide()
     }
 }

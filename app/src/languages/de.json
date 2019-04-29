@@ -46,6 +46,11 @@
             "cancel_btn": "Zurück"
         }
     },
+    "update_page": {
+        "msg_1_1": "Dabei sein, ein neues Update runterzuladen. Bleib dran!",
+        "msg_1_2": "Es kann einige Minuten dauern.",
+        "msg_2": "Update installieren..."
+    },
     "welcome_page": {
         "login_btn": "Einloggen",
         "welcome_alert_msg": "Willkommen "
@@ -101,6 +106,15 @@
                 "dark": "Dunkel",
                 "light": "Hell"
             },
+            "updates": {
+                "title": "Version und Updates",
+                "msg_1": "Das Update wird automatisch ohne Benachrichtigungen installiert.",
+                "msg_2": "Prüfen Sie, ob eine neuere Version verfügbar ist.",
+                "btn_upt": "Auf Updates prüfen",
+                "btn_upt_available": "Update ist verfügbar!",
+                "btn_no_upt": "Keine Aktualisierungen...",
+                "btn_upt_err": "Aktualisierungsfehler!"
+            },
             "dev_console": {
                 "title": "Entwicklerkonsole",
                 "message": "Aktivieren 'dev console' für die Testdurchführung.",
@@ -147,6 +161,10 @@
             "autoplay_video": {
                 "title": "Video Autostart",
                 "message": "Video wird automatisch starten, wenn Sie das aufmachen."
+            },
+            "chat": {
+                "title": "Mini Player Chat",
+                "msg": "Zeige Mini-Spieler mit Chat."
             },
             "resizable": {
                 "title": "Veränderbare Mini-Playergröße",

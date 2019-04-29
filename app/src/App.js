@@ -74,26 +74,26 @@ class App extends Component {
           $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
           $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
           $("#check-for-updates-btn").addClass("check-upd-success disabled")
-          $("#check-for-updates-btn").html("Update is available!")
+          $("#check-for-updates-btn").html(this.state.langPack.settings_page.application_settings.updates.btn_upt_available)
           setTimeout(() => {
             $("#check-for-updates-btn").removeClass("check-upd-success disabled")
-            $("#check-for-updates-btn").html("Check for Updates")
+            $("#check-for-updates-btn").html(this.state.langPack.settings_page.application_settings.updates.btn_upt)
           }, 1000 * 10)
       } else if (res === "Update not available.") {
           $("#check-for-updates-btn").removeClass("check-upd-success disabled")
           $("#check-for-updates-btn").addClass("check-upd-warn disabled")
-          $("#check-for-updates-btn").html("No updates...")
+          $("#check-for-updates-btn").html(this.state.langPack.settings_page.application_settings.updates.btn_no_upt)
           setTimeout(() => {
               $("#check-for-updates-btn").removeClass("check-upd-warn disabled")
-              $("#check-for-updates-btn").html("Check for Updates")
+              $("#check-for-updates-btn").html(this.state.langPack.settings_page.application_settings.updates.btn_upt)
           }, 5000)
       } else if (res === "Error in auto-updater.") {
           $("#check-for-updates-btn").removeClass("check-upd-success disabled")
           $("#check-for-updates-btn").addClass("check-upd-danger disabled")
-          $("#check-for-updates-btn").html("Updating Error!")
+          $("#check-for-updates-btn").html(this.state.langPack.settings_page.application_settings.updates.btn_upt_err)
           setTimeout(() => {
               $("#check-for-updates-btn").removeClass("check-upd-danger disabled")
-              $("#check-for-updates-btn").html("Check for Updates")
+              $("#check-for-updates-btn").html(this.state.langPack.settings_page.application_settings.updates.btn_upt)
           }, 5000)
       } else if (res === "Downloading update.") {
           $("#updating-alert").fadeIn()
@@ -326,7 +326,7 @@ class App extends Component {
               langPack={this.state.langPack.settings_page}
               languageHandler={this.languageHandler}
             />
-            <UpdatingAlert />
+            <UpdatingAlert langPack={this.state.langPack.update_page} />
             <OfflineAlert />
         </div>
       </Router>

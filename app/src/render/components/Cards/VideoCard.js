@@ -52,6 +52,6 @@ export default class VideoCard extends Component {
                     </div>
                 </div>
             </div>
-      )
+        )
     }
 }

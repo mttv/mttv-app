@@ -102,7 +102,7 @@ export default class Channel extends Component {
         if (this.state.ableToOpenWindow) {
             this.setState({isPlaying: false})
             this.setState({showCounter: this.state.showCounter + 1})
-            main.playerWindow(this.state.channel.name)
+            main.playerWindow(this.state.channel.name, localStorage.getItem("mp-chat") ? true : false, localStorage.getItem("darkMode") ? "dark" : "light")
         }
     }
 
