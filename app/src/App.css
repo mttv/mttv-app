@@ -447,7 +447,8 @@
   height: 50px;
   -webkit-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
-  transition: all 0.5s ease; }
+  transition: all 0.5s ease;
+  cursor: pointer; }
 
 #main-nav .dropdown .nav-btn:hover {
   -webkit-border-radius: 25%;
