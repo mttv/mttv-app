@@ -29,11 +29,10 @@ gulp.task('sass-nm', function() {
 //Getting all js libs in one
 gulp.task('script-libs', function() {
 	return gulp.src([
-		'dev/libs/jquery/dist/jquery.min.js',
-		'dev/libs/popperJs/index.js',
+		'dev/libs/jquery/index.min.js',
+		'dev/libs/popper-js/index.min.js',
 		'dev/libs/bootstrap/dist/js/bootstrap.min.js',
 		'dev/libs/fontawesome/js/all.js',
-		// 'static/libs/others/modulesExport.js'
 	])
 	.pipe(concat('libs.min.js'))
 	.pipe(gulp.dest('app/public/'))
@@ -44,7 +43,7 @@ gulp.task('css-libs', function() {
 	return gulp.src([
 		'dev/libs/bootstrap/dist/css/bootstrap.min.css',
 		'dev/libs/fontawesome/css/all.css',
-		'dev/libs/animate/animate.css'
+		'dev/libs/animate-css/animate.css'
 	])
   .pipe(concat('libs.css'))
 	.pipe(gulp.dest('app/src/libs'))

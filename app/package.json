@@ -73,6 +73,7 @@
     "electron-titlebar": "0.0.3",
     "electron-updater": "^4.0.6",
     "jquery": "^3.3.1",
+    "popper.js": "^1.15.0",
     "prettysize": "^2.0.0",
     "react": "^16.4.2",
     "react-beautiful-dnd": "^10.0.3",
