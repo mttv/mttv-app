@@ -1,6 +1,9 @@
 {
   "name": "mttv",
-  "author": "webif",
+  "author": {
+    "name": "webifua",
+    "email": "mttvapp.contacts@gmail.com"
+  },
   "description": "empty",
   "main": "electron/main.js",
   "version": "0.4.10",
@@ -17,6 +20,7 @@
     "electron": "electron .",
     "pack-src": "electron-builder --dir",
     "ebuild": "yarn electron-builder && node_modules/.bin/build",
+    "linux-build": "yarn electron-builder --linux && node_modules/.bin/build",
     "gh-publish": "yarn electron-builder -p always && node_modules/.bin/build"
   },
   "build": {
@@ -28,8 +32,11 @@
       }
     ],
     "linux": {
-      "target": "AppImage",
-      "icon": "build/icon_r.ico"
+      "target": ["deb", "snap", "rpm"],
+      "icon": "build/icon_r.ico",
+      "category": "Utility",
+      "maintainer": "mttvapp.contacts@gmail.com",
+      "vendor": "mttvapp.contacts@gmail.com"
     },
     "win": {
       "target": {
