@@ -1,5 +1,0 @@
-exports.mainWindow = require('./mainWindow/mainWindow')
-exports.preloaderWindow = require('./preloaderWindow/preloaderWindow')
-exports.playerWindow = require('./playerWindow/playerWindow')
-exports.subscribeWindow = require('./subscribeWindow/subscribeWindow')
-exports.twitchWindow = require('./twitchWindow/twitchWindow')
