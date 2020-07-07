@@ -89,7 +89,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "electron": "^3.0.0",
+    "electron": "^9.1.0",
     "electron-builder": "^20.38.5",
     "foreman": "^3.0.1",
     "nodemon": "^1.18.4"
